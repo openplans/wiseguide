@@ -1,0 +1,36 @@
+<div id="page-header">
+  <h1>Create New User</h1>
+</div>
+
+<%= form_for @user, :url=>url_for(:action=>:create_user) do |f| %>
+  <% if @errors %>
+    <div id="error_explanation">
+      <ul>
+      <% @errors.each do |field, msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+
+    <ol class="section first">
+      <li>
+        <%= f.label :email, "Email:" %>
+        <%= f.text_field :email %>
+      </li>
+
+      <li>
+        <%= f.label :permissions, "Permissions:" %>
+        <%= f.select :level, [["Admin", 100], ["Editor", 50], ["Viewer", 0]] %>
+      </li>
+    </ol>
+
+    <div class="actions">
+      <%= f.submit "Create User" %>
+    </div>
+
+  </fieldset>
+
+<% end %>
