@@ -1,0 +1,32 @@
+<% if @users == 0 %>
+  <p>No users yet.</p>
+<% else %>
+  <table>
+    <tr>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Last login</th>
+      <% if can? :edit, Role %>
+      <th></th>
+      <th></th>
+      <% end %>
+    </tr>
+
+    <% for user in @users %>
+    <tr>
+      <td class="<%= user.role_name.downcase %>"><%= user.email %></td>
+      <td><%= user.role_name %></td>
+      <td><%= user.last_sign_in_at %></td>
+      <% if can? :edit, user %>
+      <td>
+        <%= form_for(role, :url=>update_user_path(user.id), :html => { :method => :post }) do |f| %>
+          <%= f.select :level, [["Admin", 100], ["Editor", 50], ["Viewer", 0]] %>
+          <%= f.submit "Change role" %>
+        <% end %>
+      </td>
+      <td><%= button_to "Delete", user, :confirm => 'Are you sure?', :class=>'delete', :method=>:delete %></td>
+      <% end %>
+    </tr>
+    <% end %>
+ </table>
+<% end %>

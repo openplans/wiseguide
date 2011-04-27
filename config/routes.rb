@@ -8,5 +8,5 @@ Wiseguide::Application.routes.draw do
     post "change_provider" => "users#change_provider"
   end
 
-  match 'users', :controller=>:users, :action=>:index
+  match 'users', :controller=>:admin, :action=>:users
 end
