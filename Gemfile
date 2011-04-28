@@ -11,6 +11,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem "devise"
 
+gem "cancan"
+
 gem 'will_paginate', '3.0.pre2'
 
 # Use unicorn as the web server

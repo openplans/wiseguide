@@ -9,4 +9,15 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  def role_name
+    case level
+    when 0
+      return "Viewer"
+    when 50
+      return "Editor"
+    when 100
+      return "Admin"
+    end
+  end
+
 end
