@@ -6,7 +6,7 @@
       <th>Email</th>
       <th>Role</th>
       <th>Last login</th>
-      <% if can? :edit, Role %>
+      <% if can? :edit, User %>
       <th></th>
       <th></th>
       <% end %>
@@ -19,14 +19,19 @@
       <td><%= user.last_sign_in_at %></td>
       <% if can? :edit, user %>
       <td>
-        <%= form_for(role, :url=>update_user_path(user.id), :html => { :method => :post }) do |f| %>
+        <%= form_for(user, :url=>update_user_path(:id=>user.id), :html => { :method => :post }) do |f| %>
           <%= f.select :level, [["Admin", 100], ["Editor", 50], ["Viewer", 0]] %>
           <%= f.submit "Change role" %>
         <% end %>
       </td>
-      <td><%= button_to "Delete", user, :confirm => 'Are you sure?', :class=>'delete', :method=>:delete %></td>
+      <td><%= button_to "Delete", user_path(:id=>user.id), :confirm => 'Are you sure?', :class=>'delete', :method=>:delete %></td>
       <% end %>
     </tr>
     <% end %>
  </table>
+<% end %>
+
+<% if can? :edit, User %>
+<hr/>
+<%= link_to "New User", new_user_path %>
 <% end %>

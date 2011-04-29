@@ -12,16 +12,17 @@ class UsersController < Devise::SessionsController
     if User.count == 0
       return redirect_to :init
     end
-    authorize! :edit, current_user.current_provider
+    authorize! :edit, User
     @user = User.new
   end
 
   def create_user
-    authorize! :edit, current_user.current_provider
+    authorize! :edit, User
     
-    @user = User.new(params[:user])
-    @user.password = @user.password_confirmation = Devise.friendly_token[0..8]
-    @user.current_provider_id = current_provider_id
+    user_params = params[:user]
+    user_params[:password] = user_params[:password_confirmation] = Devise.friendly_token[0..8]
+    @user = User.new(user_params)
+    @user.level = user_params[:level] #this should be unnecesary
 
     if @user.save
       NewUserMailer.new_user_email(@user, @user.password).deliver
@@ -51,6 +52,17 @@ class UsersController < Devise::SessionsController
 
     flash[:notice] = "OK, now sign in"
     redirect_to :action=>:new
+  end
+
+  def update
+
+  end
+  
+  def delete
+    @user = User.find(params[:id])
+    authorize! :manage, @user
+    @user.destroy
+    redirect_to '/users'
   end
 
 end

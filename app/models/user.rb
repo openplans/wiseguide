@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_admin
+    return level == 100
+  end
+
 end
