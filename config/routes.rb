@@ -11,11 +11,11 @@ Wiseguide::Application.routes.draw do
 
   resources :event_types
 
-  resources :eventtypes
-
   resources :ethnicities
 
   resources :dispositions
+
+  resources :customers
 
   devise_for :users, :controllers=>{:sessions=>"users"} do
     get "new_user" => "users#new_user"
@@ -28,6 +28,7 @@ Wiseguide::Application.routes.draw do
   end
 
   match 'users', :controller=>:admin, :action=>:users
+  match 'admin', :controller=>:admin, :action=>:index
 
   root :to => "home#index"
 end

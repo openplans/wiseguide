@@ -72,7 +72,9 @@
 
 <p>
   <b>Portrait:</b>
-  <%= image_tag @customer.portrait.url %>
+  <% if @customer.portrait %>
+    <%= image_tag @customer.portrait.url %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
