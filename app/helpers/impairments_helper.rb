@@ -1,0 +1,2 @@
+module ImpairmentsHelper
+end

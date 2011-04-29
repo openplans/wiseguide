@@ -1,4 +1,21 @@
 Wiseguide::Application.routes.draw do
+  resources :trip_reasons
+
+  resources :routes
+
+  resources :referral_types
+
+  resources :impairments
+
+  resources :funding_sources
+
+  resources :event_types
+
+  resources :eventtypes
+
+  resources :ethnicities
+
+  resources :dispositions
 
   devise_for :users, :controllers=>{:sessions=>"users"} do
     get "new_user" => "users#new_user"

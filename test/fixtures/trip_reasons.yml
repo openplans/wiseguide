@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  name: Shopping
+  work_related: false
+
+two:
+  id: 2
+  name: Business
+  work_related: true

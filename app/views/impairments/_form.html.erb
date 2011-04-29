@@ -1,0 +1,25 @@
+<%= form_for(@impairment) do |f| %>
+  <% if @impairment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@impairment.errors.count, "error") %> prohibited this impairment from being saved:</h2>
+
+      <ul>
+      <% @impairment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.text_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<h1>Listing trip_reasons</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Work related</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @trip_reasons.each do |trip_reason| %>
+  <tr>
+    <td><%= trip_reason.id %></td>
+    <td><%= trip_reason.name %></td>
+    <td><%= trip_reason.work_related %></td>
+    <td><%= link_to 'Show', trip_reason %></td>
+    <td><%= link_to 'Edit', edit_trip_reason_path(trip_reason) %></td>
+    <td><%= link_to 'Destroy', trip_reason, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Trip reason', new_trip_reason_path %>

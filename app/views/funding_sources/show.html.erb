@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @funding_source.id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @funding_source.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_funding_source_path(@funding_source) %> |
+<%= link_to 'Back', funding_sources_path %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Id:</b>
+  <%= @disposition.id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @disposition.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_disposition_path(@disposition) %> |
+<%= link_to 'Back', dispositions_path %>
