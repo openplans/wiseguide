@@ -5,4 +5,7 @@ class Customer < ActiveRecord::Base
   has_many :cases
 
   has_attached_file :portrait, :styles => { :small => "150x150>" }
+
+  validates_attachment_size :portrait, :less_than => 300.kilobytes
+  validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 end
