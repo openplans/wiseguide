@@ -38,8 +38,8 @@ class CustomersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @customer.destroy
-    redirect_to(impairments_url)
+    redirect_to(customers_url)
   end
 end
