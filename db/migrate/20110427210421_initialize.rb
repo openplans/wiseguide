@@ -41,7 +41,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :customer_impairments do |t|
@@ -59,7 +59,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :cases do |t|
@@ -76,7 +76,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :case_routes do |t|
@@ -94,7 +94,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :referral_types do |t|
@@ -104,7 +104,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :outcomes do |t|
@@ -123,7 +123,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :trip_reasons do |t|
@@ -134,7 +134,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :contacts do |t|
@@ -149,7 +149,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :assessments do |t|
@@ -161,7 +161,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :events do |t|
@@ -177,7 +177,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :event_types do |t|
@@ -187,7 +187,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :funding_sources do |t|
@@ -197,7 +197,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :ethnicities do |t|
@@ -207,7 +207,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
     create_table :dispositions do |t|
@@ -217,7 +217,7 @@ class Initialize < ActiveRecord::Migration
       t.string :created_by
       t.datetime :updated_at
       t.string :updated_by
-      t.integer :lock_version
+      t.integer :lock_version, :default=>0
     end
 
   end

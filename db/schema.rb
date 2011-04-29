@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "case_routes", :force => true do |t|
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version",      :default => 0
   end
 
   create_table "contacts", :force => true do |t|
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "customer_impairments", :force => true do |t|
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version",          :default => 0
   end
 
   create_table "dispositions", :force => true do |t|
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "ethnicities", :force => true do |t|
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "event_types", :force => true do |t|
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "events", :force => true do |t|
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version",      :default => 0
   end
 
   create_table "funding_sources", :force => true do |t|
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "impairments", :force => true do |t|
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "outcomes", :force => true do |t|
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version",                :default => 0
   end
 
   create_table "referral_types", :force => true do |t|
@@ -173,7 +173,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "routes", :force => true do |t|
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "trip_reasons", :force => true do |t|
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.string   "created_by"
     t.datetime "updated_at"
     t.string   "updated_by"
-    t.integer  "lock_version"
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "users", :force => true do |t|
