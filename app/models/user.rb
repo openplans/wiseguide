@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  has_many :assessments
+  has_many :cases
+  has_many :contacts
+  has_many :events
+
   validates_confirmation_of :password
   validates_uniqueness_of :email
   # Include default devise modules. Others available are:
