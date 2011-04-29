@@ -17,6 +17,8 @@ gem 'will_paginate', '3.0.pre2'
 
 gem "reverse_scaffold", :git => 'https://github.com/chrugail/reverse_scaffold.git'
 
+gem "paperclip"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
