@@ -15,6 +15,8 @@ gem "cancan"
 
 gem 'will_paginate', '3.0.pre2'
 
+gem "reverse_scaffold", :git => 'https://github.com/chrugail/reverse_scaffold.git'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -23,7 +25,7 @@ gem 'will_paginate', '3.0.pre2'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
 # gem 'ruby-debug'
-# gem 'ruby-debug19'
+gem 'ruby-debug19'
 
 # Bundle the extra gems:
 # gem 'bj'
