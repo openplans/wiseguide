@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @ethnicities.each do |ethnicity| %>
   <tr>
-    <td><%= ethnicity.id %></td>
     <td><%= ethnicity.name %></td>
     <td><%= link_to 'Show', ethnicity %></td>
     <td><%= link_to 'Edit', edit_ethnicity_path(ethnicity) %></td>

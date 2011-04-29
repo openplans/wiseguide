@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @funding_sources.each do |funding_source| %>
   <tr>
-    <td><%= funding_source.id %></td>
     <td><%= funding_source.name %></td>
     <td><%= link_to 'Show', funding_source %></td>
     <td><%= link_to 'Edit', edit_funding_source_path(funding_source) %></td>

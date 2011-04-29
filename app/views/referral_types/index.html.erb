@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @referral_types.each do |referral_type| %>
   <tr>
-    <td><%= referral_type.id %></td>
     <td><%= referral_type.name %></td>
     <td><%= link_to 'Show', referral_type %></td>
     <td><%= link_to 'Edit', edit_referral_type_path(referral_type) %></td>

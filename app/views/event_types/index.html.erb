@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @event_types.each do |event_type| %>
   <tr>
-    <td><%= event_type.id %></td>
     <td><%= event_type.name %></td>
     <td><%= link_to 'Show', event_type %></td>
     <td><%= link_to 'Edit', edit_event_type_path(event_type) %></td>

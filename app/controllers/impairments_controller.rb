@@ -1,4 +1,5 @@
 class ImpairmentsController < ApplicationController
+  load_and_authorize_resource
   # GET /impairments
   # GET /impairments.xml
   def index

@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @dispositions.each do |disposition| %>
   <tr>
-    <td><%= disposition.id %></td>
     <td><%= disposition.name %></td>
     <td><%= link_to 'Show', disposition %></td>
     <td><%= link_to 'Edit', edit_disposition_path(disposition) %></td>

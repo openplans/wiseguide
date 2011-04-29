@@ -1,6 +1,5 @@
 class DispositionsController < ApplicationController
-  # GET /dispositions
-  # GET /dispositions.xml
+  load_and_authorize_resource
   def index
     @dispositions = Disposition.all
 
@@ -72,7 +71,6 @@ class DispositionsController < ApplicationController
   # DELETE /dispositions/1
   # DELETE /dispositions/1.xml
   def destroy
-    @disposition = Disposition.find(params[:id])
     @disposition.destroy
 
     respond_to do |format|

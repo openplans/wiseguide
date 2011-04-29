@@ -1,0 +1,30 @@
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>DOB</th>
+    <th>Primary Phone</th>
+    <th>Secondary Phone</th>
+    <th>Email Address</th>
+    <th>Address</th>
+  </tr>
+
+<% for customer in @customers %>
+
+  <tr>
+    <th><%= @customer.first_name %></th>
+    <th><%= @customer.last_name %></th>
+    <th><%= @customer.birth_date %></th>
+    <th><%= @customer.phone_number_1 %></th>
+    <th><%= @customer.phone_number_2 %></th>
+    <th><%= @customer.email_address %></th>
+    <th><%= @customer.address %></th>
+  </tr>
+
+<% end %>
+</table>
+
+<% if can? :edit, Customer %>
+<%= link_to "New Customer", new_customer_path %>
+<% end %>

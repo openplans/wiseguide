@@ -20,6 +20,7 @@ class TripReasonsController < ApplicationController
 
     if @trip_reason.save
       redirect_to(@trip_reason, :notice => 'Trip reason was successfully created.')
+    else
       render :action => "new"
     end
   end

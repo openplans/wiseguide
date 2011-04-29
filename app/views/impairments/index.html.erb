@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @impairments.each do |impairment| %>
   <tr>
-    <td><%= impairment.id %></td>
     <td><%= impairment.name %></td>
     <td><%= link_to 'Show', impairment %></td>
     <td><%= link_to 'Edit', edit_impairment_path(impairment) %></td>

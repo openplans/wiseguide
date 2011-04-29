@@ -1,4 +1,5 @@
 class FundingSourcesController < ApplicationController
+  load_and_authorize_resource
   # GET /funding_sources
   # GET /funding_sources.xml
   def index

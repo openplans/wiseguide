@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+  load_and_authorize_resource
   # GET /routes
   # GET /routes.xml
   def index

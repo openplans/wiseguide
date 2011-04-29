@@ -1,4 +1,5 @@
 class EthnicitiesController < ApplicationController
+  load_and_authorize_resource
   # GET /ethnicities
   # GET /ethnicities.xml
   def index
