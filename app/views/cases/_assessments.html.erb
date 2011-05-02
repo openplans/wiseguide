@@ -1,0 +1,13 @@
+<h1>Assessments</h1>
+<table>
+<% for assessment in @case.assessments %>
+<tr>
+<td><%= @assessment.created_at %></td>
+<td>TODO: surveys</td>
+<td><%= link_to :details, @assessment %></td>
+</tr>
+<% end %>
+</table>
+<% if can? :edit, @case %>
+<%= link_to "Add", new_assessment_path(:case_id=>@case.id) %>
+<% end %>

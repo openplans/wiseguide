@@ -17,6 +17,16 @@ Wiseguide::Application.routes.draw do
 
   resources :customers
 
+  resources :cases
+
+  resources :contacts
+
+  resources :events
+
+  resources :assessments
+
+  resources :outcomes
+
   devise_for :users, :controllers=>{:sessions=>"users"} do
     get "new_user" => "users#new_user"
     post "create_user" => "users#create_user"

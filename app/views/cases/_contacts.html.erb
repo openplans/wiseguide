@@ -1,0 +1,15 @@
+<h1>Contacts</h1>
+
+<table>
+<% for contact in @case.contacts %>
+<tr>
+  <td><%= contact.date_time.date %></td>
+  <td><%= contact.method %></td>
+  <td><%= contact.description %></td>
+  <td><%= link_to "Details", contact %></td>
+</tr>
+<% end %> 
+</table>
+<% if can? :edit, @case %>
+<%= link_to "Add", new_contact_path(:case_id=>@case.id) %>
+<% end %>

@@ -1,0 +1,45 @@
+<h1>Outcomes</h1>
+
+<% for outcome in @case.outcomes %>
+<h2><%= outcome.trip_reason.name %></h2><% if can :edit, outcome %>
+<%= link_to "Edit", outcome %>
+<% end %>
+<table>
+<tr>
+<th>When</th>
+<th>Trips/wk</th>
+<th>VMR</th>
+</tr>
+
+<tr>
+<td>Exit</td>
+<td><%= outcome.exit_trip_count %></td>
+<td><%= outcome.exit_vehicle_miles_reduced %></td>
+</tr>
+
+<tr>
+<td>3 Months</td>
+<% if outcome.three_month_unreachable %>
+<td colspan="2">not reachable</td>
+<% else %>
+<td><%= outcome.three_month_trip_count %></td>
+<td><%= outcome.three_month_vehicle_miles_reduced %></td>
+<% end %>
+</tr>
+
+<tr>
+<td>6 Months</td>
+<% if outcome.six_month_unreachable %>
+<td colspan="2">not reachable</td>
+<% else %>
+<td><%= outcome.six_month_trip_count %></td>
+<td><%= outcome.six_month_vehicle_miles_reduced %></td>
+<% end %>
+</tr>
+
+</table>
+<% end %>
+
+<% if can? :edit, @case %>
+<%= link_to "Add", new_outcome_path(:case_id=>@case.id) %>
+<% end %>

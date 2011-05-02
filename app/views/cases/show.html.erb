@@ -1,0 +1,25 @@
+<%= @case.customer.name %>
+
+Opened: <%= @case.open_date %><br/>
+Referral Source: <%= @case.referral_source %><br/>
+Referral Source Type: <%= @case.referral_type.name %><br/>
+Assigned to: <%= @case.assigned_to.email %><br/>
+Default Funding Source: <%= @case.funding_source.name %><br/>
+Closed: <%= @case.close_date %><br/>
+Disposition: <%= @case.disposition.name %><br/>
+
+Last Updated: <%= @case.updated_at %> by <%= @case.updated_by %>
+
+<%= render "contacts" %>
+
+<%= render "events" %>
+
+<%= render "assessments" %>
+
+<%= render "routes", :locals=>{:edit => false} %>
+
+<%= render "outcomes" %>
+
+
+
+

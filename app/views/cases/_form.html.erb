@@ -1,0 +1,57 @@
+<h1><%= @case.customer.name %></h1>
+
+<%= form_for @case do |f| %>
+  <% if @case.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@case.errors.count, "error") %> prohibited this case from being saved:</h2>
+
+      <ul>
+      <% @case.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.hidden_field :customer_id %>
+
+<%= f.label :open_date, "Opened" %><br/>
+<%= f.text_field :open_date %><br/>
+
+
+<%= f.label :referral_source %><br/>
+<%= f.text_field :referral_source %><br/>
+
+<%= f.label :referral_type_id, "Referral Source Type" %><br/>
+
+<%= f.collection_select :referral_type_id, @referral_types, :id, :name %><br/>
+
+<%= f.label :user_id, "Assigned to" %><br/>
+<%= f.collection_select :user_id, @users, :id, :email %><br/>
+
+<%= f.label :funding_source_id, "Default funding source" %><br/>
+<%= f.collection_select :funding_source_id, @funding_sources, :id, :name %><br/>
+
+<%= f.label :close_date, "Closed" %><br/>
+<%= f.text_field :close_date %><br/>
+
+<%= f.label :disposition_id, "Disposition" %><br/>
+<%= f.collection_select :disposition_id, @dispositions, :id, :name %><br/>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
+<%= render "contacts" %>
+
+<%= render "events" %>
+
+<%= render "assessments" %>
+
+<%= render "routes", :locals=>{:edit => true} %>
+
+<%= render "outcomes" %>
+
+

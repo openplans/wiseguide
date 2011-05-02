@@ -1,0 +1,15 @@
+<h1>Training Events</h1>
+
+<table>
+<% for event in @case.events %>
+<tr>
+  <td><%= event.date_time.date %></td>
+  <td><%= event.event_type.name %></td>
+  <td><%= event.user.email %></td>
+  <td><%= link_to "Details", event %></td>
+</tr>
+<% end %> 
+</table>
+<% if can? :edit, @case %>
+<%= link_to "Add", new_event_path(:case_id=>@case.id) %>
+<% end %>

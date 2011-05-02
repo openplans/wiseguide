@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :birth_date %><br />
-    <%= f.date_select :birth_date %>
+    <%= f.text_field :birth_date %>
   </div>
   <div class="field">
     <%= f.label :gender %><br />
@@ -65,9 +65,14 @@
   </div>
   <div class="field">
     <%= f.label :portrait %>
+    <% if @customer.portrait %>
+    <%= image_tag @customer.portrait.url %>
+    <% end %>
     <%= f.file_field :portrait %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= render "cases" %>

@@ -1,0 +1,14 @@
+<h1>Routes Trained</h1>
+<table>
+<% for route in @case.routes %>
+<tr>
+<td><%= @route.name %></td>
+<% if edit %>
+<td>[todo: remove button]</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+<% if can? :edit, @case %>
+<%= link_to "Add", new_route_path(:case_id=>@case.id) %>
+<% end %>

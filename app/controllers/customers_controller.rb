@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
     if @customer.update_attributes(params[:customer])
       redirect_to(@customer, :notice => 'Customer was successfully created.') 
     else
-      render :action => "new"
+      render :action => "edit"
     end
   end
 
