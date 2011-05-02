@@ -81,5 +81,7 @@
 Last Updated: <%= @customer.updated_at %> by <%= @customer.updated_by %>
 </p>
 
+<%= render "cases" %>
+
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
