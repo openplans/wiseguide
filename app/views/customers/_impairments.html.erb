@@ -1,0 +1,52 @@
+<h1>Impairments</h1>
+
+<table id="impairments">
+<% for impairment in @customer.impairments %>
+<%= render :partial=>"impairment_row", :locals=>{:impairment=>impairment, :customer=>@customer, :edit=>true} %>
+<% end %>
+</table>
+
+
+
+<% if can? :edit, @customer %>
+<%= link_to "Add [TODO: make this link show this form]" %>
+
+<%= form_for @customer_impairment, :url=>add_impairment_customers_path, :html=>{:remote=>:true, :id=>"new_impairment_form", :method=>:post, "data-type"=>:html} do |f| %>
+  <%= f.hidden_field :customer_id %>
+  <%= f.collection_select :impairment_id, @impairments, :id, :name %>
+  <%= f.submit %>
+<% end %>
+<% end %>
+
+<script type='text/javascript'>
+function init_row(index, row) {
+    $(row).bind('ajax:success', function(evt, data, status, xhr){
+        var $this = $(this);
+        $('#customer_impairment_' + data.customer_id + "_" + data.impairment_id).remove();
+    })
+}
+$('.customer_impairment_row').each (init_row);
+
+$('#new_impairment_form')
+  .bind('ajax:success', function(evt, data, status, xhr){
+    var $this = $(this);
+
+    $('#impairments').append(xhr.responseText);
+
+    init_row(null, '#impairments tbody tr:last');
+
+    $this.find('.errors').empty();
+
+  })
+  .bind('ajax:error', function(evt, xhr, status, error){
+
+    // Display the errors (i.e. an error partial or helper)
+    $(this).find('.errors').html(xhr.responseText);
+
+  });
+</script>
+
+
+<% if can? :edit, @customer %>
+<%= link_to "Add", new_impairment_path(:customer_id=>@customer.id) %><br/>
+<% end %>

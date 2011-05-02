@@ -15,7 +15,10 @@ Wiseguide::Application.routes.draw do
 
   resources :dispositions
 
-  resources :customers
+  resources :customers do
+    post "add_impairment", :on=>:collection
+    post "delete_impairment", :on=>:collection
+  end
 
   resources :cases do 
     post "add_route", :on=>:collection

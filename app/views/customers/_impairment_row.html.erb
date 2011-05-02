@@ -1,0 +1,6 @@
+<tr id="customer_impairment_<%= "%s_%s" % [customer.id, impairment.id] %>">
+<td><%= impairment.name %></td>
+<% if edit %>
+<td><%= link_to "x", delete_impairment_customers_path(:customer_id=>customer.id, :impairment_id=>impairment.id), {:remote=>true, :method=>:post, :class=>"customer_impairment_row"} %></td>
+<% end %>
+</tr>
