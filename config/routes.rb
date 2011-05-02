@@ -17,7 +17,10 @@ Wiseguide::Application.routes.draw do
 
   resources :customers
 
-  resources :cases
+  resources :cases do 
+    post "add_route", :on=>:collection
+    post "delete_route", :on=>:collection
+  end
 
   resources :contacts
 

@@ -1,14 +1,44 @@
 <h1>Routes Trained</h1>
-<table>
+<table id="routes">
 <% for route in @case.routes %>
-<tr>
-<td><%= @route.name %></td>
-<% if edit %>
-<td>[todo: remove button]</td>
-<% end %>
-</tr>
+<%= render :partial=>"route_row", :locals=>{:route=>route, :kase=>@case, :edit=>true} %>
 <% end %>
 </table>
+
 <% if can? :edit, @case %>
-<%= link_to "Add", new_route_path(:case_id=>@case.id) %>
+<%= link_to "Add [TODO: make this link show this form]" %>
+
+<%= form_for @case_route, :url=>add_route_cases_path, :html=>{:remote=>:true, :id=>"new_route_form", :method=>:post, "data-type"=>:html} do |f| %>
+  <%= f.hidden_field :case_id %>
+  <%= f.collection_select :route_id, @routes, :id, :name %>
+  <%= f.submit %>
 <% end %>
+<% end %>
+
+<script type='text/javascript'>
+function init_row(index, row) {
+    $(row).bind('ajax:success', function(evt, data, status, xhr){
+        var $this = $(this);
+        $('#case_route_' + data.case_id + "_" + data.route_id).remove();
+    })
+}
+$('.case_route_row').each (init_row);
+
+$('#new_route_form')
+  .bind('ajax:success', function(evt, data, status, xhr){
+    var $this = $(this);
+
+    $('#routes').append(xhr.responseText);
+
+    init_row(null, '#routes tbody tr:last');
+
+    $this.find('.errors').empty();
+
+  })
+  .bind('ajax:error', function(evt, xhr, status, error){
+
+    // Display the errors (i.e. an error partial or helper)
+    $(this).find('.errors').html(xhr.responseText);
+
+  });
+</script>

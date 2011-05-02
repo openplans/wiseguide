@@ -5,6 +5,7 @@ class CasesController < ApplicationController
   end
 
   def show
+    prep_edit #because some things are editable from show(?)
   end
 
   def edit
@@ -42,10 +43,29 @@ class CasesController < ApplicationController
     redirect_to(cases_url)
   end
 
+  def add_route
+    @case = Case.find(params[:case_route][:case_id])
+    authorize! :edit, @case
+    @case_route = CaseRoute.create(params[:case_route])
+    @route = @case_route.route
+    render :layout=>nil
+  end
+
+  def delete_route
+    @case_route = CaseRoute.where(:case_id=>params[:case_id], :route_id=>params[:route_id])[0]
+    @case_route.destroy
+    render :json=>{:action=>:destroy, :case_id=>@case_route.case_id, :route_id=>@case_route.route_id}
+  end
+
+  private
   def prep_edit
     @referral_types = ReferralType.accessible_by(current_ability)
     @users = User.accessible_by(current_ability)
     @dispositions = Disposition.accessible_by(current_ability)
     @funding_sources = FundingSource.accessible_by(current_ability)
+
+    @case_route = CaseRoute.new(:case_id => @case.id)
+    @routes = Route.accessible_by(current_ability)
+
   end
 end

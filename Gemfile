@@ -19,6 +19,8 @@ gem "reverse_scaffold", :path=>"/home/novalis/lowdown/reverse_scaffold"
 
 gem "paperclip"
 
+gem 'jquery-rails', '>= 0.2.6'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
