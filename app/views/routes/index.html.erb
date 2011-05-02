@@ -2,7 +2,6 @@
 
 <table>
   <tr>
-    <th>Id</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,7 +10,6 @@
 
 <% @routes.each do |route| %>
   <tr>
-    <td><%= route.id %></td>
     <td><%= route.name %></td>
     <td><%= link_to 'Show', route %></td>
     <td><%= link_to 'Edit', edit_route_path(route) %></td>
