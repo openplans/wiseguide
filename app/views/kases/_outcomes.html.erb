@@ -1,7 +1,7 @@
 <h1>Outcomes</h1>
 
 <% for outcome in @kase.outcomes %>
-<h2><%= outcome.trip_reason.name %></h2><% if can :edit, outcome %>
+<h2><%= outcome.trip_reason.name %></h2><% if can? :edit, outcome %>
 <%= link_to "Edit", outcome %>
 <% end %>
 <table>
