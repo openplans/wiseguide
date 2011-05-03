@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503175703) do
+ActiveRecord::Schema.define(:version => 20110503181552) do
 
   create_table "assessments", :force => true do |t|
     t.integer  "kase_id"
@@ -102,11 +102,11 @@ ActiveRecord::Schema.define(:version => 20110503175703) do
     t.datetime "date_time"
     t.integer  "event_type_id"
     t.integer  "funding_source_id"
-    t.integer  "duration_in_hours"
+    t.decimal  "duration_in_hours", :precision => 5, :scale => 2
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",      :default => 0
+    t.integer  "lock_version",                                    :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
   end
