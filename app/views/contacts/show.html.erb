@@ -1,0 +1,12 @@
+<h1>Contact for <%= @contact.customer.name %></h1>
+
+By: <%= current_user.email %><br/>
+Date: <%= @contact.date_time %><br/>
+Method: <%= @contact.method %><br/>
+Description: <%= @contact.description %><br/>
+Notes: <%= @contact.notes %><br/>
+
+<%= last_updated @contact %><br/>
+
+<%= link_to "Edit", edit_contact_path(@contact) %><br/>
+<%= link_to "Back to case opened %s for %s " % [@contact.kase.open_date, @contact.customer.name], @contact.kase %>

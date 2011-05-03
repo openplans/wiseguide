@@ -1,6 +1,6 @@
 <h1>Cases</h1>
 <table>
-<% for kase in @customer.cases %>
+<% for kase in @customer.kases %>
 <tr>
 <td><%= kase.open_date %> -</td>
 <td><%= kase.disposition.name %></td>
@@ -10,5 +10,5 @@
 </table>
 
 <% if can? :edit, @customer %>
-<%= link_to "Add", new_case_path(:customer_id=>@customer.id) %><br/>
+<%= link_to "Add", new_kase_path(:customer_id=>@customer.id) %><br/>
 <% end %>

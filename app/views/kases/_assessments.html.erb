@@ -1,6 +1,6 @@
 <h1>Assessments</h1>
 <table>
-<% for assessment in @case.assessments %>
+<% for assessment in @kase.assessments %>
 <tr>
 <td><%= @assessment.created_at %></td>
 <td>TODO: surveys</td>
@@ -8,6 +8,6 @@
 </tr>
 <% end %>
 </table>
-<% if can? :edit, @case %>
-<%= link_to "Add", new_assessment_path(:case_id=>@case.id) %>
+<% if can? :edit, @kase %>
+<%= link_to "Add", new_assessment_path(:kase_id=>@kase.id) %>
 <% end %>

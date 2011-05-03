@@ -1,6 +1,6 @@
 <h1>Outcomes</h1>
 
-<% for outcome in @case.outcomes %>
+<% for outcome in @kase.outcomes %>
 <h2><%= outcome.trip_reason.name %></h2><% if can :edit, outcome %>
 <%= link_to "Edit", outcome %>
 <% end %>
@@ -40,6 +40,6 @@
 </table>
 <% end %>
 
-<% if can? :edit, @case %>
-<%= link_to "Add", new_outcome_path(:case_id=>@case.id) %>
+<% if can? :edit, @kase %>
+<%= link_to "Add", new_outcome_path(:kase_id=>@kase.id) %>
 <% end %>

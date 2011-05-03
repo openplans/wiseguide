@@ -10,61 +10,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427210421) do
+ActiveRecord::Schema.define(:version => 20110503175703) do
 
   create_table "assessments", :force => true do |t|
-    t.integer  "case_id"
+    t.integer  "kase_id"
     t.integer  "user_id"
     t.integer  "survey_id"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
-  end
-
-  create_table "case_routes", :force => true do |t|
-    t.integer  "case_id"
-    t.integer  "route_id"
-    t.datetime "created_at"
-    t.string   "created_by"
-  end
-
-  create_table "cases", :force => true do |t|
-    t.integer  "customer_id"
-    t.date     "open_date"
-    t.date     "close_date"
-    t.string   "referral_source"
-    t.integer  "referral_type_id"
-    t.integer  "user_id"
-    t.integer  "funding_source_id"
-    t.integer  "disposition_id"
-    t.datetime "created_at"
-    t.string   "created_by"
-    t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version",      :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "contacts", :force => true do |t|
-    t.integer  "case_id"
+    t.integer  "kase_id"
     t.integer  "user_id"
     t.datetime "date_time"
     t.string   "method"
     t.string   "description"
     t.text     "notes"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "customer_impairments", :force => true do |t|
     t.integer  "customer_id"
     t.integer  "impairment_id"
     t.datetime "created_at"
-    t.string   "created_by"
+    t.integer  "created_by_id"
   end
 
   create_table "customers", :force => true do |t|
@@ -86,41 +63,41 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.integer  "portrait_file_size"
     t.datetime "portrait_updated_at"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
     t.integer  "lock_version",          :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "dispositions", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "ethnicities", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "event_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "events", :force => true do |t|
-    t.integer  "case_id"
+    t.integer  "kase_id"
     t.integer  "user_id"
     t.datetime "date_time"
     t.integer  "event_type_id"
@@ -128,32 +105,55 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.integer  "duration_in_hours"
     t.text     "notes"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
     t.integer  "lock_version",      :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "funding_sources", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "impairments", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+  end
+
+  create_table "kase_routes", :force => true do |t|
+    t.integer  "kase_id"
+    t.integer  "route_id"
+    t.datetime "created_at"
+    t.integer  "created_by_id"
+  end
+
+  create_table "kases", :force => true do |t|
+    t.integer  "customer_id"
+    t.date     "open_date"
+    t.date     "close_date"
+    t.string   "referral_source"
+    t.integer  "referral_type_id"
+    t.integer  "user_id"
+    t.integer  "funding_source_id"
+    t.integer  "disposition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lock_version",      :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "outcomes", :force => true do |t|
-    t.integer  "case_id"
+    t.integer  "kase_id"
     t.integer  "trip_reason_id"
     t.integer  "exit_trip_count"
     t.integer  "exit_vehicle_miles_reduced"
@@ -161,38 +161,38 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.integer  "three_vehicle_miles_reduced"
     t.integer  "three_month_unreachable"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
     t.integer  "lock_version",                :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "referral_types", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "routes", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "trip_reasons", :force => true do |t|
     t.string   "name"
     t.boolean  "work_related"
     t.datetime "created_at"
-    t.string   "created_by"
     t.datetime "updated_at"
-    t.string   "updated_by"
-    t.integer  "lock_version", :default => 0
+    t.integer  "lock_version",  :default => 0
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "users", :force => true do |t|
@@ -210,6 +210,8 @@ ActiveRecord::Schema.define(:version => 20110427210421) do
     t.integer  "level"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
 end

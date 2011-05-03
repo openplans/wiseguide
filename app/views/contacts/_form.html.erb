@@ -1,0 +1,23 @@
+<h1>Contact for <%= @contact.customer.name %></h1>
+
+<%= form_for @contact do |f| %>
+
+<%= f.hidden_field :kase_id %>
+
+By<br/>
+<%= current_user.email %><br/>
+
+<%= f.label :date_time, "Date" %> <br/>
+<%= f.text_field :date_time, :value=>@contact.date_time %><br/>
+
+<%= f.label :method %><br/>
+<%= f.collection_select :method, @contact_methods, :to_s, :to_s %><br/>
+
+<%= f.label :description %><br/>
+<%= f.text_field :description %><br/>
+
+<%= f.label :notes %><br/>
+<%= f.text_area :notes %><br/>
+
+<%= f.submit %><br/>
+<% end %>

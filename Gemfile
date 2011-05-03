@@ -21,6 +21,8 @@ gem "paperclip"
 
 gem 'jquery-rails', '>= 0.2.6'
 
+gem 'userstamp'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

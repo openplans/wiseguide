@@ -20,7 +20,7 @@ Wiseguide::Application.routes.draw do
     post "delete_impairment", :on=>:collection
   end
 
-  resources :cases do 
+  resources :kases, :path => "cases" do 
     post "add_route", :on=>:collection
     post "delete_route", :on=>:collection
   end

@@ -78,12 +78,12 @@
 </p>
 
 <p>
-Last Updated: <%= @customer.updated_at %> by <%= @customer.updated_by %>
+<%= last_updated @customer %>
 </p>
 
 <%= render "impairments" %>
 
-<%= render "cases" %>
+<%= render "kases" %>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

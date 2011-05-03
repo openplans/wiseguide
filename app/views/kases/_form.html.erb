@@ -1,12 +1,12 @@
-<h1><%= @case.customer.name %></h1>
+<h1><%= @kase.customer.name %></h1>
 
-<%= form_for @case do |f| %>
-  <% if @case.errors.any? %>
+<%= form_for @kase do |f| %>
+  <% if @kase.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@case.errors.count, "error") %> prohibited this case from being saved:</h2>
+      <h2><%= pluralize(@kase.errors.count, "error") %> prohibited this case from being saved:</h2>
 
       <ul>
-      <% @case.errors.full_messages.each do |msg| %>
+      <% @kase.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>

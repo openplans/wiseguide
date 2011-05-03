@@ -1,15 +1,15 @@
 <h1>Routes Trained</h1>
 <table id="routes">
-<% for route in @case.routes %>
-<%= render :partial=>"route_row", :locals=>{:route=>route, :kase=>@case, :edit=>true} %>
+<% for route in @kase.routes %>
+<%= render :partial=>"route_row", :locals=>{:route=>route, :kase=>@kase, :edit=>true} %>
 <% end %>
 </table>
 
-<% if can? :edit, @case %>
+<% if can? :edit, @kase %>
 <%= link_to "Add [TODO: make this link show this form]" %>
 
-<%= form_for @case_route, :url=>add_route_cases_path, :html=>{:remote=>:true, :id=>"new_route_form", :method=>:post, "data-type"=>:html} do |f| %>
-  <%= f.hidden_field :case_id %>
+<%= form_for @kase_route, :url=>add_route_kases_path, :html=>{:remote=>:true, :id=>"new_route_form", :method=>:post, "data-type"=>:html} do |f| %>
+  <%= f.hidden_field :kase_id %>
   <%= f.collection_select :route_id, @routes, :id, :name %>
   <%= f.submit %>
 <% end %>
@@ -19,10 +19,10 @@
 function init_row(index, row) {
     $(row).bind('ajax:success', function(evt, data, status, xhr){
         var $this = $(this);
-        $('#case_route_' + data.case_id + "_" + data.route_id).remove();
+        $('#kase_route_' + data.kase_id + "_" + data.route_id).remove();
     })
 }
-$('.case_route_row').each (init_row);
+$('.kase_route_row').each (init_row);
 
 $('#new_route_form')
   .bind('ajax:success', function(evt, data, status, xhr){

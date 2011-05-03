@@ -3,6 +3,10 @@ class Ability
 
   def initialize(user)
 
+    if user.level < 0
+      return #turned-off users can do nothing
+    end
+
     #system tables
     can :read, Disposition
     can :read, Ethnicity
@@ -21,8 +25,8 @@ class Ability
     end
 
     can ability, Assessment
-    can ability, Case
-    can ability, CaseRoute
+    can ability, Kase
+    can ability, KaseRoute
     can ability, Customer
     can ability, CustomerImpairment
     can ability, Event
