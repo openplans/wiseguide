@@ -2,10 +2,10 @@ class KasesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @my_open_kases = @kases.where(:user_id=>current_user.id)
-    @other_open_kases = @kases.where(["user_id != ? and user_id is not null", current_user.id])
+    @my_open_kases = @kases.find(:all, :conditions=>["user_id = ?", current_user.id], :joins=>:customer, :order=>'customers.name')
+    @other_open_kases = @kases.find(:all, :conditions=>["user_id != ? and user_id is not null", current_user.id], :joins=>:customer, :order=>'customers.name')
 
-    @wait_list = @kases.where("user_id is null")
+    @wait_list = @kases.find(:all, :conditions=>"user_id is null", :order=>'open_date')
   end
 
   def show
