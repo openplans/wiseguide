@@ -1,0 +1,17 @@
+<h1>My Open Cases</h1>
+
+<% for kase in @my_open_kases %>
+<%= link_to kase.customer.name, kase %><br/>
+<% end %>
+
+<h1>Other Open Cases</h1>
+
+<% for kase in @other_open_kases %>
+<%= link_to kase.customer.name, kase %> (<%= kase.user.email %>)<br/> 
+<% end %>
+
+<h1>Wait List</h1>
+
+<% for kase in @wait_list %>
+<%= link_to kase.customer.name, kase %> (<%= kase.open_date %>)<br/>
+<% end %>

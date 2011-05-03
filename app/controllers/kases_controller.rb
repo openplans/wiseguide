@@ -2,6 +2,10 @@ class KasesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @my_open_kases = @kases.where(:user_id=>current_user.id)
+    @other_open_kases = @kases.where(["user_id != ? and user_id is not null", current_user.id])
+
+    @wait_list = @kases.where("user_id is null")
   end
 
   def show
