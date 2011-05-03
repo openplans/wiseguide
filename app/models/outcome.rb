@@ -5,4 +5,11 @@ class Outcome < ActiveRecord::Base
   belongs_to :created_by, :foreign_key => :created_by_id, :class_name=>'User'
   belongs_to :updated_by, :foreign_key => :updated_by_id, :class_name=>'User'
 
+  validates_presence_of :kase_id
+  validates_presence_of :trip_reason_id
+  
+  def customer
+    return kase.customer
+  end
+
 end

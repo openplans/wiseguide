@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503181552) do
+ActiveRecord::Schema.define(:version => 20110503191552) do
 
   create_table "assessments", :force => true do |t|
     t.integer  "kase_id"
@@ -158,13 +158,16 @@ ActiveRecord::Schema.define(:version => 20110503181552) do
     t.integer  "exit_trip_count"
     t.integer  "exit_vehicle_miles_reduced"
     t.integer  "three_month_trip_count"
-    t.integer  "three_vehicle_miles_reduced"
-    t.integer  "three_month_unreachable"
+    t.integer  "three_month_vehicle_miles_reduced"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",                :default => 0
+    t.integer  "lock_version",                      :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
+    t.integer  "six_month_trip_count"
+    t.integer  "six_month_vehicle_miles_reduced"
+    t.boolean  "six_month_unreachable"
+    t.boolean  "three_month_unreachable"
   end
 
   create_table "referral_types", :force => true do |t|

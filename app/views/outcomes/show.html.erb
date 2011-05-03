@@ -1,0 +1,32 @@
+<h1>Outcome for <%= @outcome.customer.name %></h1>
+
+
+Travel Purpose: <%= @outcome.trip_reason.name %><br/>
+
+<h2>At Exit</h2>
+Anticipated one-way trips per week: <%= @outcome.exit_trip_count %><br/>
+Anticipated vehicle miles reduced: <%= @outcome.exit_vehicle_miles_reduced %><br/>
+
+<h2>At 3 Months</h2>
+<% if @outcome.three_month_unreachable %>
+Not reachable.<br/>
+<% else %>
+Actual one-way trips per week: <%= @outcome.three_month_trip_count %><br/>
+Actual vehicle miles reduced: <%= @outcome.three_month_vehicle_miles_reduced %><br/>
+<% end %>
+
+<h2>At 6 Months</h2>
+<% if @outcome.six_month_unreachable %>
+Not reachable.<br/>
+<% else %>
+Actual one-way trips per week: <%= @outcome.six_month_trip_count %><br/>
+Actual vehicle miles reduced: <%= @outcome.six_month_vehicle_miles_reduced %><br/>
+<% end %>
+
+<br/>
+<%= last_updated @outcome %><br/>
+
+<% if can? :edit, @outcome %>
+  <%= link_to "Edit", edit_outcome_path(@outcome) %><br/>
+<% end %>
+<%= link_to "Back to case", @outcome.kase %><br/>
