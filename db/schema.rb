@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503191552) do
+ActiveRecord::Schema.define(:version => 20110503193936) do
 
   create_table "assessments", :force => true do |t|
     t.integer  "kase_id"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(:version => 20110503191552) do
     t.integer  "impairment_id"
     t.datetime "created_at"
     t.integer  "created_by_id"
+  end
+
+  create_table "customer_support_network_members", :force => true do |t|
+    t.integer  "customer_id"
+    t.string   "name"
+    t.string   "title"
+    t.string   "organization"
+    t.string   "phone_number"
+    t.string   "email"
+    t.datetime "created_at"
+    t.integer  "created_by_id"
+    t.datetime "updated_at"
+    t.integer  "updated_by_id"
+    t.integer  "lock_version",  :default => 0
   end
 
   create_table "customers", :force => true do |t|

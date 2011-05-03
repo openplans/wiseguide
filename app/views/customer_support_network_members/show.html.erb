@@ -1,0 +1,17 @@
+<h1>Customer Support Network Member for <%= @customer_support_network_member.customer.name %></h1>
+
+<%= @customer_support_network_member.name %> 
+
+<%= @customer_support_network_member.title %><br/>
+<%= @customer_support_network_member.organization %><br/>
+<%= @customer_support_network_member.phone_number %><br/>
+<%= link_to @customer_support_network_member.email, "mailto:%s" % @customer_support_network_member.email %><br/>
+
+<br/>
+<%= last_updated @customer_support_network_member %><br/>
+
+<% if can? :edit, @customer_support_network_member %>
+  <%= link_to "Edit", edit_customer_support_network_member_path(@customer_support_network_member) %><br/>
+  <%= link_to "Delete", customer_support_network_member_path(@customer_support_network_member), :method=>:delete, :confirm=>"Are you sure?" %><br/>
+<% end %>
+<%= link_to "Back to customer", @customer_support_network_member.customer %><br/>

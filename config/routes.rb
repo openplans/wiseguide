@@ -15,6 +15,8 @@ Wiseguide::Application.routes.draw do
 
   resources :dispositions
 
+  resources :customer_support_network_members
+
   resources :customers do
     post "add_impairment", :on=>:collection
     post "delete_impairment", :on=>:collection
