@@ -15,8 +15,6 @@ gem "cancan"
 
 gem 'will_paginate', '3.0.pre2'
 
-gem "reverse_scaffold", :path=>"/home/novalis/lowdown/reverse_scaffold"
-
 gem "paperclip"
 
 gem 'jquery-rails', '>= 0.2.6'
