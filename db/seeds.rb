@@ -19,6 +19,10 @@ end
   Ethnicity.find_or_create_by_name(e)
 end 
 
+['Medical','Life-sustaining Medical','Personal/Support Services','Shopping','School/Work','Volunteer Work','Recreation','Nutrition'].each do |tr|
+  TripReason.find_or_create_by_name(tr)
+end
+
 ['Initial Interview','Route & Scout','Travel Training','Trainee Shadow'].each do |et|
   EventType.find_or_create_by_name(et)
 end
