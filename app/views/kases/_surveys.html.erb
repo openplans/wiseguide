@@ -1,0 +1,13 @@
+<h1><%= local_assigns[:title].nil? ? 'Assessments' : title%></h1>
+<table>
+<% for response_set in @kase.response_sets %>
+<tr>
+<td><%= response_set.created_at %></td>
+<td><%= link_to response_set.survey.title, view_my_survey_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code) %></td>
+<td><%= button_to "Delete", delete_surveys_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code), :method=>:delete %></td>
+</tr>
+<% end %>
+</table>
+<% if can? :edit, @kase %>
+<%= link_to "Add", new_survey_path(:kase_id=>@kase.id) %>
+<% end %>

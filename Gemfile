@@ -21,6 +21,12 @@ gem 'jquery-rails', '>= 0.2.6'
 
 gem 'userstamp'
 
+gem 'formtastic'
+
+gem 'surveyor', :git => 'git://github.com/openplans/surveyor.git', :branch => 'rails3'
+
+gem 'haml'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

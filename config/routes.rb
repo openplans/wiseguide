@@ -31,7 +31,10 @@ Wiseguide::Application.routes.draw do
 
   resources :events
 
-  resources :assessments
+  #these are called "assessments" in user-visible text
+  resources :surveys, :controller=>'Surveyor' do
+    delete "/:survey_code/:response_set_code/delete", :to => "surveyor#delete_response_set", :as=>:delete, :on=>:collection
+  end
 
   resources :outcomes
 
