@@ -1,0 +1,12 @@
+<% for survey in @surveys %>
+
+<b class="<%= survey.inactive_at ? 'active' : 'inactive' %>"><%= survey.title %></b>: Assessed <%= survey.response_sets.size %> times.<br>
+Created <%= survey.active_at %><br/>
+<% if survey.inactive_at %>
+  Deactivated <%= survey.inactive_at %><br/>
+  <%= button_to :reactivate, survey_reactivate_path(survey), :method=>:post %>
+<% else %>
+  <%= button_to :deactivate, survey, :method=>:delete %>
+<% end %>
+
+<% end %>
