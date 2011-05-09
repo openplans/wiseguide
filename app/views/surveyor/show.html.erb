@@ -1,0 +1,58 @@
+<% for survey_section in @response_set.survey.sections %>
+
+<h2><%= survey_section.title %></h2>
+<p><%= survey_section.description %></p>
+<% last_question_group = nil %>
+<% for question in survey_section.questions %>
+
+<!-- we want to display question group headers -->
+<% if question.question_group != last_question_group 
+      last_question_group = question.question_group
+      if question.question_group %>
+         <p class="question_group_text"><%= question.question_group.text %></p>
+      <% end %>
+<% end %>
+
+<!-- now display the question -->
+<p class="question"><%= question.text %></p>
+
+<% if question.display_type == "label" 
+   next 
+end %>
+
+<% if !question.question_group || question.question_group.display=="inline" || question.question_group.display_type="grid" %>
+<%= display_response(@response_set, question).html_safe %>
+<% else %>
+multi
+<% end %>
+<!-- now the answers.  There are a few cases here:
+
+(a) a question has no question_group, and thus is a simple question with 
+one or more responses
+
+or
+
+    a question has a question_group, but display_type=inline.   This is a set
+of questions that is logically grouped, but each q will only have one a (with one or more responses, depending).
+
+or 
+    a question has a question_group with display_type="grid", meaning
+that it is in effect a single question with one (for radio) or more
+(for checkboxes) responses -- the other questions in the group are
+independent.
+
+(b) a question has a question_group with display_type=repeater.  This
+is a set of questions which may have more than one set of answers, the
+responses being grouped by response_group.  That is, answers are
+effectively sub-questions.
+
+In this case, we want to display the each response_group on one line
+
+-->
+
+
+<% end %>
+
+<% end %>
+
+<br/><%= link_to "Back to case", @response_set.kase %>

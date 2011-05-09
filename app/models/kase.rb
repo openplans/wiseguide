@@ -11,7 +11,7 @@ class Kase < ActiveRecord::Base
 
   has_many :contacts
   has_many :events
-  has_many :assessments
+  has_many :response_sets
   has_many :kase_routes
   has_many :routes, :through=>:kase_routes
   has_many :outcomes

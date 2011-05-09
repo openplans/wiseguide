@@ -1,0 +1,17 @@
+<%= render :partial=>"/kases/surveys", :locals=>{:title=>"Assessments for #{@kase.customer.name}"} %> 
+<br/>
+
+<% if @surveys.empty? %>
+  No assessments
+<% else %>
+  <ul>
+  <% for survey in @surveys %>
+  <li>
+    <%= form_tag(take_survey_path(:survey_code => survey.access_code)) do %>
+    <%= hidden_field_tag :kase_id, @kase.id %>
+    <%= survey.title %>
+    <%= submit_tag( "Assess" ) %>
+    <% end %>
+  </li>
+  <% end %>
+ <% end %>
