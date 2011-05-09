@@ -57,6 +57,7 @@ module SurveyorControllerCustomMethods
   end
 
   def create_survey
+    authorize! :manage, Survey
     survey_obj = JSON.parse(params[:survey])
     to_save = []
     ActiveRecord::Base.transaction do
