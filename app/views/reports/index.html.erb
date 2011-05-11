@@ -1,0 +1,29 @@
+Monthly report:<br/>
+<form action="/reports/basic_monthly_report">
+
+Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
+
+First day of month: <input type="text" name="start_date">
+
+<input type="submit" name="report" value="Report">
+</form>
+
+Yearly report:<br/>
+<form action="/reports/basic_annual_report">
+
+Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
+
+Fiscal Year: <input type="text" name="year">
+
+<input type="submit" name="report" value="Report">
+</form>
+
+Age and ethnicity report:<br/>
+<form action="/reports/age_and_ethnicity">
+
+Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
+
+First day of month: <input type="text" name="start_date">
+
+<input type="submit" name="report" value="Report">
+</form>

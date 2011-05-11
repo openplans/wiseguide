@@ -14,7 +14,22 @@ class Customer < ActiveRecord::Base
   validates_attachment_size :portrait, :less_than => 300.kilobytes
   validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
+  validates_presence_of :ethnicity_id
+
   def name
     return "%s %s" % [first_name, last_name]
   end
+
+  def age_in_years
+    if birth_date.nil?
+      return nil
+    end
+    today = Date.today
+    years = today.year - birth_date.year #2011 - 1980 = 31
+    if today.month < birth_date.month  || today.month == birth_date.month and today.day < birth_date.day #but 4/8 is before 7/3, so age is 30
+      years -= 1
+    end
+    return years
+  end
+
 end

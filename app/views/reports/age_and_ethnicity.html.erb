@@ -1,0 +1,63 @@
+<div id="page-header">
+  <h1>Reports: Age &amp; Ethnicity</h1>
+</div>
+
+<div class="section-header">
+  <h2>Age</h2>
+</div>
+
+<table>
+  <tr>
+    <th>Age</th>
+    <th>Current Month</th>
+    <th>Fiscal YTD</th>
+  </tr>
+
+  <tr>
+    <td>Unduplicated number of persons 60 years and older</td>
+    <td><%= @this_month_sixty_plus %></td>
+    <td><%= @this_year_sixty_plus %></td>
+  </tr>
+
+  <tr>
+    <td>Unduplicated number of persons 59 years and younger</td>
+    <td><%= @this_month_less_than_sixty %></td>
+    <td><%= @this_year_less_than_sixty %></td>
+  </tr>
+
+  <tr>
+    <td>Unduplicated number of persons age unknown</td>
+    <td><%= @this_month_unknown_age %></td>
+    <td><%= @this_year_unknown_age %></td>
+  </tr>
+
+  <tr>
+    <td>Total Unduplicated Individuals</td>
+    <td><%= @this_month_unknown_age + @this_month_sixty_plus + @this_month_less_than_sixty %></td>
+    <td><%= @this_year_unknown_age + @this_year_sixty_plus + @this_year_less_than_sixty  %></td>
+  </tr>
+
+</table>
+
+<div class="section-header">
+  <h2>Ethnic Heritage</h2>
+</div>
+
+<table>
+
+  <tr>
+    <th>Ethnic Heritage</th>
+    <th>Current Month</th>
+    <th>Fiscal YTD</th>
+  </tr>
+
+  <% for ethnicity in @counts_by_ethnicity.keys.sort %>
+  <% row = @counts_by_ethnicity[ethnicity] %>
+  <tr>
+    <td><%= ethnicity.name %></td>
+    <td><%= row['month'] %></td>
+    <td><%= row['year'] %></td>
+  </tr>
+  <% end %>
+
+</table>
