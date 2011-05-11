@@ -1,0 +1,52 @@
+<%= form_tag new_survey_surveys_path, :method=>"PUT" do %>
+
+
+Survey (in JSON):<br/>
+<%= text_area_tag "survey", params[:survey], {:cols=>80, :rows=>20} %>
+<br/>
+
+Here's an example -- stuff with # in front of it is an explanation
+and should not be used in your survey
+<pre>
+{"title" : "Intake",
+ "sections" : [
+    {
+      "title" : "Section 1",
+      "questions" : [
+         {
+         "type" : "group",
+         "text" : "Questions about the trainer",
+         "display_type" : "default", #or "dropdown"
+         "questions" : [
+            { "title" : "What is your favorite color?",
+              "pick" : "one", #or none (meaning a free answer) or any
+              "answers" : [
+                { "text" : "octarine", "response_class" : "answer"},
+                { "text" : "fuligin", "response_class" : "answer"},
+                { "text" : "bleen", "response_class" : "answer"}
+              ]
+            },
+            { "title" : "Give me a number",
+              "pick" : "none",
+              "answers" : [ #you still need one answer, with response_class "text" or "float" (for numbers)
+                { "text" : "answer", "response_class" : "float"}
+              ]
+            }
+          ]
+        },
+        { #you can also have ungrouped questions:
+#TODO: REPEATER EXAMPLE
+          "title" : "Give me as many names as you like",
+          "pick" : "none",
+          "answers" : [ 
+            { "text" : "answer", "response_class" : "text"}
+          ]
+        }          
+      ]
+    }
+  ]
+}
+</pre>
+<%= submit_tag "Create" %>
+
+<% end %>

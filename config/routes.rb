@@ -34,6 +34,9 @@ Wiseguide::Application.routes.draw do
   #these are called "assessments" in user-visible text
   resources :surveys, :controller=>'Surveyor' do
     delete "/:survey_code/:response_set_code/delete", :to => "surveyor#delete_response_set", :as=>:delete, :on=>:collection
+    get "new_survey", :on=>:collection
+    put "new_survey", :on=>:collection, :to=>"surveyor#create_survey", :as=>:new_survey
+    post "reactivate_survey", :to=>"surveyor#reactivate", :as=>:reactivate
   end
 
   resources :outcomes
