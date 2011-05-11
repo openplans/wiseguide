@@ -23,7 +23,7 @@ end
   TripReason.find_or_create_by_name(tr)
 end
 
-['Initial Interview','Route & Scout','Travel Training','Trainee Shadow'].each do |et|
+['Initial Interview','Route & Scout','Travel Training','Trainee Shadow','Honored Citizen Card Requested','Liability Waiver Signed'].each do |et|
   EventType.find_or_create_by_name(et)
 end
 
