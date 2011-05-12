@@ -7,7 +7,7 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 require 'csv'
 
-['Successful','Unsuccessful','Incomplete','Exited'].each do |d|
+['In Progress', 'Successful','Unsuccessful','Incomplete','Exited'].each do |d|
   Disposition.find_or_create_by_name(d)
 end
 

@@ -17,7 +17,8 @@ class KasesController < ApplicationController
   end
 
   def new
-    @kase = Kase.new(:customer_id=>params[:customer_id])
+    in_progress = Disposition.find_by_name('In Progress')
+    @kase = Kase.new(:customer_id=>params[:customer_id], :disposition_id=>in_progress.id)
     prep_edit
   end
 
