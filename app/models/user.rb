@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   belongs_to :created_by, :foreign_key => :created_by_id, :class_name=>'User'
   belongs_to :updated_by, :foreign_key => :updated_by_id, :class_name=>'User'
 
-  has_many :assessments
+  has_many :surveys
   has_many :kases
   has_many :contacts
   has_many :events
