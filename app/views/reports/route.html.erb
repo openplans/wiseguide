@@ -1,0 +1,9 @@
+
+Trained on <%= @route.name %><br/>
+
+<% for customer in @customers %>
+<%= link_to customer.name, customer %><br/>
+<%= customer.phone_number_1 %><br/>
+<%= customer.phone_number_2 %><br/>
+<hr>
+<% end %>

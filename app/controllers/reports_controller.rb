@@ -2,6 +2,7 @@ class ReportsController < ApplicationController
 
   def index
     @funding_sources = [FundingSource.new(:id=>0, :name=>"all")] + FundingSource.accessible_by(current_ability) 
+    @routes = Route.accessible_by(current_ability)
   end
 
   def basic_monthly_report
@@ -140,6 +141,12 @@ class ReportsController < ApplicationController
     @hours_by_customer = hours_by_customer
     @dispositions = dispositions
     @events_by_type = events_by_type
+  end
+
+  def route
+    @route = Route.find(params[:route_id])
+    authorize! :read, @route
+    @customers = Customer.accessible_by(current_ability).find(:all, :conditions=>{"kase_routes.route_id"=>params[:route_id]}, :joins=>{:kases => :kase_routes})
   end
 
   private

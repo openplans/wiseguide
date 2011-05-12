@@ -43,3 +43,13 @@ Trainee report:<br/>
 <input type="text" name="end_date"><br/>
 <input type="submit" name="report" value="Report">
 </form>
+
+Route report:<br/>
+<form action="/reports/route">
+
+Route: <%= select_tag "route_id", options_for_select(@routes.map { |fs| [fs.name, fs.id] }) %><br/>
+
+<input type="text" name="start_date"><br/>
+<input type="text" name="end_date"><br/>
+<input type="submit" name="report" value="Report">
+</form>
