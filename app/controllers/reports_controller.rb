@@ -68,6 +68,43 @@ class ReportsController < ApplicationController
 
   end
 
+  def trainer
+    #Trainer Report: Listing of training activities (Initial
+    #interviews, scouts, trainings, shadows), with dates, durations.
+    #Grouped by trainer with grand and by-trainer totals.
+
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    events = Event.where(["date_time between ? and ?", start_date, end_date]).order('date_time')
+    events_by_trainer = {}
+    hours_by_trainer = {'{total}' => 0}
+    customers_by_trainer = {'{total}' => Set.new}
+    for event in events
+      user = event.user
+      if ! events_by_trainer.member? user
+        events_by_trainer[user] = []
+      end
+      events_by_trainer[user].push(event)
+      if ! hours_by_trainer.member? user
+        hours_by_trainer[user] = 0
+      end
+      hours_by_trainer[user] += event.duration_in_hours
+      hours_by_trainer['{total}'] += event.duration_in_hours
+      if ! customers_by_trainer.member? user
+        customers_by_trainer[user] = Set.new
+      end
+      customers_by_trainer[user].add event.kase.customer
+      customers_by_trainer['{total}'].add event.kase.customer
+    end
+    @trainers = events_by_trainer.keys.sort{|x| x.email}
+
+    @events_by_trainer = events_by_trainer
+    @hours_by_trainer = hours_by_trainer
+    @customers_by_trainer = customers_by_trainer
+    @events = events
+  end
+
   private
 
   def get_kases_for_month
@@ -186,5 +223,4 @@ class ReportsController < ApplicationController
       end
     end
   end
-
 end

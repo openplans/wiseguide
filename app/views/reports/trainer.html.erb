@@ -1,0 +1,29 @@
+<% for trainer in @trainers %>
+
+<b><%= trainer.email %></b><br/>
+Trained: <i><%= @customers_by_trainer[trainer].size %></i><br/>
+<b><%= @hours_by_trainer[trainer] %> hours</b><br/>
+
+<table>
+<tr>
+<th>Name</th>
+<th>Actions Completed</th>
+<th>Date Completed</th>
+<th>Hours Trained</th>
+</tr>
+
+<% for event in @events_by_trainer[trainer] %>
+<tr>
+<td><%= event.kase.customer.name %></td>
+<td><%= event.event_type.name %></td>
+<td><%= event.date_time.to_date %></td>
+<td><%= event.duration_in_hours %></td>
+</tr>
+<% end %>
+</table>
+<hr>
+
+<% end %>
+
+<b>Total Individuals Trained:</b> <%= @hours_by_trainer['{total}'] %> <br/>
+<b>Hours Trained:</b> <%= @customers_by_trainer['{total}'].size %> <br/>
