@@ -23,5 +23,17 @@
 <td colspan="4">&nbsp;</td>
 <td class="total"><%= @hours_by_customer[customer] %></td>
 </tr>
+</table>
 
 <% end %>
+
+Dispositions:<br/>
+<% @dispositions.each do |disposition, count| %>
+<%= disposition.name %>: <%= count %><br/>
+<% end %>
+
+Events:<br/>
+<% @events_by_type.each do |event_type, count| %>
+<%= event_type.name %>: <%= count %><br/>
+<% end %>
+

@@ -113,7 +113,8 @@ class ReportsController < ApplicationController
     events = Event.accessible_by(current_ability).where(["date_time between ? and ?", start_date, end_date]).order('date_time')
     events_by_customer = {}
     hours_by_customer = {}
-
+    dispositions = {}
+    events_by_type = {}
     for event in events
       customer = event.kase.customer
       if ! events_by_customer.member? customer
@@ -124,10 +125,21 @@ class ReportsController < ApplicationController
         hours_by_customer[customer] = 0
       end
       hours_by_customer[customer] += event.duration_in_hours
+      if !dispositions.member? event.kase.disposition
+        dispositions[event.kase.disposition] = 0
+      end
+      dispositions[event.kase.disposition] += 1
+      if !events_by_type.member? event.event_type
+        events_by_type[event.event_type] = 0
+      end
+      events_by_type[event.event_type] += 1
+
     end
     @customers = events_by_customer.keys.sort{|x| x.name}
     @events_by_customer = events_by_customer
     @hours_by_customer = hours_by_customer
+    @dispositions = dispositions
+    @events_by_type = events_by_type
   end
 
   private
