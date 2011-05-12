@@ -1,0 +1,27 @@
+<table>
+<tr>
+<th>Name</th>
+<th>Actions Completed</th>
+<th>Date Completed</th>
+<th>Trainer</th>
+<th>Hours Trained</th>
+</th>
+
+<% for customer in @customers %>
+<tr>
+<td rowspan="@events_by_customer[customer].size + 2" colspan="5"><%= customer.name %></td>
+</tr>
+<% for event in @events_by_customer[customer] %>
+<tr>
+<td><%= event.event_type.name %></td>
+<td><%= event.date_time.to_date %></td>
+<td><%= event.user.email %></td>
+<td><%= event.duration_in_hours %></td>
+</tr>
+<% end %>
+<tr>
+<td colspan="4">&nbsp;</td>
+<td class="total"><%= @hours_by_customer[customer] %></td>
+</tr>
+
+<% end %>

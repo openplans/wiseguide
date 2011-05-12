@@ -76,7 +76,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.where(["date_time between ? and ?", start_date, end_date]).order('date_time')
+    events = Event.accessible_by(current_ability).where(["date_time between ? and ?", start_date, end_date]).order('date_time')
     events_by_trainer = {}
     hours_by_trainer = {'{total}' => 0}
     customers_by_trainer = {'{total}' => Set.new}
@@ -105,6 +105,31 @@ class ReportsController < ApplicationController
     @events = events
   end
 
+  def trainee
+
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    events = Event.accessible_by(current_ability).where(["date_time between ? and ?", start_date, end_date]).order('date_time')
+    events_by_customer = {}
+    hours_by_customer = {}
+
+    for event in events
+      customer = event.kase.customer
+      if ! events_by_customer.member? customer
+        events_by_customer[customer] = []
+      end
+      events_by_customer[customer].push(event)
+      if ! hours_by_customer.member? customer
+        hours_by_customer[customer] = 0
+      end
+      hours_by_customer[customer] += event.duration_in_hours
+    end
+    @customers = events_by_customer.keys.sort{|x| x.name}
+    @events_by_customer = events_by_customer
+    @hours_by_customer = hours_by_customer
+  end
+
   private
 
   def get_kases_for_month
@@ -129,7 +154,7 @@ class ReportsController < ApplicationController
     end
     fy_start_date = Date.new(fy, 7, 1)
 
-    possibly_prior_kases_this_year = Kase.where(["close_date < ? and close_date > ?", start_date, fy_start_date])
+    possibly_prior_kases_this_year = Kase.accessible_by(current_ability).where(["close_date < ? and close_date > ?", start_date, fy_start_date])
 
     possibly_prior_kases_this_year = filter_by_funding_source(possibly_prior_kases_this_year)
 
@@ -158,6 +183,7 @@ class ReportsController < ApplicationController
     end
     kases
   end
+
   def get_kases_for_year
     successful = Disposition.find_by_name("Successful")
 
@@ -180,6 +206,7 @@ class ReportsController < ApplicationController
     where k2.id is null"
       kases = Kase.find_by_sql([sql, successful.id, fy_start_date, fy_end_date, successful.id, fy_start_date, fy_end_date])
     end
+    kases = kases.find_all {|k| can? :read, k}
     kases
   end
 
