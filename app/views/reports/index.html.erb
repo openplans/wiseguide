@@ -53,3 +53,11 @@ Route: <%= select_tag "route_id", options_for_select(@routes.map { |fs| [fs.name
 <input type="text" name="end_date"><br/>
 <input type="submit" name="report" value="Report">
 </form>
+
+Outcomes export:<br/>
+<form action="/reports/outcomes">
+
+<input type="text" name="start_date"><br/>
+<input type="text" name="end_date"><br/>
+<input type="submit" name="report" value="Report">
+</form>

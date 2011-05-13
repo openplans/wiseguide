@@ -1,3 +1,4 @@
+require 'csv'
 class ReportsController < ApplicationController
 
   def index
@@ -144,9 +145,51 @@ class ReportsController < ApplicationController
   end
 
   def route
+
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
     @route = Route.find(params[:route_id])
     authorize! :read, @route
-    @customers = Customer.accessible_by(current_ability).find(:all, :conditions=>{"kase_routes.route_id"=>params[:route_id]}, :joins=>{:kases => :kase_routes})
+    @customers = Customer.accessible_by(current_ability).find(:all, :conditions=>["kase_routes.route_id = ? and (kases.open_date between ? and ? or kases.close_date between ? and ? or (kases.close_date is null and kases.open_date < ?))", params[:route_id], start_date, end_date, start_date, end_date, end_date], :joins=>{:kases => :kase_routes})
+  end
+
+  def outcomes
+    #csv, one record per outcome
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    kases = Kase.accessible_by(current_ability).where(["close_date between ? and ?", start_date,end_date])
+    
+    csv = ""
+    CSV.generate(csv) do |csv|
+      for kase in kases
+        customer = kase.customer
+        for outcome in kase.outcomes
+          csv << [customer.name,
+                  customer.birth_date.to_s,
+                  customer.ethnicity.name,
+                  customer.gender,
+                  kase.open_date,
+                  kase.assigned_to.email,
+                  kase.referral_source,
+                  kase.referral_type.name,
+                  kase.close_date,
+                  kase.disposition.name,
+                  outcome.trip_reason.name,
+                  outcome.exit_trip_count,
+                  outcome.exit_vehicle_miles_reduced,
+                  outcome.three_month_unreachable,
+                  outcome.three_month_trip_count,
+                  outcome.three_month_vehicle_miles_reduced,
+                  outcome.six_month_unreachable,
+                  outcome.six_month_trip_count,
+                  outcome.six_month_vehicle_miles_reduced]
+        end
+      end 
+    end
+    
+    render :text=>csv
   end
 
   private
