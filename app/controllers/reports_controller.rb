@@ -151,7 +151,7 @@ class ReportsController < ApplicationController
 
     @route = Route.find(params[:route_id])
     authorize! :read, @route
-    @customers = Customer.accessible_by(current_ability).find(:all, :conditions=>["kase_routes.route_id = ? and (kases.open_date between ? and ? or kases.close_date between ? and ? or (kases.close_date is null and kases.open_date < ?))", params[:route_id], start_date, end_date, start_date, end_date, end_date], :joins=>{:kases => :kase_routes})
+    @customers = Customer.accessible_by(current_ability).find(:all, :conditions=>["kase_routes.route_id = ? and (kases.open_date between ? and ? or kases.close_date between ? and ? or (kases.close_date is null and kases.open_date < ?))", params[:route_id], start_date, end_date, start_date, end_date, end_date], :joins=>{:kases => :kase_routes}, :include=>{:kases=>:outcomes})
   end
 
   def outcomes
@@ -189,6 +189,84 @@ class ReportsController < ApplicationController
       end 
     end
     
+    render :text=>csv
+  end
+
+  #because this is user-visible in the url, it does not match the
+  #system-wide "kase" naming convention
+  def cases
+    #csv, one record per case with events in the period
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    kases = Kase.accessible_by(current_ability).includes(:events, :customer).where(["events.date_time between ? and ?", start_date, end_date])
+
+    csv = ""
+    CSV.generate(csv) do |csv|
+      for kase in kases
+        total_duration = 0
+        for event in kase.events.where(["events.date_time between ? and ?", start_date, end_date])
+          total_duration += event.duration_in_hours
+        end
+        customer = kase.customer
+        csv << [customer.name,
+                customer.birth_date.to_s,
+                customer.ethnicity.name,
+                customer.gender,
+                customer.phone_number_1,
+                customer.phone_number_2,
+                customer.email,
+                customer.address,
+                customer.city,
+                customer.state,
+                customer.zip,
+                customer.notes,
+                kase.open_date,
+                kase.assigned_to.email,
+                kase.referral_source,
+                kase.referral_type.name,
+                kase.close_date,
+                kase.disposition.name,
+                total_duration]
+      end
+    end 
+    
+    render :text=>csv
+  end
+
+  def events
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(["date_time between ? and ?", start_date, end_date])
+
+    csv = ""
+    CSV.generate(csv) do |csv|
+      for event in events
+        kase = event.kase
+        customer = kase.customer
+        csv << [customer.name,
+                customer.birth_date.to_s,
+                customer.ethnicity.name,
+                customer.gender,
+                customer.phone_number_1,
+                customer.phone_number_2,
+                customer.email,
+                customer.address,
+                customer.city,
+                customer.state,
+                customer.zip,
+                customer.notes,
+                kase.open_date,
+                kase.close_date,
+                kase.disposition.name,
+                event.event_type.name,
+                event.date_time, 
+                event.user.email,
+                event.funding_source.name,
+                event.duration_in_hours]
+      end
+    end
     render :text=>csv
   end
 
