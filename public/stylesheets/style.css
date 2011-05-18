@@ -915,7 +915,22 @@ body.users a.action-bttn {
  * Cases
  *
  */
+body.kases div.first,
+body.kases div.second {
+ float : left;
+}
 
+body.kases div.first {
+ width : 55%;
+ margin-right : 5%;
+}
+
+body.kases h2 a {
+  float: right;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 24px;
+}
 
 /*
  *

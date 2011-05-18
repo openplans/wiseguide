@@ -1,6 +1,3 @@
-<h1><%= @kase.customer.name %></h1>
-
-<%= form_for @kase do |f| %>
   <% if @kase.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@kase.errors.count, "error") %> prohibited this case from being saved:</h2>
@@ -15,31 +12,45 @@
 
 <%= f.hidden_field :customer_id %>
 
-<%= f.label :open_date, "Opened" %><br/>
-<%= f.text_field :open_date %><br/>
+<ol class="section">
+  <li>
+    <%= f.label :open_date, "Opened" %>
+    <%= f.text_field :open_date %>
+  </li>
+  
+  <li>
+    <%= f.label :referral_source %>
+    <%= f.text_field :referral_source %>
+  </li>
 
+  <li>
+    <%= f.label :referral_type_id, "Referral Source Type" %>
+    <%= f.collection_select :referral_type_id, @referral_types, :id, :name %>
+  </li>
 
-<%= f.label :referral_source %><br/>
-<%= f.text_field :referral_source %><br/>
+  <li>
+    <%= f.label :user_id, "Assigned to" %>
+    <%= f.collection_select :user_id, @users, :id, :email %>
+  </li>
 
-<%= f.label :referral_type_id, "Referral Source Type" %><br/>
+  <li>
+    <%= f.label :funding_source_id, "Default funding source" %>
+    <%= f.collection_select :funding_source_id, @funding_sources, :id, :name %>
+  </li>
 
-<%= f.collection_select :referral_type_id, @referral_types, :id, :name %><br/>
+  <li>
+    <%= f.label :close_date, "Closed" %>
+    <%= f.text_field :close_date %>
+  </li>
 
-<%= f.label :user_id, "Assigned to" %><br/>
-<%= f.collection_select :user_id, @users, :id, :email %><br/>
-
-<%= f.label :funding_source_id, "Default funding source" %><br/>
-<%= f.collection_select :funding_source_id, @funding_sources, :id, :name %><br/>
-
-<%= f.label :close_date, "Closed" %><br/>
-<%= f.text_field :close_date %><br/>
-
-<%= f.label :disposition_id, "Disposition" %><br/>
-<%= f.collection_select :disposition_id, @dispositions, :id, :name %><br/>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-<% end %>
+  <li>
+    <%= f.label :disposition_id, "Disposition" %>
+    <%= f.collection_select :disposition_id, @dispositions, :id, :name %>
+  </li>
+  
+  <li>
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+  </li>
+</ol>
