@@ -19,6 +19,10 @@ class Customer < ActiveRecord::Base
   def name
     return "%s %s" % [first_name, last_name]
   end
+  
+  def name_reversed
+    return "%s, %s" % [last_name, first_name]
+  end
 
   def age_in_years
     if birth_date.nil?
