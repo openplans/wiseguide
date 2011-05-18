@@ -1,4 +1,3 @@
-<%= form_for @customer, :html => { :multipart => true }  do |f| %>
   <% if @customer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
@@ -11,66 +10,62 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
+    <li>
+    <%= f.label :first_name %>
     <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
+    </li>
+
+    <li>
+    <%= f.label :last_name %>
     <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_date %><br />
+    </li>
+
+    <li>
+    <%= f.label :birth_date %>
     <%= f.text_field :birth_date %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br />
+    </li>
+
+    <li>
+    <%= f.label :gender %>
     <%= f.select :gender, @genders, {:selected=>@customer.gender} %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number_1 %><br />
+    </li>
+
+    <li>
+    <%= f.label :phone_number_1 %>
     <%= f.text_field :phone_number_1 %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number_2 %><br />
+    </li>
+
+    <li>
+    <%= f.label :phone_number_2 %>
     <%= f.text_field :phone_number_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
+    </li>
+
+    <li>
+    <%= f.label :email %>
     <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
+    </li>
+
+    <li>
+    <%= f.label :address %>
     <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
+    </li>
+
+    <li>
+    <%= f.label :city %>
     <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
+    </li>
+
+    <li>
+    <%= f.label :state %>
     <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :zip %><br />
+    </li>
+
+    <li>
+    <%= f.label :zip %>
     <%= f.text_field :zip %>
-  </div>
-  <div class="field">
-    <%= f.label :ethnicity %><br />
+    </li>
+
+    <li>
+    <%= f.label :ethnicity %>
     <%= f.collection_select :ethnicity_id, @ethnicities, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>
-  </div>
-  <div class="field">
-    <%= f.label :portrait %>
-    <% if @customer.portrait %>
-    <%= image_tag @customer.portrait.url %>
-    <% end %>
-    <%= f.file_field :portrait %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    </li>

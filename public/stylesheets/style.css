@@ -932,6 +932,28 @@ body.kases h2 a {
   line-height: 24px;
 }
 
+
+/*
+ *
+ * Customers
+ *
+ */
+body.customers ol.notes label,
+body.customers ol.notes input[type="file"] {
+  float: none;
+  clear: both;
+  width : 100%;
+  display: block;
+}
+
+body.customers dt {
+  font-weight: bold;
+}
+
+body.customers dd {
+  padding-left: 20px;
+}
+
 /*
  *
  * Reports

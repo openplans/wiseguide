@@ -1,4 +1,4 @@
-<h1>Impairments</h1>
+<h1>Special Considerations</h1>
 
 <table id="impairments">
 <% for impairment in @customer.impairments %>
@@ -14,7 +14,7 @@
 <%= form_for @customer_impairment, :url=>add_impairment_customers_path, :html=>{:remote=>:true, :id=>"new_impairment_form", :method=>:post, "data-type"=>:html} do |f| %>
   <%= f.hidden_field :customer_id %>
   <%= f.collection_select :impairment_id, @impairments, :id, :name %>
-  <%= f.submit %>
+  <%= f.submit "Add impairment" %>
 <% end %>
 <% end %>
 
