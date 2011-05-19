@@ -1,14 +1,39 @@
-<h1>Editing customer</h1>
+<div id="page-header">
+  <h1>Editing <%= @customer.name %></h1>
+</div>
 
-<%= render 'form' %>
-
-<%= last_updated @customer %>
-
-<%= render "impairments" %>
-
-<%= render "kases" %>
-
-<%= render "network" %>
-
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
+<%= form_for @customer, :html => { :multipart => true }  do |f| %>
+  <fieldset>
+    <ol class="section first">
+      <%= render 'form', :f => f %>
+      <li>
+      <%= last_updated @customer %>
+      </li>
+    </ol>
+    <ol class="section second">
+      <li>
+      <%= render "impairments" %>
+      </li>
+    </ol>
+    <ol class="section third">
+      <li>
+      <%= render "network" %>
+      </li>
+    </ol>
+    <ol class="section second notes">
+      <li>
+      <%= render "notes_and_photo", :f => f %>
+      </li>
+    </ol>
+    <ol class="section third">
+      <li>
+      <%= render "kases" %>
+      </li>
+    </ol>
+    
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+    
+  </fieldset>
+<% end %>

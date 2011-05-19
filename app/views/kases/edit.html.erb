@@ -1,14 +1,46 @@
-<%= render "form" %>
+<div id="page-header">
+  <h1><%= @kase.customer.name %></h1>
+</div>
 
-<%= last_updated @kase %>
+<%= form_for @kase do |f| %>
 
-<%= render "contacts" %>
+<fieldset>
+  <div class="first">
+    <%= render "form", :f => f %>
 
-<%= render "events" %>
+    <%#= last_updated @kase %>
+    <ol class="section">
+      <li>
+      <%= render "contacts" %>
+      </li>
+    </ol>
+    
+    <ol class="section">
+      <li>
+      <%= render "events" %>
+      </li>
+    </ol>
+  </div>
 
-<%= render "surveys" %>
+  <div class="second">
+    <ol class="section">
+      <li>
+      <%= render "surveys" %>
+      </li>
+    </ol>
+    
+    <ol class="section">
+      <li>
+      <%= render "routes", :locals=>{:edit => false} %>
+      </li>
+    </ol>
 
-<%= render "routes", :locals=>{:edit => false} %>
+    <ol class="section">
+      <li>
+      <%= render "outcomes" %>
+      </li>
+    </ol>
+  </div>
+</fieldset>
 
-<%= render "outcomes" %>
-
+<% end %>

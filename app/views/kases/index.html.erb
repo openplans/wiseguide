@@ -1,17 +1,26 @@
-<h1>My Open Cases</h1>
-
-<% for kase in @my_open_kases %>
-<%= link_to kase.customer.name, kase %><br/>
-<% end %>
-
-<h1>Other Open Cases</h1>
-
-<% for kase in @other_open_kases %>
-<%= link_to kase.customer.name, kase %> (<%= kase.user.email %>)<br/> 
-<% end %>
-
-<h1>Wait List</h1>
-
-<% for kase in @wait_list %>
-<%= link_to kase.customer.name, kase %> (<%= kase.open_date %>)<br/>
-<% end %>
+<fieldset>
+  <ol class="section first">
+    <h1>My Open Cases</h1>
+    <% for kase in @my_open_kases %>
+      <li>
+        <%= link_to kase.customer.name_reversed, kase %><br/>
+      </li>
+    <% end %>
+  </ol>
+  <ol class="section second">
+    <h1>Other Open Cases</h1>
+    <% for kase in @other_open_kases %>
+      <li>
+        <%= link_to kase.customer.name_reversed, kase %> (<%= kase.assigned_to.email %>)<br/> 
+      </li>
+    <% end %>
+  </ol>
+  <ol class="section third">
+    <h1>Wait List</h1>
+    <% for kase in @wait_list %>
+      <li>
+        <%= link_to kase.customer.name_reversed, kase %> (<%= kase.open_date %>)<br/>
+      </li>
+    <% end %>
+  </ol>
+</fieldset>

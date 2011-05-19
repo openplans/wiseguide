@@ -2,17 +2,53 @@
 <html>
 <head>
   <title>Wiseguide</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "style.css", :media=>"screen" %>
+  <%= stylesheet_link_tag "print.css", :media=>"print" %>
+  <%= stylesheet_link_tag "jquery-ui-1.8.9.custom.css" %>
+
   <%= javascript_include_tag :defaults %>
+
   <%= csrf_meta_tag %>
+
 </head>
-<body>
+<body class="<%= bodytag_class %>">
+  <div id="header">
+    <div class="wrap selfclear">
+      <a id="logo" href="/">Wiseguide</a>
+      <div id="login-area">
+        <% if current_user %>
+        <a href="#"><%= current_user.email %></a> | <%= link_to "Log out", "#", {:method=>"post"} %></a>
+        <% end %>
+      </div>
+    </div><!-- /.wrap -->
+  </div><!-- /#header -->
+  <div id="crossbar">
+    <div class="wrap selfclear">             
+      <ul id="primary-nav" class="selfclear">
+        <li class="customers"><%= link_to "Customers", :controller => "customers" %></li>
+        <li class="kases"><%= link_to "Cases", :controller => "kases" %></li>
+        <li class="reports"><%= link_to "Reports", :controller => "reports" %></li>
+      </ul>
+      <ul id="secondary-nav" class="selfclear">
+        <li class="users"><%= link_to "Users", users_path %></li>
+      </ul>
+    </div><!-- /.wrap -->
+  </div><!-- /#crossbar -->
 
-<div class="flash_something">
-<%= flash_messages([:alert]) %>
-</div>
 
-<%= yield %>
+  <div id="main">
+
+    <div class="wrap selfclear">
+
+      <%= raw( flash_type(:notice) + flash_type(:alert) ) %>
+
+      <%= content_for?(:menu_bar) ? yield(:menu_bar) : '' %>
+
+      <%= yield %>
+
+     </div><!-- /.wrap -->
+
+  </div><!-- /#main -->
 
 </body>
 </html>

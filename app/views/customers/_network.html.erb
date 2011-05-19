@@ -1,15 +1,19 @@
 <h1>Support Network</h1>
+<dl>
 <% for member in @customer.customer_support_network_members %>
 
-<%= member.name %> 
-<% if can? :edit, member %>
-  <%= link_to "x", member, :method=>:delete, :confirm=>"Are you sure?" %><br/>
-<% end %>
+<dt>
+  <%= member.name %>
+  <% if can? :edit, member %>
+    <%= link_to "x", member, :method=>:delete, :confirm=>"Are you sure?" %>
+  <% end %>
+</dt>
 
-<%= member.title %><br/>
-<%= member.organization %><br/>
-<%= member.phone_number %><br/>
-<%= link_to member.email, "mailto:%s" % member.email %><br/>
+<dd><%= member.title %></dd>
+<dd><%= member.organization %></dd>
+<dd><%= member.phone_number %></dd>
+<dd><%= link_to member.email, "mailto:%s" % member.email %></dd>
 
 <% end %>
-<%= link_to "Add", new_customer_support_network_member_path(:customer_id=>@customer.id) %><br/>
+</dl>
+<%= link_to "Add", new_customer_support_network_member_path(:customer_id=>@customer.id) %>
