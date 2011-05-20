@@ -34,7 +34,7 @@ class KasesController < ApplicationController
   def update
 
     if @kase.update_attributes(params[:kase])
-      redirect_to(@kase, :notice => 'Case was successfully created.') 
+      redirect_to(@kase, :notice => 'Case was successfully updated.') 
     else
       prep_edit
       render :action => "show"

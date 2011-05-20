@@ -1,91 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div id="page-header">
+  <h1>Editing <%= @customer.name %></h1>
+</div>
 
-<p>
-  <b>Id:</b>
-  <%= @customer.id %>
-</p>
-
-<p>
-  <b>First name:</b>
-  <%= @customer.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @customer.last_name %>
-</p>
-
-<p>
-  <b>Birth date:</b>
-  <%= @customer.birth_date %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%= @customer.gender %>
-</p>
-
-<p>
-  <b>Phone number 1:</b>
-  <%= @customer.phone_number_1 %>
-</p>
-
-<p>
-  <b>Phone number 2:</b>
-  <%= @customer.phone_number_2 %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @customer.email %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @customer.address %>
-</p>
-
-<p>
-  <b>City:</b>
-  <%= @customer.city %>
-</p>
-
-<p>
-  <b>State:</b>
-  <%= @customer.state %>
-</p>
-
-<p>
-  <b>Zip:</b>
-  <%= @customer.zip %>
-</p>
-
-<p>
-  <b>Ethnicity:</b>
-  <%= @customer.ethnicity.name %>
-</p>
-
-<p>
-  <b>Notes:</b>
-  <%= @customer.notes %>
-</p>
-
-<p>
-  <b>Portrait:</b>
-  <% if @customer.portrait %>
-    <%= image_tag @customer.portrait.url %>
-  <% end %>
-</p>
-
-<p>
-<%= last_updated @customer %>
-</p>
-
-<%= render "impairments" %>
-
-<%= render "kases" %>
-
-<%= render "network" %>
-
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+<%= form_for @customer, :html => { :multipart => true }  do |f| %>
+  <fieldset>
+    <ol class="section first">
+      <%= render 'form', :f => f %>
+      <li>
+      <%= last_updated @customer %>
+      </li>
+    </ol>
+    <ol class="section second">
+      <li>
+      <%= render "impairments" %>
+      </li>
+    </ol>
+    <ol class="section third">
+      <li>
+      <%= render "network" %>
+      </li>
+    </ol>
+    <ol class="section second notes">
+      <li>
+      <%= render "notes_and_photo", :f => f %>
+      </li>
+    </ol>
+    <ol class="section third">
+      <li>
+      <%= render "kases" %>
+      </li>
+    </ol>
+    
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+    
+  </fieldset>
+<% end %>

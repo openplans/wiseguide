@@ -8,10 +8,6 @@ class CustomersController < ApplicationController
     prep_edit
   end
 
-  def edit
-    prep_edit
-  end
-
   def new
     prep_edit
   end
@@ -30,10 +26,10 @@ class CustomersController < ApplicationController
   def update
 
     if @customer.update_attributes(params[:customer])
-      redirect_to(@customer, :notice => 'Customer was successfully created.') 
+      redirect_to(@customer, :notice => 'Customer was successfully updated.') 
     else
       prep_edit
-      render :action => "edit"
+      render :action => "show"
     end
   end
 
