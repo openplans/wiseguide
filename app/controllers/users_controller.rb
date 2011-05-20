@@ -62,7 +62,7 @@ class UsersController < Devise::SessionsController
     @user = User.find(params[:id])
     authorize! :manage, @user
     @user.destroy
-    redirect_to '/users'
+    redirect_to :users
   end
 
 end
