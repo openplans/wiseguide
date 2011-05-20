@@ -1,79 +1,183 @@
-Monthly report:<br/>
-<form action="/reports/basic_monthly_report">
+<div class="predefined-report">
+  <form action="/reports/basic_monthly_report" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Monthly report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Funding source:</label> 
+          <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %>
+        </li>
+        <li>
+          <label>First day of month:</label> 
+          <input type="text" name="start_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
+<div class="predefined-report">
+  <form action="/reports/basic_annual_report" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Yearly report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Funding source:</label> 
+          <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %>
+        </li>
+        <li>
+          <label>Fiscal Year:</label> 
+          <input type="text" name="year">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-First day of month: <input type="text" name="start_date">
+<div class="predefined-report">
+  <form action="/reports/age_and_ethnicity" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Age and ethnicity report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Funding source:</label> 
+          <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %>
+        </li>
+        <li>
+          <label>First day of month:</label> 
+          <input type="text" name="start_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-<input type="submit" name="report" value="Report">
-</form>
+<div class="predefined-report">
+  <form action="/reports/trainer" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Trainer report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-Yearly report:<br/>
-<form action="/reports/basic_annual_report">
+<div class="predefined-report">
+  <form action="/reports/trainee" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Trainee report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
+<div class="predefined-report">
+  <form action="/reports/route" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Route report</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Route:</label> 
+          <%= select_tag "route_id", options_for_select(@routes.map { |fs| [fs.name, fs.id] }) %>
+        </li>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-Fiscal Year: <input type="text" name="year">
+<div class="predefined-report">
+  <form action="/reports/outcomes" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Outcomes export</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-<input type="submit" name="report" value="Report">
-</form>
+<div class="predefined-report">
+  <form action="/reports/cases" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Cases export</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
 
-Age and ethnicity report:<br/>
-<form action="/reports/age_and_ethnicity">
-
-Funding source: <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %><br/>
-
-First day of month: <input type="text" name="start_date">
-
-<input type="submit" name="report" value="Report">
-</form>
-
-Trainer report:<br/>
-<form action="/reports/trainer">
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
-
-Trainee report:<br/>
-<form action="/reports/trainee">
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
-
-Route report:<br/>
-<form action="/reports/route">
-
-Route: <%= select_tag "route_id", options_for_select(@routes.map { |fs| [fs.name, fs.id] }) %><br/>
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
-
-Outcomes export:<br/>
-<form action="/reports/outcomes">
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
-
-Cases export:<br/>
-<form action="/reports/cases">
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
-
-Events export:<br/>
-<form action="/reports/events">
-
-<input type="text" name="start_date"><br/>
-<input type="text" name="end_date"><br/>
-<input type="submit" name="report" value="Report">
-</form>
+<div class="predefined-report">
+  <form action="/reports/events" class="run-report">
+    <fieldset>
+      <h2 class="report-header">Events export</h2>
+      <p></p>
+      <ol>
+        <li>
+          <label>Start date:</label>
+          <input type="text" name="start_date">
+        </li>
+        <li>
+          <label>End date:</label>
+          <input type="text" name="end_date">
+        </li>
+      </ol>
+      <input type="submit" name="report" value="Report">
+    </fieldset>
+  </form>
+</div>
