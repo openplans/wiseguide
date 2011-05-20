@@ -49,6 +49,7 @@ class EventsController < ApplicationController
   def prep_edit
     @event_types = EventType.accessible_by(current_ability)
     @funding_sources = FundingSource.accessible_by(current_ability)
+    @users = User.accessible_by(current_ability)
   end
 
 end

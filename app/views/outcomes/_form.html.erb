@@ -1,36 +1,61 @@
-<h1>Outcome for <%= @outcome.customer.name %></h1>
+<div id="page-header">
+  <h1>Outcome for <%= @outcome.customer.name %></h1>
+</div>
 
 <%= form_for @outcome do |f| %>
 <%= f.hidden_field :kase_id %>
+  <fieldset>
+    <ol class="section fourth">
+      <li>
+        <%= f.label :trip_reason_id, "Travel Purpose:" %>
+        <%= f.collection_select :trip_reason_id, @trip_reasons, :id, :name %>
+      </li>
+      <li>
+        <h2>At Exit</h2>
+      </li>
+      <li>
+        <%= f.label :exit_trip_count, "Anticipated one-way trips per week" %>
+        <%= f.text_field :exit_trip_count %>
+      </li>
+      <li>
+        <%= f.label :exit_vehicle_miles_reduced, "Anticipated vehicle miles reduced" %>
+        <%= f.text_field :exit_vehicle_miles_reduced %>
+      </li>
+      <li>
+        <h2>At 3 Months</h2>
+      </li>
+      <li>
+        <%= f.label :three_month_trip_count, "Actual one-way trips per week" %>
+        <%= f.text_field :three_month_trip_count %>
+        <div>
+          <%= f.check_box :three_month_unreachable %>
+          <%= f.label :three_month_unreachable, "Unreachable" %>
+        </div>
+      </li>
+      <li>
+        <%= f.label :three_month_vehicle_miles_reduced, "Actual vehicle miles reduced" %>
+        <%= f.text_field :three_month_vehicle_miles_reduced %>
+      </li>
 
-<%= f.label :trip_reason_id, "Travel Purpose" %><br/>
-<%= f.collection_select :trip_reason_id, @trip_reasons, :id, :name %><br/>
-
-<h2>At Exit</h2>
-<%= f.label :exit_trip_count, "Anticipated one-way trips per week" %><br/>
-<%= f.text_field :exit_trip_count %><br/>
-<%= f.label :exit_vehicle_miles_reduced, "Anticipated vehicle miles reduced" %><br/>
-<%= f.text_field :exit_vehicle_miles_reduced %><br/>
-
-<h2>At 3 Months</h2>
-<%= f.label :three_month_trip_count, "Actual one-way trips per week" %><br/>
-<%= f.text_field :three_month_trip_count %><br/>
-
-<%= f.label :three_month_vehicle_miles_reduced, "Actual vehicle miles reduced" %><br/>
-<%= f.text_field :three_month_vehicle_miles_reduced %><br/>
-
-<%= f.label :three_month_unreachable, "Unreachable" %><br/>
-<%= f.check_box :three_month_unreachable %><br/>
-
-<h2>At 6 Months</h2>
-<%= f.label :six_month_trip_count, "Actual one-way trips per week" %><br/>
-<%= f.text_field :six_month_trip_count %><br/>
-
-<%= f.label :six_month_vehicle_miles_reduced, "Actual vehicle miles reduced" %><br/>
-<%= f.text_field :six_month_vehicle_miles_reduced %><br/>
-
-<%= f.label :six_month_unreachable, "Unreachable" %><br/>
-<%= f.check_box :six_month_unreachable %><br/>
-
-<%= f.submit %> <br/>
+      <li>
+        <h2>At 6 Months</h2>
+      </li>
+      <li>
+        <%= f.label :six_month_trip_count, "Actual one-way trips per week" %>
+        <%= f.text_field :six_month_trip_count %>
+        <div>
+          <%= f.check_box :six_month_unreachable %>
+          <%= f.label :six_month_unreachable, "Unreachable" %>
+        </div>
+      </li>
+      <li>
+        <%= f.label :six_month_vehicle_miles_reduced, "Actual vehicle miles reduced" %>
+        <%= f.text_field :six_month_vehicle_miles_reduced %>
+      </li> 
+    </ol>
+    
+    <div class="actions">
+      <%= f.submit "Save" %>
+    </div>
+  </fieldset>
 <% end %>

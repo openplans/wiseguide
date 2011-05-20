@@ -1,25 +1,46 @@
-<h1>Training Event for <%= @event.customer.name %></h1>
+<div id="page-header">
+  <h1>Training Event for <%= @event.customer.name %></h1>
+</div>
 
 <%= form_for @event do |f| %>
-<%= f.hidden_field :user_id %>
-<%= f.hidden_field :kase_id %>
+<fieldset>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :kase_id %>
+  
+  <ol class="section first">
+    <li>
+      <%= f.label :user_id, "By" %>
+      <%= f.collection_select :user_id, @users, :id, :email %>
+    </li>
+    
+    <li>
+      <%= f.label :date_time, "Date & Time" %>
+      <%= f.text_field :date_time %>
+    </li>
+    
+    <li>
+      <%= f.label :event_type_id, "Type" %>
+      <%= f.collection_select :event_type_id, @event_types, :id, :name %>
+    </li>
+    
+    <li>
+      <%= f.label :funding_source_id, "Funding Source" %>
+      <%= f.collection_select :funding_source_id, @funding_sources, :id, :name %>
+    </li>
+    
+    <li>
+      <%= f.label :duration_in_hours, "Hours" %>
+      <%= f.text_field :duration_in_hours %>
+    </li>
 
-By: <%= @event.user.email %><br/>
-
-<%= f.label :date_time, "Date & Time" %><br/>
-<%= f.text_field :date_time %><br/>
-
-<%= f.label :event_type_id, "Type" %><br/>
-<%= f.collection_select :event_type_id, @event_types, :id, :name %><br/>
-
-<%= f.label :funding_source_id, "Funding Source" %><br/>
-<%= f.collection_select :funding_source_id, @funding_sources, :id, :name %><br/>
-
-<%= f.label :duration_in_hours, "Hours" %><br/>
-<%= f.text_field :duration_in_hours %><br/>
-
-<%= f.label :notes %><br/>
-<%= f.text_area :notes %><br/>
-
-<%= f.submit %> <br/>
+    <li>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </li>
+  </ol>
+  
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+</fieldset>
 <% end %>

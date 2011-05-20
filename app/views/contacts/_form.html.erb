@@ -1,23 +1,37 @@
-<h1>Contact for <%= @contact.customer.name %></h1>
+<div id="page-header">
+  <h1>Contact for <%= @contact.customer.name %></h1>
+</div>
 
 <%= form_for @contact do |f| %>
+<fieldset>
+  <%= f.hidden_field :kase_id %>
+  
+  <ol class="section first">
+    <li>
+      <label>By</label>
+      <%= current_user.email %>
+    </li>
+    <li>
+      <%= f.label :date_time, "Date" %>
+      <%= f.text_field :date_time, :value=>@contact.date_time %>
+    </li>
+    <li>
+      <%= f.label :method %>
+      <%= f.collection_select :method, @contact_methods, :to_s, :to_s %>
+    </li>
+    <li>
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </li>
+    <li>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </li>
+  </ol>
 
-<%= f.hidden_field :kase_id %>
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
 
-By<br/>
-<%= current_user.email %><br/>
-
-<%= f.label :date_time, "Date" %> <br/>
-<%= f.text_field :date_time, :value=>@contact.date_time %><br/>
-
-<%= f.label :method %><br/>
-<%= f.collection_select :method, @contact_methods, :to_s, :to_s %><br/>
-
-<%= f.label :description %><br/>
-<%= f.text_field :description %><br/>
-
-<%= f.label :notes %><br/>
-<%= f.text_area :notes %><br/>
-
-<%= f.submit %><br/>
+</fieldset>
 <% end %>

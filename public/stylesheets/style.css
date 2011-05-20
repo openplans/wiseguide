@@ -957,6 +957,35 @@ body.customers dd {
 
 /*
  *
+ * Outcomes
+ *
+ */
+body.outcomes ol.section li {
+  margin-bottom : 5px;
+  min-height : 25px;
+}
+
+body.outcomes ol.section label {
+  width : 50%;
+  padding-left : 10px;
+}
+
+body.outcomes ol.section input[type="text"] {
+  width : 10%;
+  float : left;
+}
+
+body.outcomes ol.section input[type="checkbox"] {
+  float : left;
+  margin : 5px 0 0 10px;
+}
+
+body.outcomes ol.section li div {
+  float : left;
+  width : 160px;
+}
+/*
+ *
  * Reports
  *
  */
