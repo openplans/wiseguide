@@ -906,7 +906,8 @@ a.action-bttn:active {
 body.reports a.action-bttn {
     background: #eee url(images/report--plus.png) 0.8em center no-repeat scroll;
 }
-body.users a.action-bttn {
+body.users a.action-bttn,
+body.customers a.new-customer {
     background: #eee url(images/user--plus.png) 0.8em center no-repeat scroll;
 }
 

@@ -34,5 +34,5 @@
 </table>
 
 <% if can? :edit, Customer %>
-<%= link_to "New Customer", new_customer_path %>
+<%= link_to "New Customer", new_customer_path, :class => "new-customer action-bttn" %>
 <% end %>
