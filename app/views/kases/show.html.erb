@@ -1,24 +1,43 @@
-<h1>Case for <%= link_to @kase.customer.name, @kase.customer %></h1>
+<div id="page-header">
+  <h1><%= @kase.customer.name %></h1>
+</div>
 
-Opened: <%= @kase.open_date %><br/>
-Referral Source: <%= @kase.referral_source %><br/>
-Referral Source Type: <%= @kase.referral_type.name %><br/>
-Assigned to: <%= @kase.assigned_to.email %><br/>
-Default Funding Source: <%= @kase.funding_source.name %><br/>
-Closed: <%= @kase.close_date %><br/>
-Disposition: <%= @kase.disposition.name %><br/>
 
-<%= last_updated @kase %>
+<fieldset>
+  <div class="first">
+    <%= render "form" %>
 
-<%= render "contacts" %>
+    <%#= last_updated @kase %>
+    <ol class="section">
+      <li>
+      <%= render "contacts" %>
+      </li>
+    </ol>
+    
+    <ol class="section">
+      <li>
+      <%= render "events" %>
+      </li>
+    </ol>
+  </div>
 
-<%= render "events" %>
+  <div class="second">
+    <ol class="section">
+      <li>
+      <%= render "surveys" %>
+      </li>
+    </ol>
+    
+    <ol class="section">
+      <li>
+      <%= render "routes", :locals=>{:edit => false} %>
+      </li>
+    </ol>
 
-<%= render "surveys" %>
-
-<%= render "routes", :locals=>{:edit => false} %>
-
-<%= render "outcomes" %>
-
-<br/>
-<%= link_to "Edit", edit_kase_path(@kase) %>
+    <ol class="section">
+      <li>
+      <%= render "outcomes" %>
+      </li>
+    </ol>
+  </div>
+</fieldset>

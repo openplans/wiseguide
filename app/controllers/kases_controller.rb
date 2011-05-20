@@ -11,10 +11,6 @@ class KasesController < ApplicationController
   end
 
   def show
-    prep_edit #because some things are editable from show(?)
-  end
-
-  def edit
     prep_edit
   end
 
@@ -41,7 +37,7 @@ class KasesController < ApplicationController
       redirect_to(@kase, :notice => 'Case was successfully created.') 
     else
       prep_edit
-      render :action => "edit"
+      render :action => "show"
     end
   end
 
