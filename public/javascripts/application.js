@@ -1,2 +1,10 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(function(){
+  
+  // toggle_form links toggle the next form
+  $(".toggle_form").live("click", function(e){
+    var link = $(this).hide();
+    link.next("form").show();
+    
+    e.preventDefault();
+  });
+});

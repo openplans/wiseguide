@@ -1,3 +1,4 @@
+<%= form_for @kase do |f| %>
   <% if @kase.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@kase.errors.count, "error") %> prohibited this case from being saved:</h2>
@@ -54,3 +55,4 @@
     </div>
   </li>
 </ol>
+<% end %>

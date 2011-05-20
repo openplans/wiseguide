@@ -2,11 +2,10 @@
   <h1><%= @kase.customer.name %></h1>
 </div>
 
-<%= form_for @kase do |f| %>
 
 <fieldset>
   <div class="first">
-    <%= render "form", :f => f %>
+    <%= render "form" %>
 
     <%#= last_updated @kase %>
     <ol class="section">
@@ -42,5 +41,3 @@
     </ol>
   </div>
 </fieldset>
-
-<% end %>
