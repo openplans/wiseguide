@@ -319,7 +319,7 @@ body {
 body.reports #primary-nav li.reports a:link, body.reports #primary-nav li.reports a:visited,
 body.kases #primary-nav li.kases a:link, body.kases #primary-nav li.kases a:visited,
 body.customers #primary-nav li.customers a:link, body.customers #primary-nav li.customers a:visited,
-body.users #secondary-nav li.users a:link, body.users #secondary-nav li.users a:visited {
+body.admin #secondary-nav li.admin a:link, body.admin #secondary-nav li.admin a:visited {
     background: #fff;
     color: #009FFB;
 }
