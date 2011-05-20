@@ -13,7 +13,7 @@ module SurveyorControllerCustomMethods
   def new
     super
     @kase = Kase.find(params[:kase_id])
-    @surveys = @surveys.keep_if {|survey| survey.inactive_at.nil?}
+    @surveys = @surveys.keep_if {|survey| survey.inactive_at.nil?} if @surveys.present?
   end
   def create
     @kase = Kase.find(params[:kase_id])
