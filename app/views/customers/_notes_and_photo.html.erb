@@ -1,0 +1,12 @@
+<li>
+<%= f.label :notes %>
+<%= f.text_area :notes %>
+</li>
+
+<li>
+<%= f.label :portrait, "Photo" %>
+<% if @customer.portrait %>
+<%= image_tag @customer.portrait.url %>
+<% end %>
+<%= f.file_field :portrait %>
+</li>
