@@ -46,6 +46,7 @@ Wiseguide::Application.routes.draw do
     post "create_user" => "users#create_user"
     put "create_user" => "users#create_user"
     get "init" => "users#show_init"
+    post "logout" => "users#sign_out"
     post "init" => "users#init"
     post "update_user" => "users#update"
     delete "user" => "users#delete"

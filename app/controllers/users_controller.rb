@@ -58,6 +58,14 @@ class UsersController < Devise::SessionsController
 
   end
   
+  def sign_out
+    scope = Devise::Mapping.find_scope!(current_user)
+    current_user = nil
+    warden.logout(scope)
+
+    return redirect_to "/"
+  end
+
   def delete
     @user = User.find(params[:id])
     authorize! :manage, @user
