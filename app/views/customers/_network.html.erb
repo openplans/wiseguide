@@ -3,7 +3,7 @@
 <% for member in @customer.customer_support_network_members %>
 
 <dt>
-  <%= member.name %>
+  <%= link_to member.name, edit_customer_support_network_member_path(member) %>
   <% if can? :edit, member %>
     <%= link_to "x", member, :method=>:delete, :confirm=>"Are you sure?" %>
   <% end %>
