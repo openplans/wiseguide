@@ -20,4 +20,9 @@ $(function(){
     buttonText: "Select",
     dateFormat: 'yy-mm-dd' 
   });
+  
+  // auto-resizing text areas
+  $("textarea[data-behavior=autoresize]").autoResize({
+      extraSpace      : 20
+  }).trigger('change');
 });

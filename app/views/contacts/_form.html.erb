@@ -6,7 +6,7 @@
 <fieldset>
   <%= f.hidden_field :kase_id %>
   
-  <ol class="section first">
+  <ol class="section fourth">
     <li>
       <label>By</label>
       <%= current_user.email %>
@@ -25,7 +25,7 @@
     </li>
     <li>
       <%= f.label :notes %>
-      <%= f.text_area :notes %>
+      <%= f.text_area :notes, "data-behavior" => "autoresize" %>
     </li>
   </ol>
 

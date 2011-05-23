@@ -7,7 +7,7 @@
   <%= f.hidden_field :user_id %>
   <%= f.hidden_field :kase_id %>
   
-  <ol class="section first">
+  <ol class="section fourth">
     <li>
       <%= f.label :user_id, "By" %>
       <%= f.collection_select :user_id, @users, :id, :email %>
@@ -35,7 +35,7 @@
 
     <li>
       <%= f.label :notes %>
-      <%= f.text_area :notes %>
+      <%= f.text_area :notes, "data-behavior" => "autoresize" %>
     </li>
   </ol>
   
