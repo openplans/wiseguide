@@ -6,10 +6,10 @@ $(function(){
     return false;
   });
   
-  // toggle_form links toggle the next form
-  $(".toggle_form").live("click", function(e){
+  // toggle-next links toggle the next sibling
+  $("[data-behavior=toggle-next]").live("click", function(e){
     var link = $(this).hide();
-    link.next("form").show();
+    link.next().show();
     
     e.preventDefault();
   });

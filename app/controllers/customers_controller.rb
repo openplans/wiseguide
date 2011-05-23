@@ -24,7 +24,6 @@ class CustomersController < ApplicationController
   end
 
   def update
-
     if @customer.update_attributes(params[:customer])
       redirect_to(@customer, :notice => 'Customer was successfully updated.') 
     else
@@ -40,9 +39,9 @@ class CustomersController < ApplicationController
 
 
   def add_impairment
-    @customer = Customer.find(params[:customer_impairment][:customer_id])
+    @customer = Customer.find(params[:customer][:customer_impairment][:customer_id])
     authorize! :edit, @customer
-    @customer_impairment = CustomerImpairment.create(params[:customer_impairment])
+    @customer_impairment = CustomerImpairment.create(params[:customer][:customer_impairment])
     @impairment = @customer_impairment.impairment
     render :layout=>nil
   end
@@ -58,6 +57,5 @@ class CustomersController < ApplicationController
     @impairments = Impairment.all
     @ethnicities = Ethnicity.all
     @genders = ALL_GENDERS
-    @customer_impairment = CustomerImpairment.new(:customer_id=>@customer.id)
   end
 end
