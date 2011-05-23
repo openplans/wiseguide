@@ -1,23 +1,34 @@
-<h1>Customer support network member for <%= @customer_support_network_member.customer.name %></h1>
+<div id="page-header">
+  <h1>Customer support network member for <%= @customer_support_network_member.customer.name %></h1>
+</div>
 
 <%= form_for @customer_support_network_member do |f| %>
 <%= f.hidden_field :customer_id %>
-
-<%= f.label :name %><br/>
-<%= f.text_field :name %><br/>
-
-<%= f.label :title %><br/>
-<%= f.text_field :title %><br/>
-
-<%= f.label :organization %><br/>
-<%= f.text_field :organization %><br/>
-
-<%= f.label :phone_number %><br/>
-<%= f.text_field :phone_number %><br/>
-
-<%= f.label :email %><br/>
-<%= f.text_field :email %><br/>
-
-
-<%= f.submit %> <br/>
+<fieldset>
+  <ol class="section first">
+    <li>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </li>
+    <li>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </li>
+    <li>
+      <%= f.label :organization %>
+      <%= f.text_field :organization %>
+    </li>
+    <li>
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number %>
+    </li>
+    <li>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </li>
+  </ol>
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+</fieldset>
 <% end %>
