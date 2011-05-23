@@ -3,7 +3,7 @@
 <% for outcome in @kase.outcomes %>
 <h2>
   <%= outcome.trip_reason.name %>
-  <%= link_to( "Edit", outcome) if can? :edit, outcome %>
+  <%= link_to( "Edit", edit_outcome_path( outcome )) if can? :edit, outcome %>
 </h2>
 <table>
 <tr>

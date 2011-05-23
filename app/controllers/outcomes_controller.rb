@@ -4,9 +4,6 @@ class OutcomesController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def edit
     prep_edit
   end
@@ -22,7 +19,7 @@ class OutcomesController < ApplicationController
     @outcome = Outcome.new(params[:outcome])
 
     if @outcome.save
-      redirect_to(@outcome, :notice => 'Outcome was successfully created.') 
+      redirect_to(@kase, :notice => 'Outcome was successfully created.') 
     else
       prep_edit
       render :action => "new"
@@ -33,7 +30,7 @@ class OutcomesController < ApplicationController
     @kase = Kase.find(params[:outcome][:kase_id])
     authorize! :edit, @kase
     if @outcome.update_attributes(params[:outcome])
-      redirect_to(@outcome, :notice => 'Outcome was successfully created.') 
+      redirect_to(@kase, :notice => 'Outcome was successfully updated.') 
     else
       prep_edit
       render :action => "edit"
