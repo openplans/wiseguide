@@ -10,7 +10,7 @@
 </div>  
 
 <div class="predefined-report" data-name="monthly">
-  <form action="/reports/basic_monthly_report" class="run-report">
+  <form action="<%= url_for(:action => 'basic_monthly_report') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Monthly report</h2>
       <p></p>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="predefined-report" data-name="yearly">
-  <form action="/reports/basic_annual_report" class="run-report">
+  <form action="<%= url_for(:action => 'basic_annual_report') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Yearly report</h2>
       <p></p>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="predefined-report" data-name="demographic">
-  <form action="/reports/age_and_ethnicity" class="run-report">
+  <form action="<%= url_for(:action => 'age_and_ethnicity') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Age and ethnicity report</h2>
       <p></p>
@@ -70,7 +70,7 @@
 </div>
 
 <div class="predefined-report" data-name="trainer">
-  <form action="/reports/trainer" class="run-report">
+  <form action="<%= url_for(:action => 'trainer') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Trainer report</h2>
       <p></p>
@@ -90,7 +90,7 @@
 </div>
 
 <div class="predefined-report" data-name="trainee">
-  <form action="/reports/trainee" class="run-report">
+  <form action="<%= url_for(:action => 'trainee') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Trainee report</h2>
       <p></p>
@@ -110,7 +110,7 @@
 </div>
 
 <div class="predefined-report" data-name="route">
-  <form action="/reports/route" class="run-report">
+  <form action="<%= url_for(:action => 'route') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Route report</h2>
       <p></p>
@@ -134,7 +134,7 @@
 </div>
 
 <div class="predefined-report" data-name="outcomes">
-  <form action="/reports/outcomes" class="run-report">
+  <form action="<%= url_for(:action => 'outcomes') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Outcomes export</h2>
       <p></p>
@@ -154,7 +154,7 @@
 </div>
 
 <div class="predefined-report" data-name="cases">
-  <form action="/reports/cases" class="run-report">
+  <form action="<%= url_for(:action => 'cases') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Cases export</h2>
       <p></p>
@@ -174,7 +174,7 @@
 </div>
 
 <div class="predefined-report" data-name="events">
-  <form action="/reports/events" class="run-report">
+  <form action="<%= url_for(:action => 'events') %>" class="run-report">
     <fieldset>
       <h2 class="report-header">Events export</h2>
       <p></p>

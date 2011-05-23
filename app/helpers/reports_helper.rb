@@ -1,7 +1,7 @@
 module ReportsHelper
   
   def reports_options
-    options_for_select( %w{yearly demographic trainer trainee route outcomes cases events}.map do |name|
+    options_for_select( %w{monthly yearly demographic trainer trainee route outcomes cases events}.map do |name|
       case name
       when "demographic"
         ["Age and ethnicity", name]
