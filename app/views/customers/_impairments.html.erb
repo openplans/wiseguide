@@ -9,11 +9,9 @@
 <%- if can? :edit, @customer -%>
   <%= link_to "Add", add_impairment_customers_path(:customer_id=>@customer.id), "data-behavior" => "toggle-next" %>
   <div style="display:none;">
-    <%= form.fields_for @customer.customer_impairments.build do |f| %>
-      <%= f.hidden_field :customer_id %>
-      <%= f.collection_select :impairment_id, @impairments, :id, :name %>
-      <%= content_tag :button, "Add impairment", "data-remote" => add_impairment_customers_path %>
-    <% end %>
+    <%= hidden_field_tag "customer_impairment[customer_id]", @customer.id %>
+    <%= collection_select "customer_impairment", :impairment_id, @impairments, :id, :name %>
+    <%= content_tag :button, "Add impairment", "data-remote" => add_impairment_customers_path %>
   </div>
 <%- end -%>
 
