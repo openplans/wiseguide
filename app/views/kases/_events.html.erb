@@ -6,7 +6,7 @@
   <td><%= event.date_time.to_date %></td>
   <td><%= event.event_type.name %></td>
   <td><%= event.user.email %></td>
-  <td><%= link_to "Details", event %></td>
+  <td><%= link_to "Details", edit_event_path(event) %></td>
 </tr>
 <% end %> 
 </table>

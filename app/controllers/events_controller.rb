@@ -4,9 +4,6 @@ class EventsController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def edit
     prep_edit
   end
@@ -22,7 +19,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 
     if @event.save
-      redirect_to(@event, :notice => 'Event was successfully created.') 
+      redirect_to(@kase, :notice => 'Event was successfully created.') 
     else
       prep_edit
       render :action => "new"
@@ -33,7 +30,7 @@ class EventsController < ApplicationController
     @kase = Kase.find(params[:event][:kase_id])
     authorize! :edit, @kase
     if @event.update_attributes(params[:event])
-      redirect_to(@event, :notice => 'Event was successfully created.') 
+      redirect_to(@kase, :notice => 'Event was successfully updated.') 
     else
       prep_edit
       render :action => "edit"

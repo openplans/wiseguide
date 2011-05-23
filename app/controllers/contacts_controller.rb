@@ -4,9 +4,6 @@ class ContactsController < ApplicationController
   def index
   end
 
-  def show
-  end
-
   def edit
     prep_edit
   end
@@ -22,7 +19,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(params[:contact])
 
     if @contact.save
-      redirect_to(@contact, :notice => 'Contact was successfully created.') 
+      redirect_to(@kase, :notice => 'Contact was successfully created.') 
     else
       prep_edit
       render :action => "new"
@@ -33,7 +30,7 @@ class ContactsController < ApplicationController
     @kase = Kase.find(params[:contact][:kase_id])
     authorize! :edit, @kase
     if @contact.update_attributes(params[:contact])
-      redirect_to(@contact, :notice => 'Contact was successfully created.') 
+      redirect_to(@kase, :notice => 'Contact was successfully updated.') 
     else
       prep_edit
       render :action => "edit"
