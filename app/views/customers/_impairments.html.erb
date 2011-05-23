@@ -37,6 +37,7 @@
 
         $('#impairments').append(xhr.responseText);
         init_row(null, '#impairments tbody tr:last');
+        $("tr:odd").addClass("odd");
       }
     );
     e.preventDefault();
