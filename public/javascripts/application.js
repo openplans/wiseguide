@@ -33,4 +33,10 @@ $(function(){
   $("textarea[data-behavior=autoresize]").autoResize({
       extraSpace      : 20
   }).trigger('change');
+  
+  // Report toggling
+  $("#report_selector").change(function(e){
+    $("body.reports.index").find(".predefined-report").hide();
+    $("div[data-name=" + $(this).val() + "]").show();
+  }).trigger("change");
 });
