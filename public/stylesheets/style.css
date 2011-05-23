@@ -650,22 +650,11 @@ tr.odd {
 }
 table td {
     padding: 5px 10px 10px;
-    border-right: 1px solid #eee;
-}
-table td:last-child {
-    border-right: 0;
 }
 table th {
-    padding: 5px;
-    text-align: left;
-    background: #2e6399;
-    color: #ddd;
-    font-size: 10px;
-    letter-spacing: -0.2px;
-    border-right: 1px solid #3674b3;
-}
-table th:last-child {
-    border-right: 0;
+  text-align: left;
+  background: #2E6399;
+  color: #DDD;
 }
 table tr.sub-header th {
     border-top: 1px dotted #3674b3;
@@ -956,6 +945,10 @@ body.customers dd {
   padding-left: 20px;
 }
 
+body.customers th {
+  padding: 10px 10px 10px 0;
+}
+
 /*
  *
  * Outcomes
@@ -1084,6 +1077,25 @@ div.predefined-report form.run-report input[type="submit"] {
 }
 div.predefined-report form.run-report input[type="submit"]:hover {
     background: #009FFB;
+}
+
+body.reports table th {
+    padding: 5px;
+    font-size: 10px;
+    letter-spacing: -0.2px;
+    border-right: 1px solid #3674b3;
+}
+
+body.reports table td {
+  border-right: 1px solid #eee;
+}
+
+body.reports table td:last-child {
+    border-right: 0;
+}
+
+body.reports table th:last-child {
+    border-right: 0;
 }
 
 #history {
