@@ -5,7 +5,7 @@
 <dt>
   <%= link_to member.name, edit_customer_support_network_member_path(member) %>
   <% if can? :edit, member %>
-    <%= link_to "x", member, :method=>:delete, :confirm=>"Are you sure?" %>
+    <%= link_to "", member, :class => "delete", :method=>:delete, :confirm=>"Are you sure?" %>
   <% end %>
 </dt>
 

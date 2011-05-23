@@ -1,6 +1,6 @@
 <tr id="kase_route_<%= "%s_%s" % [kase.id, route.id] %>">
 <td><%= route.name %></td>
 <% if edit %>
-<td><%= link_to "x", delete_route_kases_path(:kase_id=>kase.id, :route_id=>route.id), {:remote=>true, :method=>:post, :class=>"kase_route_row"} %></td>
+<td><%= link_to "", delete_route_kases_path(:kase_id=>kase.id, :route_id=>route.id), {:remote=>true, :method=>:post, :class=>"kase_route_row delete"} %></td>
 <% end %>
 </tr>
