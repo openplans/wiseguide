@@ -21,6 +21,14 @@ $(function(){
     dateFormat: 'yy-mm-dd' 
   });
   
+  $('.birthdatepicker').datepicker({
+    showOn: "button",
+    buttonText: "Select", 
+    dateFormat: 'yy-mm-dd',
+    changeYear: true,
+    yearRange: '1900:2010'
+  });
+  
   // auto-resizing text areas
   $("textarea[data-behavior=autoresize]").autoResize({
       extraSpace      : 20
