@@ -96,7 +96,7 @@ module SurveyorControllerCustomMethods
   end
 
   def destroy
-    @survey = Survey.find(params[:survey_id])
+    @survey = Survey.find(params[:id])
     @survey.inactive_at = DateTime.now
     @survey.save!
     redirect_to surveys_path
