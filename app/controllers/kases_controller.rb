@@ -63,7 +63,7 @@ class KasesController < ApplicationController
   private
   def prep_edit
     @referral_types = ReferralType.accessible_by(current_ability)
-    @users = User.accessible_by(current_ability)
+    @users = [User.new(:email=>'Unassigned')] + User.accessible_by(current_ability)
     @dispositions = Disposition.accessible_by(current_ability)
     @funding_sources = FundingSource.accessible_by(current_ability)
 
