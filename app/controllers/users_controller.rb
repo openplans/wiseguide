@@ -33,6 +33,30 @@ class UsersController < Devise::SessionsController
     end
   end
 
+
+  def update
+    debugger
+    @user = User.find(params[:id])
+    authorize! :edit, @user
+    @user.update_attributes(params[:user])
+    redirect_to "/users"
+  end
+
+  def change_password
+    @user = current_user
+  end
+
+  def update_password
+    if current_user.update_attributes(:password=>params[:user][:password], :password_confirmation=>params[:user][:password_confirmation])
+      flash[:notice] = "Password changed"
+      redirect_to '/'
+    else
+      flash.now[:alert] = "Error updating password"
+      @user = current_user
+      render :action=>:change_password
+    end
+  end
+
   def show_init
     #create initial user
     if User.count > 0
@@ -52,10 +76,6 @@ class UsersController < Devise::SessionsController
 
     flash[:notice] = "OK, now sign in"
     redirect_to :action=>:new
-  end
-
-  def update
-
   end
   
   def sign_out

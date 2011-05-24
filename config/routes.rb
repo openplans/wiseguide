@@ -50,6 +50,9 @@ Wiseguide::Application.routes.draw do
     post "init" => "users#init"
     post "update_user" => "users#update"
     delete "user" => "users#delete"
+    match "change_password"  => "users#change_password"
+    post "update_password" => "users#update_password"
+
   end
 
   match 'users', :controller=>:admin, :action=>:users
