@@ -78,10 +78,10 @@ module SurveyorControllerCustomMethods
                 question.question_group = question_group
                 question.survey_section = section
               end
-            when "question"
+            else
               question = parse_question(question_obj, to_save)
+              question.survey_section = section
             end
-            question.survey_section = section
           end
         end
         for savee in to_save
