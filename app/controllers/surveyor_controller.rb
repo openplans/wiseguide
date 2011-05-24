@@ -19,6 +19,7 @@ module SurveyorControllerCustomMethods
     @kase = Kase.find(params[:kase_id])
     authorize! :manage, @kase
     super
+    @response_set.update_attributes({:kase_id => @kase.id})
   end
   def show
     super
