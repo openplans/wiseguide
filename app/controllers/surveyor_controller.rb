@@ -65,7 +65,7 @@ module SurveyorControllerCustomMethods
         survey.inactive_at = nil #no, really
         to_save.push survey
         for section_obj in survey_obj['sections']
-          section = SurveySection.new(:title=>section_obj["title"])
+          section = SurveySection.new(:title=>section_obj["title"], :survey=>survey)
           to_save.push section
           for question_obj in section_obj['questions']
             case question_obj["type"] 
