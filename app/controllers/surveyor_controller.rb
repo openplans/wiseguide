@@ -76,6 +76,7 @@ module SurveyorControllerCustomMethods
               for grouped_question_obj in question_obj["questions"]
                 question = parse_question(grouped_question_obj, to_save)
                 question.question_group = question_group
+                question.survey_section = section
               end
             when "question"
               question = parse_question(question_obj, to_save)
