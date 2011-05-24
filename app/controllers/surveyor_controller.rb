@@ -33,15 +33,9 @@ module SurveyorControllerCustomMethods
     authorize! :manage, @kase
     super
   end
-  
-  # Paths
-  def surveyor_index
-    # most of the above actions redirect to this method
-    super # available_surveys_path
-  end
+
   def surveyor_finish
-    # the update action redirects to this method if given params[:finish]
-    super # available_surveys_path
+    kase_path @kase
   end
 
   def delete_response_set
