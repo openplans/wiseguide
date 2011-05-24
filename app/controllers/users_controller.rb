@@ -35,10 +35,10 @@ class UsersController < Devise::SessionsController
 
 
   def update
-    debugger
     @user = User.find(params[:id])
     authorize! :edit, @user
-    @user.update_attributes(params[:user])
+    @user.level = params[:user][:level]
+    @user.save
     redirect_to "/users"
   end
 
