@@ -25,17 +25,40 @@ and should not be used in your survey
                 { "text" : "fuligin", "response_class" : "answer"},
                 { "text" : "bleen", "response_class" : "answer"}
               ]
+            }
+          ]
+        },
+        #You can also do repeating question groups
+        {
+         "type" : "group",
+         "text" : "Questions about modes",
+         "display_type" : "repeater", 
+         "questions" : [
+            { "title" : "What kind of mode does the client like?",
+              "pick" : "one", 
+              "answers" : [
+                { "text" : "bus", "response_class" : "answer"},
+                { "text" : "max", "response_class" : "answer"},
+                { "text" : "streetcar", "response_class" : "answer"},
+                { "text" : "aerial tram", "response_class" : "answer"},
+                { "text" : "teleportation", "response_class" : "answer"}
+              ]
             },
-            { "title" : "Give me a number",
+            { "title" : "How much does the client like this mode",
               "pick" : "none",
-              "answers" : [ #you still need one answer, with response_class "text" or "float" (for numbers)
-                { "text" : "answer", "response_class" : "float"}
+              "answers" : [ 
+                { "text" : "answer", "response_class" : "text"}
               ]
             }
           ]
         },
+        { "title" : "Give me a number",
+          "pick" : "none",
+          "answers" : [ #you still need one answer, with response_class "text" or "float" (for numbers)
+            { "text" : "answer", "response_class" : "float"}
+          ]
+        },
         { #you can also have ungrouped questions:
-#TODO: REPEATER EXAMPLE
           "title" : "Give me as many names as you like",
           "pick" : "none",
           "answers" : [ 

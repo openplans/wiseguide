@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110503232827) do
+ActiveRecord::Schema.define(:version => 20110525180000) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20110503232827) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "default_value"
+    t.string   "api_id"
   end
 
   create_table "contacts", :force => true do |t|
@@ -264,6 +265,7 @@ ActiveRecord::Schema.define(:version => 20110503232827) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "correct_answer_id"
+    t.string   "api_id"
   end
 
   create_table "referral_types", :force => true do |t|
@@ -355,6 +357,7 @@ ActiveRecord::Schema.define(:version => 20110503232827) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "display_order"
+    t.string   "api_id"
   end
 
   add_index "surveys", ["access_code"], :name => "surveys_ac_idx", :unique => true
