@@ -6,3 +6,4 @@ config/database.yml
 *~
 public/system
 *.swp
+db/legacy
