@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def last_updated(object)
-    "Last updated %s By %s" % [object.updated_at, object.updated_by.email]
+    "Last updated %s By %s" % [object.updated_at, object.updated_by.email] if object.updated_by.present?
   end
   
   def flash_type(type)
