@@ -1,6 +1,10 @@
-<% for survey_section in @response_set.survey.sections %>
+<div id="page-header">
+  <h1><%= @response_set.survey.title %> for <%= @response_set.kase.customer.name %></h1>
+</div>
 
-<h2><%= survey_section.title %></h2>
+<% for survey_section in @response_set.survey.sections %>
+<fieldset>
+<h1><%= survey_section.title %></h1>
 <p><%= survey_section.description %></p>
 <% last_question_group = nil %>
 <% for question in survey_section.questions %>
@@ -9,19 +13,19 @@
 <% if question.question_group != last_question_group 
       last_question_group = question.question_group
       if question.question_group %>
-         <p class="question_group_text"><%= question.question_group.text %></p>
+         <h2 class="question_group_text"><%= question.question_group.text %></h2>
       <% end %>
 <% end %>
 
 <!-- now display the question -->
-<p class="question"><%= question.text %></p>
+<h3 class="question"><%= question.text %></h3>
 
 <% if question.display_type == "label" 
    next 
 end %>
 
 <% if !question.question_group || question.question_group.display=="inline" || question.question_group.display_type="grid" %>
-<%= display_response(@response_set, question).html_safe %>
+<p><%= display_response(@response_set, question).html_safe %></p>
 <% else %>
 multi
 <% end %>
@@ -53,6 +57,7 @@ In this case, we want to display the each response_group on one line
 
 <% end %>
 
+</fieldset>
 <% end %>
 
 <br/><%= link_to "Back to case", @response_set.kase %>
