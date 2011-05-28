@@ -1104,3 +1104,8 @@ body.reports table th:last-child {
 #history h2 {
     margin-bottom: 0;
 }
+
+/* Surveys */
+body.surveyor a.add_survey {
+  display : none;
+}

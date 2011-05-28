@@ -4,7 +4,7 @@
 <% if @surveys.empty? %>
   No assessments
 <% else %>
-  <ul>
+  <ol class="section">
   <% for survey in @surveys %>
   <li>
     <%= form_tag(take_survey_path(:survey_code => survey.access_code)) do %>
@@ -14,4 +14,5 @@
     <% end %>
   </li>
   <% end %>
- <% end %>
+  </ol>
+<% end %>
