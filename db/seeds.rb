@@ -15,7 +15,7 @@ end
   FundingSource.find_or_create_by_name(fs)
 end
 
-['Caucasian','African American','Asian','Asian Indian','Chinese','Filipino','Japanese','Korean','Vietnamese','Pacific Islander','American Indian/Alaska Native','Native Hawaiian','Guamanian or Chamorrow','Samoan','Russian','Unknown','Refused','Other'].each do |e|
+['Caucasian','African American','Asian','Asian Indian','Chinese','Filipino','Japanese','Korean','Vietnamese','Pacific Islander','American Indian/Alaska Native','Native Hawaiian','Guamanian or Chamorro','Samoan','Russian','Unknown','Refused','Other','Hispanic'].each do |e|
   Ethnicity.find_or_create_by_name(e)
 end 
 
