@@ -8,13 +8,15 @@ class Customer < ActiveRecord::Base
   belongs_to :created_by, :foreign_key => :created_by_id, :class_name=>'User'
   belongs_to :updated_by, :foreign_key => :updated_by_id, :class_name=>'User'
 
-
   has_attached_file :portrait, :styles => { :small => "150x150>" }
 
   validates_attachment_size :portrait, :less_than => 300.kilobytes
   validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
   validates_presence_of :ethnicity_id
+
+  cattr_reader :per_page
+  @@per_page = 50
 
   def name
     return "%s %s" % [first_name, last_name]

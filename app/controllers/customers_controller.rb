@@ -2,6 +2,7 @@ class CustomersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @customers = Customer.paginate :page => params[:page], :order => [:last_name, :first_name]
   end
 
   def show
