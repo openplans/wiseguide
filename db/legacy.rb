@@ -11,7 +11,6 @@ unknown_ethnicity = Ethnicity.find_by_name('Unknown')
 bad_ethnicities = []
 notes = {}
 
-if false
 Customer.record_timestamps = false
 CSV.foreach(File.join(Rails.root,'db','legacy','ridewise_customers.csv'),headers: true) do |r|
   id = r['Constituent ID']
@@ -49,7 +48,6 @@ CSV.foreach(File.join(Rails.root,'db','legacy','ridewise_customers.csv'),headers
 end
 ActiveRecord::Base.connection.execute("SELECT setval('customers_id_seq',#{Customer.maximum(:id)})")
 Customer.record_timestamps = false
-end
 
 cc = {}
 CSV.foreach(File.join(Rails.root,'db','legacy','ridewise_customers.csv'),headers: true) do |r|
