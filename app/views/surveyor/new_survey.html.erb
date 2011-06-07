@@ -2,9 +2,10 @@
 
 
 Survey (in JSON):<br/>
-<%= text_area_tag "survey", params[:survey], {:cols=>80, :rows=>20} %>
+  <%= text_area_tag "survey", params[:survey], {:cols=>80, :rows=>20} %>
+  <%= submit_tag "Create" %>
+<% end %>
 <br/>
-
 Here's an example -- stuff with # in front of it is an explanation
 and should not be used in your survey
 <pre>
@@ -70,6 +71,4 @@ and should not be used in your survey
   ]
 }
 </pre>
-<%= submit_tag "Create" %>
 
-<% end %>
