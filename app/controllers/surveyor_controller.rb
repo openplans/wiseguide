@@ -110,12 +110,13 @@ module SurveyorControllerCustomMethods
   end
     
   private
+
   def parse_question(question_obj, to_save)
     question = Question.new(:text=>question_obj["title"], 
                             :pick=>question_obj["pick"])
     i = 1
     for answer in question_obj["answers"]
-      answer = Answer.new(:question=>question, :text=>answer["text"], :display_order=>i, :response_class=>answer['response_class'])
+      answer = Answer.new(:question=>question, :text=>answer["text"], :display_order=>i, :response_class=>answer['response_class'], :hide_label=>answer['hide_label'])
       i += 1
       to_save.push answer
     end
