@@ -6,7 +6,7 @@ Survey (in JSON):<br/>
   <%= submit_tag "Create" %>
 <% end %>
 <br/>
-Here's an example -- stuff with # in front of it is an explanation
+Here's an example -- stuff with // in front of it is an explanation
 and should not be used in your survey
 <pre>
 {"title" : "Intake",
@@ -17,10 +17,10 @@ and should not be used in your survey
          {
          "type" : "group",
          "text" : "Questions about the trainer",
-         "display_type" : "default", #or "dropdown"
+         "display_type" : "default", //or "dropdown"
          "questions" : [
             { "title" : "What is your favorite color?",
-              "pick" : "one", #or none (meaning a free answer) or any
+              "pick" : "one", //or none (meaning a free answer) or any
               "answers" : [
                 { "text" : "octarine", "response_class" : "answer"},
                 { "text" : "fuligin", "response_class" : "answer"},
@@ -29,7 +29,7 @@ and should not be used in your survey
             }
           ]
         },
-        #You can also do repeating question groups
+        //You can also do repeating question groups
         {
          "type" : "group",
          "text" : "Questions about modes",
@@ -55,11 +55,11 @@ and should not be used in your survey
         },
         { "title" : "Give me a number",
           "pick" : "none",
-          "answers" : [ #you still need one answer, with response_class "text" or "float" (for numbers)
+          "answers" : [ //you still need one answer, with response_class "text" or "float" (for numbers)
             { "text" : "answer", "response_class" : "float"}
           ]
         },
-        { #you can also have ungrouped questions:
+        { //you can also have ungrouped questions:
           "title" : "Give me as many names as you like",
           "pick" : "none",
           "answers" : [ 

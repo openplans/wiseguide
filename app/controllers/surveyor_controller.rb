@@ -89,6 +89,9 @@ module SurveyorControllerCustomMethods
         end
     end
     redirect_to surveys_path
+  rescue JSON::ParserError => e
+    flash[:alert] = "Malformed JSON %s" % e.message
+    render :action => :new_survey
   end
 
   def index
