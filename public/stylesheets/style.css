@@ -1204,3 +1204,11 @@ body.surveyor div.survey_section li.string label {
   float     : left;
   min-width : 150px;
 }
+
+body.surveyor div.survey_section table {
+  width: 50%;
+}
+
+body.surveyor div.survey_section table td {
+  padding-left: 0;
+}

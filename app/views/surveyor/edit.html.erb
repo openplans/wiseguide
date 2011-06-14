@@ -1,7 +1,10 @@
 <div id="surveyor">
+  <div class="survey_title">
+    <%= @survey.title %>
+  </div>
 <%= semantic_form_for(@response_set, :as => :r, :url => update_my_survey_path, :html => {:method => :put, :id => "survey_form", :class => @survey.custom_class}) do |f| %>
-   <%= render 'partials/section_menu', :survey_title=>@survey.title, :previous_section=>previous_section %>
-
+   <%= render 'partials/section_menu' %>
+   <div class="previous_section"><%= previous_section %></div>
    <%= render 'partials/dependents' unless @dependents.empty? %>
 
     <% if false #@response_set.no_responses_for_section?(@section) %>
@@ -9,9 +12,8 @@
     <% else %>
       <%= render "/partials/section", :f => f %>
     <% end %>
-
-<br/>
-
-<%= next_section %>
+    <div class="previous_section"><%= next_section %></div>
+    <br/>
 <% end %>
 </div>
+<%= link_to "Back to case", @response_set.kase %>
