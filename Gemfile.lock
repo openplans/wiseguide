@@ -1,12 +1,13 @@
 GIT
-  remote: git://github.com/openplans/surveyor.git
-  revision: f1a6cc1045456f11557ea23ffec401953120b59d
+  remote: git://github.com/gorenje/surveyor.git
+  revision: b4b606b1b088375e6e9914a47fefed21dd6bd29f
   branch: rails3
   specs:
-    surveyor (0.16.10)
+    surveyor (0.16.16)
       fastercsv
       formtastic
       haml
+      surveyor
       uuid
 
 GEM
