@@ -35,4 +35,13 @@ class User < ActiveRecord::Base
   def is_admin
     return level == 100
   end
+
+  def update_password(params)
+    unless params[:password].blank?
+      self.update_with_password(params)
+    else
+      self.errors.add('password', :blank)
+      false
+    end
+  end
 end

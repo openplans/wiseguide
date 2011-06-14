@@ -42,18 +42,18 @@ class UsersController < Devise::SessionsController
     redirect_to "/users"
   end
 
-  def change_password
+  def show_change_password
     @user = current_user
   end
 
-  def update_password
-    if current_user.update_attributes(:password=>params[:user][:password], :password_confirmation=>params[:user][:password_confirmation])
+  def change_password
+    if current_user.update_password(params[:user])
+      sign_in(current_user, :bypass => true)
       flash[:notice] = "Password changed"
-      redirect_to '/'
+      redirect_to users_path
     else
       flash.now[:alert] = "Error updating password"
-      @user = current_user
-      render :action=>:change_password
+      render :action=>:show_change_password
     end
   end
 

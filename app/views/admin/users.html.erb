@@ -14,7 +14,12 @@
 
     <% for user in @users %>
     <tr>
-      <td class="<%= user.role_name.downcase %>"><%= user.email %></td>
+      <td class="<%= user.role_name.downcase %>">
+        <%= user.email %>
+        <% if user == current_user %>
+          <span class="separator">|</span> <%= link_to "Change Password", show_change_password_path, :class=>'change-password' %>
+        <% end %>
+      </td>
       <td><%= user.role_name %></td>
       <td><%= user.last_sign_in_at %></td>
       <% if can? :edit, user %>
