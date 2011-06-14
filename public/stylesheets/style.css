@@ -1109,3 +1109,98 @@ body.reports table th:last-child {
 body.surveyor a.add_survey {
   display : none;
 }
+
+body.surveyor div.surveyor_menu {
+  font-weight : bold;
+  font-size: 1.4em;
+}
+
+body.surveyor div.surveyor_menu ul {
+  font-size: .7em;
+}
+
+body.surveyor div.surveyor_menu input {
+  border : none;
+  background: none;
+  color: #0081cc;
+  text-decoration: underline;
+  font-weight: normal;
+}
+
+body.surveyor div.surveyor_menu input:hover {
+  color: #009ffb;
+}
+
+body.surveyor div.surveyor_menu li.active input,
+body.surveyor div.surveyor_menu li.active input:hover {
+  color: #444;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+body.surveyor div.surveyor_menu li.active input:hover {
+  text-decoration: underline;
+}
+
+body.surveyor div.surveyor_menu {
+  margin: 20px 0;
+}
+
+body.surveyor div.previous_section input[type="submit"],
+body.surveyor div.next_section input[type="submit"] {
+    padding: 0.5em 0.8em;
+    background: #0081CC;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    border: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+body.surveyor div.survey_title {
+  background: #e5f2ff;
+  padding: 5px 10px;
+  margin: 0 0 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 25px;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  font-weight : bold;
+}
+
+body.surveyor div.survey_section span.title {
+  display: block;
+  font-size: 25px;
+  margin: 20px 0;
+  line-height: 1.2;
+}
+
+body.surveyor div.survey_section input[type=checkbox] {
+  padding: 0;
+  margin:0;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+body.surveyor div.survey_section label {
+  vertical-align: middle;
+}
+
+body.surveyor div.survey_section li.surveyor_check_boxes {
+  height : 23px;
+}
+
+body.surveyor div.survey_section li.surveyor_check_boxes input[type=text] {
+  margin-left: 5px;
+}
+
+body.surveyor div.survey_section li.string label {
+  display   : block;
+  float     : left;
+  min-width : 150px;
+}
