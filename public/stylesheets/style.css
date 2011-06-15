@@ -1212,3 +1212,7 @@ body.surveyor div.survey_section table {
 body.surveyor div.survey_section table td {
   padding-left: 0;
 }
+
+body.surveyor div.survey_section ol {
+  list-style-type: none;
+}

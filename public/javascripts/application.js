@@ -41,10 +41,7 @@ $(function(){
     $("body.reports.index").find(".predefined-report").hide();
     $("div[data-name=" + $(this).val() + "]").show();
   }).trigger("change");
-  
-  // Hide numbering on survey answers
-  $("body.surveyor ol").each(function(i, ol){ if($(ol).find("ol").length < 1) $(ol).css("list-style-type", "none") });
-  
+    
   // Disable table header styles that are not on first line of table in surveys
   $("body.surveyor tr").not(":first-child").find("th").css("background", "none").css("color", "#444")
 });
