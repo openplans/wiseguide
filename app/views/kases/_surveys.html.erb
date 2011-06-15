@@ -2,10 +2,21 @@
 <table>
 <% for response_set in @kase.response_sets %>
 <tr>
-<td><%= response_set.created_at %></td>
-<td><%= link_to response_set.survey.title, view_my_survey_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code) %></td>
-<td><%= link_to "", delete_surveys_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code), :class => "delete", :method=>:delete, :confirm=>"Are you sure?" %></td>
-
+  <td>
+    <%= response_set.created_at.strftime "%Y-%m-%d"  %>
+  </td>
+  <td>
+    <%= response_set.survey.title %>
+  </td>
+  <td>
+    <%= link_to "View", view_my_survey_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code) %>
+  </td>
+  <td>
+    <%= link_to "Edit", edit_my_survey_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code) %>
+  </td>
+  <td>
+    <%= link_to "", delete_surveys_path(:survey_code=>response_set.survey.access_code, :response_set_code=>response_set.access_code), :class => "delete", :method=>:delete, :confirm=>"Are you sure?" %>
+  </td>
 </tr>
 <% end %>
 </table>
