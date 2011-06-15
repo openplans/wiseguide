@@ -25,7 +25,7 @@ gem 'userstamp'
 
 gem 'formtastic'
 
-gem 'surveyor', :git => 'git://github.com/gorenje/surveyor.git', :branch => 'rails3'
+gem 'surveyor', :git => 'git://github.com/openplans/surveyor.git', :branch => 'rails3'
 
 gem 'haml'
 

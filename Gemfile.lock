@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/gorenje/surveyor.git
-  revision: b4b606b1b088375e6e9914a47fefed21dd6bd29f
+  remote: git://github.com/openplans/surveyor.git
+  revision: de61510648e773121e75cf1bb32f56c06cc8a4ba
   branch: rails3
   specs:
     surveyor (0.16.16)
