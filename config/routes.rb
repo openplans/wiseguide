@@ -18,8 +18,11 @@ Wiseguide::Application.routes.draw do
   resources :customer_support_network_members
 
   resources :customers do
-    post "add_impairment", :on=>:collection
-    post "delete_impairment", :on=>:collection
+    collection do
+      get  :search
+      post :add_impairment
+      post :delete_impairment
+    end
   end
 
   resources :kases, :path => "cases" do 

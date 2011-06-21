@@ -37,7 +37,13 @@ class CustomersController < ApplicationController
     @customer.destroy
     redirect_to(customers_url)
   end
-
+  
+  def search
+    term = params[:name].downcase.strip
+    
+    @customers = Customer.search(term).paginate( :page => params[:page], :order => [:last_name, :first_name])
+    render :action => :index
+  end
 
   def add_impairment
     @customer = Customer.find(params[:customer_impairment][:customer_id])

@@ -1,5 +1,17 @@
 <%= will_paginate @customers %>
 
+<% form_tag search_customers_path, :method => :get do %>
+  <fieldset>
+    <ol class="section fourth">
+      <li>
+        <%= label_tag "Filter by Name" %>
+        <%= text_field_tag :name %>
+        <%= submit_tag "Search" %>
+      </li>
+    </ol>
+  </fieldset>
+<% end %>
+
 <table>
   <tr>
     <th>First Name</th>
