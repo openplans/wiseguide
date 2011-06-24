@@ -6,15 +6,13 @@ module SurveyorHelper
     
     if sets.size == 0
       "-"
-    elsif sets.size == 1
-      (sets.first.string_value || sets.first.text_value || sets.first.integer_value || sets.first.float_value || show_answer(sets.first)).to_s
     else
       sets.map { |s| show_answer(s) }.join( question.pick == "any" ? ";" : "<br/>" )
     end
   end
   
-  def show_answer(set)  
-    set.answer.text
+  def show_answer(set) 
+    (set.string_value || set.text_value || set.integer_value || set.float_value || set.answer.text).to_s
   end
 
   # Layout: stylsheets and javascripts
