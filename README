@@ -5,3 +5,12 @@ http://www.rideconnection.org/ride/Services/RideWise.aspx
 
 Funding is provided by Ride Connection, and software development
 by OpenPlans.
+
+-----------------------
+
+To set up postgres for use with WiseGuide, you will need the
+fuzzystrmatch library (included in postgresql-contrib-8.4 in Ubuntu).
+This adds support for dmetaphone, which is how we
+phonetically match names.  Run psql and then the following command:
+
+\i /opt/local/share/postgresql84/contrib/fuzzystrmatch.sql 
