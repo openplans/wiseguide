@@ -7,12 +7,29 @@ module SurveyorHelper
     if sets.size == 0
       "-"
     else
+      #sets.sort! { |a,b| a.answer.display_order <=> b.answer.display_order }
+      sets.sort! { |a,b| sort_value(a) <=> sort_value(b) }
       sets.map { |s| show_answer(s) }.join( question.pick == "any" ? "; " : "<br/>" )
     end
   end
   
   def show_answer(set) 
-    (set.string_value || set.text_value || set.integer_value || set.float_value || set.answer.text).to_s
+    this_answer = (set.string_value || set.text_value || set.integer_value || set.float_value).to_s
+    if this_answer.blank?
+      set.answer.text
+    elsif set.answer.hide_label
+      this_answer
+    else
+      "#{set.answer.text}: #{this_answer}"
+    end
+  end
+
+  def sort_value(set)
+    if set.response_group.present?
+      set.response_group.to_i * 100 + set.answer.display_order
+    else
+      set.answer.display_order
+    end
   end
 
   # Layout: stylsheets and javascripts
