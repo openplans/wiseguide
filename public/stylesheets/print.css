@@ -80,3 +80,11 @@ tr.sum-totals td {
 body.surveyor p.response {
   padding-left: 0.25in;
 }
+
+div.fieldset {
+  border: 0;
+}
+
+div.page-header {
+  border : 0;
+}
