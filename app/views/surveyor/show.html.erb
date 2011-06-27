@@ -3,7 +3,7 @@
 </div>
 
 <% for survey_section in @response_set.survey.sections %>
-<fieldset>
+<div class="fieldset">
 <h1><%= survey_section.title %></h1>
 <p><%= survey_section.description %></p>
 <% last_question_group = nil %>
@@ -57,7 +57,7 @@ In this case, we want to display the each response_group on one line
 
 <% end %>
 
-</fieldset>
+</div>
 <% end %>
 
 <br/><%= link_to "Back to case", @response_set.kase %>

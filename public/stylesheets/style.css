@@ -456,7 +456,8 @@ ol.section li {
 form label {
     font-weight: bold;
 }
-fieldset {
+fieldset,
+div.fieldset {
     clear: both;
     background: #eee;
     border: 1px solid #bbb;
