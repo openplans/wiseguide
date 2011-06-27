@@ -7,7 +7,6 @@ module SurveyorHelper
     if sets.size == 0
       "-"
     else
-      #sets.sort! { |a,b| a.answer.display_order <=> b.answer.display_order }
       sets.sort! { |a,b| sort_value(a) <=> sort_value(b) }
       sets.map { |s| show_answer(s) }.join( question.pick == "any" ? "; " : "<br/>" )
     end
