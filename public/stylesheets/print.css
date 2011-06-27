@@ -25,13 +25,15 @@ body {
 }
 
 /* hide stuff */
+#logo,
 #crossbar,
 #login-area,
 #subnav,
 .action-bttn,
 #new_report,
 form.edit_report,
-.csv { display: none; clear: both; }
+.csv,
+a.back { display: none; clear: both; }
 
 /* format stuff */
 #header {
