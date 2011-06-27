@@ -1,16 +1,18 @@
+<% content_for :title do %><%= @response_set.survey.title %> for <%= @response_set.kase.customer.name %><% end %>
+
 <div id="page-header">
   <h1><%= @response_set.survey.title %> for <%= @response_set.kase.customer.name %></h1>
 </div>
 
 <% for survey_section in @response_set.survey.sections %>
-<div class="fieldset">
-<h1><%= survey_section.title %></h1>
-<p><%= survey_section.description %></p>
-<% last_question_group = nil %>
-<% for question in survey_section.questions %>
+  <div class="fieldset">
+  <h1><%= survey_section.title %></h1>
+  <p><%= survey_section.description %></p>
+  <% last_question_group = nil %>
+    <% for question in survey_section.questions %>
 
-<!-- we want to display question group headers -->
-<% if question.question_group != last_question_group 
+    <!-- we want to display question group headers -->
+    <% if question.question_group != last_question_group 
       last_question_group = question.question_group
       if question.question_group %>
         <h2 class="question_group_text"><%= question.question_group.text %></h2>
@@ -25,11 +27,10 @@
     end %>
 
     <% if question.question_group.blank? || question.question_group.display_type=="inline" || question.question_group.display_type=="grid" %>
-      <p><%= display_response(@response_set, question).html_safe %></p>
+      <p class="response"><%= display_response(@response_set, question).html_safe %></p>
     <% else %>
       <% for subquestion in question.question_group.questions %>
-        <p>Multi</p>
-        <p><%= display_response(@response_set, subquestion).html_safe %></p>
+        <p class="response"><%= display_response(@response_set, subquestion).html_safe %></p>
       <% end %>
     <% end %>
     <!-- now the answers.  There are a few cases here:
@@ -60,7 +61,7 @@
 
   <% end %>
 
-</div>
+  </div>
 <% end %>
 
-<br/><%= link_to "Back to case", @response_set.kase %>
+<br/><%= link_to "Back to case", @response_set.kase, :class => "back" %>

@@ -1217,3 +1217,7 @@ body.surveyor div.survey_section table td {
 body.surveyor div.survey_section ol {
   list-style-type: none;
 }
+
+body.surveyor p.response {
+  padding-left : 20px;
+}

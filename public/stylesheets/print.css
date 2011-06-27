@@ -25,13 +25,15 @@ body {
 }
 
 /* hide stuff */
+#logo,
 #crossbar,
 #login-area,
 #subnav,
 .action-bttn,
 #new_report,
 form.edit_report,
-.csv { display: none; clear: both; }
+.csv,
+a.back { display: none; clear: both; }
 
 /* format stuff */
 #header {
@@ -73,4 +75,16 @@ td.report-item {
 tr.sum-totals td {
   border-top: 2pt solid #000;
   padding-top: 1.5em;
+}
+
+body.surveyor p.response {
+  padding-left: 0.25in;
+}
+
+div.fieldset {
+  border: 0;
+}
+
+div.page-header {
+  border : 0;
 }

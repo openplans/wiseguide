@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Wiseguide</title>
+  <title><%= content_for?(:title) ? yield(:title) : "Wiseguide" %></title>
   <%= stylesheet_link_tag "style.css", :media=>"screen" %>
   <%= stylesheet_link_tag "print.css", :media=>"print" %>
   <%= stylesheet_link_tag "jquery-ui-1.8.9.custom.css" %>
