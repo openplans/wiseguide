@@ -7,7 +7,7 @@ module SurveyorHelper
     if sets.size == 0
       "-"
     else
-      sets.map { |s| show_answer(s) }.join( question.pick == "any" ? ";" : "<br/>" )
+      sets.map { |s| show_answer(s) }.join( question.pick == "any" ? "; " : "<br/>" )
     end
   end
   
