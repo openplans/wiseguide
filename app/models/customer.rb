@@ -8,7 +8,10 @@ class Customer < ActiveRecord::Base
   belongs_to :created_by, :foreign_key => :created_by_id, :class_name=>'User'
   belongs_to :updated_by, :foreign_key => :updated_by_id, :class_name=>'User'
 
-  has_attached_file :portrait, :styles => { :small => "150x150>" }
+  has_attached_file :portrait, 
+    :styles => { :small => "150x150>" },
+    :path   => ":rails_root/uploads/:class/:id/:basename.:extension",
+    :url    => "/customers/:id/download_portrait"
 
   validates_attachment_size :portrait, :less_than => 300.kilobytes
   validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif']

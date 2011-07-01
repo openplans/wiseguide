@@ -8,6 +8,10 @@ class CustomersController < ApplicationController
   def show
     prep_edit
   end
+  
+  def download_portrait
+    send_file @customer.portrait.path, :type => @customer.portrait_content_type, :disposition => 'inline'
+  end
 
   def new
     prep_edit

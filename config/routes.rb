@@ -23,6 +23,10 @@ Wiseguide::Application.routes.draw do
       post :add_impairment
       post :delete_impairment
     end
+    
+    member do
+      get :download_portrait
+    end
   end
 
   resources :kases, :path => "cases" do 
