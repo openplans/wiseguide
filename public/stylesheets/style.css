@@ -185,9 +185,6 @@ button {width: auto; overflow: visible;}
  * Structure
  *
  */
-body {
-    min-width: 1100px;
-}
 #header {
     padding: 20px 20px 10px;
     background: #0d4680;
