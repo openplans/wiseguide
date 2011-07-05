@@ -6,7 +6,10 @@
 <li>
 <%= f.label :portrait, "Photo" %>
 <% if @customer.portrait %>
-<%= image_tag @customer.portrait.url %>
+  <%= image_tag @customer.portrait.url(:small) %>
+  <p>
+    <%= link_to "Download full-size original", @customer.portrait.url(:original) %>
+  </p>
 <% end %>
 <%= f.file_field :portrait %>
 </li>

@@ -9,8 +9,12 @@ class CustomersController < ApplicationController
     prep_edit
   end
   
-  def download_portrait
-    send_file @customer.portrait.path, :type => @customer.portrait_content_type, :disposition => 'inline'
+  def download_small_portrait
+    send_file @customer.portrait.path(:small), :type => @customer.portrait_content_type, :disposition => 'inline'
+  end
+
+  def download_original_portrait
+    send_file @customer.portrait.path(:original), :type => @customer.portrait_content_type
   end
 
   def new

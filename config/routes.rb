@@ -25,7 +25,8 @@ Wiseguide::Application.routes.draw do
     end
     
     member do
-      get :download_portrait
+      get :download_original_portrait
+      get :download_small_portrait
     end
   end
 
