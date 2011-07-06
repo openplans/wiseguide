@@ -17,7 +17,6 @@ class Ability
     can :read, Route
     can :read, TripReason
     can :read, User
-    can :read, Survey
 
     if user.level >= 50
       ability = :manage
@@ -32,6 +31,7 @@ class Ability
     can ability, Event
     can ability, Outcome
     can ability, ResponseSet
+    can ability, Survey
 
     #users can only read their own cases
     can :read, Contact
