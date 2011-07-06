@@ -25,9 +25,9 @@
   <div id="crossbar">
     <div class="wrap selfclear">             
       <ul id="primary-nav" class="selfclear">
-        <li class="customers"><%= link_to "Customers", :controller => "customers" %></li>
-        <li class="kases"><%= link_to "Cases", :controller => "kases" %></li>
-        <li class="reports"><%= link_to "Reports", :controller => "reports" %></li>
+        <li class="customers"><%= link_to "Customers", customers_path %></li>
+        <li class="kases"><%= link_to "Cases", kases_path %></li>
+        <li class="reports"><%= link_to "Reports", :controller => "/reports" %></li>
       </ul>
       <ul id="secondary-nav" class="selfclear">
         <li class="admin"><%= link_to "Admin", admin_path %></li>
