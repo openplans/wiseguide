@@ -31,7 +31,7 @@ class Ability
     can ability, CustomerImpairment
     can ability, Event
     can ability, Outcome
-    can ability, ResponseSet, :kase=>{:user_id=>user.id}
+    can ability, ResponseSet
 
     #users can only read their own cases
     can :read, Contact
