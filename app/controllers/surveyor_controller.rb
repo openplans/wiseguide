@@ -29,7 +29,7 @@ module SurveyorControllerCustomMethods
   end
   def update
     @response_set = ResponseSet.find_by_access_code(params[:response_set_code])
-    @kase = @response_set.kase_id
+    @kase = @response_set.kase
     authorize! :manage, @kase
     super
   end
