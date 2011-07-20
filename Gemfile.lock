@@ -10,6 +10,12 @@ GIT
       surveyor
       uuid
 
+GIT
+  remote: git://github.com/rails/exception_notification.git
+  revision: 192a49a02d63d28b23ed41cebadfedd490929cf1
+  specs:
+    exception_notification (1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -126,6 +132,7 @@ PLATFORMS
 DEPENDENCIES
   cancan
   devise
+  exception_notification!
   formtastic
   haml
   jquery-rails (>= 0.2.6)

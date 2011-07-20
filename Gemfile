@@ -29,6 +29,10 @@ gem 'surveyor', :git => 'git://github.com/openplans/surveyor.git', :branch => 'r
 
 gem 'haml'
 
+gem 'exception_notification',
+    :git => "git://github.com/rails/exception_notification.git",
+    :require => "exception_notifier"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

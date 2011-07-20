@@ -1,0 +1,15 @@
+development:
+  exception_recipients: [me@example.com]
+  exception_email_prefix: '[Waystation] '
+  exception_sender_address: '"Error Notifier" <notifier@example.com>'
+
+test:
+  exception_recipients: [me@example.com]
+  exception_email_prefix: '[Waystation] '
+  exception_sender_address: '"Error Notifier" <notifier@example.com>'
+
+production:
+  exception_recipients: [me@example.com]
+  exception_email_prefix: '[Waystation] '
+  exception_sender_address: '"Error Notifier" <notifier@example.com>'
+  
