@@ -68,5 +68,7 @@ Wiseguide::Application.routes.draw do
 
   match 'reports(/:action)', :controller=>:reports
 
+  match "test_exception_notification" => "application#test_exception_notification"
+
   root :to => "home#index"
 end
