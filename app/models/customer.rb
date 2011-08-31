@@ -14,7 +14,7 @@ class Customer < ActiveRecord::Base
     :url    => "/customers/:id/download_:style_portrait"
 
   validates_attachment_size :portrait, :less_than => 300.kilobytes
-  validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg']
 
   validates_presence_of :ethnicity_id
 
