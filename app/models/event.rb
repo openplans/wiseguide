@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :event_type_id
   validates_presence_of :funding_source_id
   validates_presence_of :date_time
+  validates_presence_of :duration_in_hours
 
   def customer
     return kase.customer
