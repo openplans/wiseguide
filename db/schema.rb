@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110914195533) do
+ActiveRecord::Schema.define(:version => 20110914201816) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(:version => 20110914195533) do
     t.integer  "lock_version",                                    :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
+    t.time     "start_time"
+    t.time     "end_time"
   end
 
   create_table "funding_sources", :force => true do |t|

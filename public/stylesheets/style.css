@@ -640,20 +640,37 @@ table {
     -moz-border-radius-bottomleft: 5px;
     border-bottom-left-radius: 5px;
 }
+
+#timePkr {
+  overflow: hidden;
+}
+
+#timePkr table {
+  margin-bottom: 0;
+  border: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
 tr {
     background: #fff;
 }
+
 tr.odd {
     background: #f7f7f7;
 }
+
 table td {
     padding: 5px 10px 10px;
 }
+
 table th {
   text-align: left;
   background: #2E6399;
   color: #DDD;
 }
+
 table tr.sub-header th {
     border-top: 1px dotted #3674b3;
     vertical-align: bottom;

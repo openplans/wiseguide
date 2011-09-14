@@ -4,6 +4,8 @@
 <% for event in @kase.events %>
 <tr>
   <td><%= event.date %></td>
+  <td><%= event.start_time %></td>
+  <td><%= event.end_time %></td>
   <td><%= event.event_type.name %></td>
   <td><%= event.user.email %></td>
   <td><%= link_to "Details", edit_event_path(event) %></td>
