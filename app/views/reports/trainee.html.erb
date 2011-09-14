@@ -14,7 +14,7 @@
 <% for event in @events_by_customer[customer] %>
 <tr>
 <td><%= event.event_type.name %></td>
-<td><%= event.date_time.to_date %></td>
+<td><%= event.date %></td>
 <td><%= event.user.email %></td>
 <td><%= event.duration_in_hours %></td>
 </tr>

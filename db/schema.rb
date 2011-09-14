@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110525180000) do
+ActiveRecord::Schema.define(:version => 20110914195533) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(:version => 20110525180000) do
   create_table "events", :force => true do |t|
     t.integer  "kase_id"
     t.integer  "user_id"
-    t.datetime "date_time"
+    t.date     "date"
     t.integer  "event_type_id"
     t.integer  "funding_source_id"
     t.decimal  "duration_in_hours", :precision => 5, :scale => 2

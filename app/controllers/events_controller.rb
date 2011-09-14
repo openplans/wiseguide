@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new(:user=>current_user, :kase_id=>params[:kase_id], :date_time=>DateTime.now)
+    @event = Event.new(:user=>current_user, :kase_id=>params[:kase_id], :date=>Date.today)
     prep_edit
   end
 
