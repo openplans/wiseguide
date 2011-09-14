@@ -39,7 +39,8 @@ class ContactsController < ApplicationController
 
   def destroy
     @contact.destroy
-    redirect_to(contacts_url)
+
+    redirect_to kase_path(@contact.kase)
   end
 
   private

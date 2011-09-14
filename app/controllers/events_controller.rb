@@ -39,7 +39,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to(events_url)
+    redirect_to kase_url( @event.kase )
   end
 
   private

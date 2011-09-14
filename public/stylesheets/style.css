@@ -938,6 +938,12 @@ body.kases h2 a {
   line-height: 24px;
 }
 
+body.events.edit a.delete,
+body.contacts.edit a.delete {
+  float  : right;
+  margin : -43px 10px 0 0;
+}
+
 
 /*
  *
