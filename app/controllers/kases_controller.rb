@@ -4,10 +4,9 @@ class KasesController < ApplicationController
   def index
     name_ordered = 'customers.last_name, customers.first_name'
     
-    @my_open_kases = @kases.find(:all, :conditions=>["user_id = ?", current_user.id], :joins=>:customer, :order=> name_ordered)
-    @other_open_kases = @kases.find(:all, :conditions=>["user_id != ? and user_id is not null", current_user.id], :joins=>:customer, :order=> name_ordered)
-
-    @wait_list = @kases.find(:all, :conditions=>"user_id is null", :order=>'open_date')
+    @my_open_kases = @kases.open.assigned_to(current_user).joins(:customer).order(name_ordered)
+    @other_open_kases = @kases.open.not_assigned_to(current_user).joins(:customer).order(name_ordered)
+    @wait_list = @kases.unassigned.order(:open_date)
   end
 
   def show

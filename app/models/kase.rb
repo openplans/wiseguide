@@ -21,4 +21,10 @@ class Kase < ActiveRecord::Base
   validates_presence_of :funding_source
   validates_presence_of :disposition
 
+  scope :assigned_to, lambda {|user| where(:user_id => user.id) }
+  scope :not_assigned_to, lambda {|user| where('user_id <> ?',user.id)}
+  scope :unassigned, where(:user_id => nil)
+  scope :open, where(:close_date => nil)
+  scope :closed, where('close_date IS NOT NULL')
+
 end
