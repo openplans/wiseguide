@@ -1,5 +1,3 @@
-<%= will_paginate @customers %>
-
 <% form_tag search_customers_path, :method => :get do %>
   <fieldset>
     <ol class="section fourth">
@@ -10,6 +8,10 @@
       </li>
     </ol>
   </fieldset>
+<% end %>
+
+<% if can? :edit, Customer %>
+  <%= link_to "New Customer", new_customer_path, :class => "new-customer action-bttn" %>
 <% end %>
 
 <table>
@@ -48,6 +50,3 @@
 
 <%= will_paginate @customers %>
 
-<% if can? :edit, Customer %>
-<%= link_to "New Customer", new_customer_path, :class => "new-customer action-bttn" %>
-<% end %>
