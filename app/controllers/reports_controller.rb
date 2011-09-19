@@ -78,7 +78,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).where(["date_time between ? and ?", start_date, end_date]).order('date_time')
+    events = Event.accessible_by(current_ability).where(["date between ? and ?", start_date, end_date]).order('date')
     events_by_trainer = {}
     hours_by_trainer = {'{total}' => 0}
     customers_by_trainer = {'{total}' => Set.new}
@@ -112,7 +112,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).where(["date_time between ? and ?", start_date, end_date]).order('date_time')
+    events = Event.accessible_by(current_ability).where(["date between ? and ?", start_date, end_date]).order('date')
     events_by_customer = {}
     hours_by_customer = {}
     dispositions = {}
@@ -189,7 +189,8 @@ class ReportsController < ApplicationController
       end 
     end
     
-    render :text=>csv
+
+    send_data csv, :type => "text/plain", :filename => "outcomes.csv", :disposition => 'attachment'    
   end
 
   #because this is user-visible in the url, it does not match the
@@ -199,13 +200,13 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).includes(:events, :customer).where(["events.date_time between ? and ?", start_date, end_date])
+    kases = Kase.accessible_by(current_ability).includes(:events, :customer).where(["events.date between ? and ?", start_date, end_date])
 
     csv = ""
     CSV.generate(csv) do |csv|
       for kase in kases
         total_duration = 0
-        for event in kase.events.where(["events.date_time between ? and ?", start_date, end_date])
+        for event in kase.events.where(["events.date between ? and ?", start_date, end_date])
           total_duration += event.duration_in_hours
         end
         customer = kase.customer
@@ -231,14 +232,14 @@ class ReportsController < ApplicationController
       end
     end 
     
-    render :text=>csv
+    send_data csv, :type => "text/plain", :filename => "cases.csv", :disposition => 'attachment'    
   end
 
   def events
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(["date_time between ? and ?", start_date, end_date])
+    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(["date between ? and ?", start_date, end_date])
 
     csv = ""
     CSV.generate(csv) do |csv|
@@ -261,13 +262,13 @@ class ReportsController < ApplicationController
                 kase.close_date,
                 kase.disposition.name,
                 event.event_type.name,
-                event.date_time, 
+                event.date,
                 event.user.email,
                 event.funding_source.name,
                 event.duration_in_hours]
       end
     end
-    render :text=>csv
+    send_data csv, :type => "text/plain", :filename => "events.csv", :disposition => 'attachment'    
   end
 
   private

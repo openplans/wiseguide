@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new(:user=>current_user, :kase_id=>params[:kase_id], :date_time=>DateTime.now)
+    @event = Event.new(:user=>current_user, :kase_id=>params[:kase_id], :date=>Date.today, :start_time => "08:00 AM", :end_time => "09:00AM")
     prep_edit
   end
 
@@ -39,7 +39,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to(events_url)
+    redirect_to kase_url( @event.kase )
   end
 
   private

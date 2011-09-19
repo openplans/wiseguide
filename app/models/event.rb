@@ -17,4 +17,12 @@ class Event < ActiveRecord::Base
     return kase.customer
   end
 
+  def start_time
+    read_attribute(:start_time).try :to_s, :just_time
+  end
+
+  def end_time
+    read_attribute(:end_time).try :to_s, :just_time
+  end
+
 end

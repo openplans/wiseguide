@@ -23,6 +23,9 @@ $(function(){
     dateFormat: 'yy-mm-dd' 
   });
   
+  // time picker
+  $('.timepicker').timePkr();
+
   $('.birthdatepicker').datepicker({
     showOn: "button",
     buttonText: "Select", 
