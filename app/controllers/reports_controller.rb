@@ -189,7 +189,8 @@ class ReportsController < ApplicationController
       end 
     end
     
-    render :text=>csv
+
+    send_data csv, :type => "text/plain", :filename => "outcomes.csv", :disposition => 'attachment'    
   end
 
   #because this is user-visible in the url, it does not match the
@@ -231,7 +232,7 @@ class ReportsController < ApplicationController
       end
     end 
     
-    render :text=>csv
+    send_data csv, :type => "text/plain", :filename => "cases.csv", :disposition => 'attachment'    
   end
 
   def events
@@ -267,7 +268,7 @@ class ReportsController < ApplicationController
                 event.duration_in_hours]
       end
     end
-    render :text=>csv
+    send_data csv, :type => "text/plain", :filename => "events.csv", :disposition => 'attachment'    
   end
 
   private
