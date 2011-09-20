@@ -8,6 +8,8 @@ class KasesController < ApplicationController
     @my_three_month_follow_ups = @kases.assigned_to(current_user).has_three_month_follow_ups_due.order(:close_date)
     @my_six_month_follow_ups = @kases.assigned_to(current_user).has_six_month_follow_ups_due.order(:close_date)
     @other_open_kases = @kases.open.not_assigned_to(current_user).joins(:customer).order(name_ordered)
+    @other_three_month_follow_ups = @kases.not_assigned_to(current_user).has_three_month_follow_ups_due.order(:close_date)
+    @other_six_month_follow_ups = @kases.not_assigned_to(current_user).has_six_month_follow_ups_due.order(:close_date)
     @wait_list = @kases.unassigned.order(:open_date)
   end
 

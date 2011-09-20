@@ -1,18 +1,19 @@
 <fieldset>
   <ol class="section first">
-    <h1>My Open Cases</h1>
+    <h1>My Cases</h1>
+    <h2>Open</h2>
     <% for kase in @my_open_kases %>
       <li>
         <%= link_to kase.customer.name_reversed, kase %><br/>
       </li>
     <% end %>
-    <h1>My 3 Month Follow-ups</h1>
+    <h2>3 Month Follow-ups</h2>
     <% for kase in @my_three_month_follow_ups %>
       <li>
         <%= link_to kase.customer.name_reversed, kase %> (closed <%= kase.close_date %>)<br/> 
       </li>
     <% end %>
-    <h1>My 6 Month Follow-ups</h1>
+    <h2>6 Month Follow-ups</h2>
     <% for kase in @my_six_month_follow_ups %>
       <li>
         <%= link_to kase.customer.name_reversed, kase %> (closed <%= kase.close_date %>)<br/> 
@@ -20,10 +21,23 @@
     <% end %>
   </ol>
   <ol class="section second">
-    <h1>Other Open Cases</h1>
+    <h1>Other Cases</h1>
+    <h2>Open</h2>
     <% for kase in @other_open_kases %>
       <li>
         <%= link_to kase.customer.name_reversed, kase %> (<%= kase.assigned_to.email %>)<br/> 
+      </li>
+    <% end %>
+    <h2>3 Month Follow-ups</h2>
+    <% for kase in @other_three_month_follow_ups %>
+      <li>
+        <%= link_to kase.customer.name_reversed, kase %> (closed <%= kase.close_date %>)<br/> 
+      </li>
+    <% end %>
+    <h2>6 Month Follow-ups</h2>
+    <% for kase in @other_six_month_follow_ups %>
+      <li>
+        <%= link_to kase.customer.name_reversed, kase %> (closed <%= kase.close_date %>)<br/> 
       </li>
     <% end %>
   </ol>
