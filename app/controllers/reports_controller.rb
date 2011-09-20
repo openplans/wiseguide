@@ -200,17 +200,17 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).includes(:events, :customer).where(["events.date between ? and ?", start_date, end_date])
+    kases = Kase.accessible_by(current_ability).includes(:customer).where(:open_date => start_date..end_date)
 
     csv = ""
     CSV.generate(csv) do |csv|
+      csv << %w(Name Open\ Date Referral\ Source Referral\ Type DOB Ethnicity Gender Phone\ Number\ 1 Phone\ Number\ 2 Email Address City State Zip Notes Assigned\ To Close\ Date Disposition)
       for kase in kases
-        total_duration = 0
-        for event in kase.events.where(["events.date between ? and ?", start_date, end_date])
-          total_duration += event.duration_in_hours
-        end
         customer = kase.customer
         csv << [customer.name,
+                kase.open_date,
+                kase.referral_source,
+                kase.referral_type.name,
                 customer.birth_date.to_s,
                 customer.ethnicity.name,
                 customer.gender,
@@ -222,17 +222,13 @@ class ReportsController < ApplicationController
                 customer.state,
                 customer.zip,
                 customer.notes,
-                kase.open_date,
                 kase.assigned_to.email,
-                kase.referral_source,
-                kase.referral_type.name,
                 kase.close_date,
-                kase.disposition.name,
-                total_duration]
+                kase.disposition.name]
       end
     end 
     
-    send_data csv, :type => "text/plain", :filename => "cases.csv", :disposition => 'attachment'    
+    send_data csv, :type => "text/csv", :filename => "cases.csv", :disposition => 'attachment'    
   end
 
   def events
