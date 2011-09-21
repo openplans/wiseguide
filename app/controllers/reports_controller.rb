@@ -159,10 +159,11 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).where(["close_date between ? and ?", start_date,end_date])
+    kases = Kase.accessible_by(current_ability).where(:close_date => start_date..end_date)
     
     csv = ""
     CSV.generate(csv) do |csv|
+      csv << %w(Name DOB Ethnicity Gender Open\ Date Assigned\ To Referral\ Source Referral\ Type Close\ Date Disposition Trip\ Reason Exit\ Trip\ Count Exit\ VMR 3\ Month\ Unreachable 3\ Month\ Trip\ Count 3\ Month\ VMR 6\ Month\ Unreachable 6\ Month\ Trip\ Count 6\ Month\ VMR)
       for kase in kases
         customer = kase.customer
         for outcome in kase.outcomes
@@ -190,7 +191,7 @@ class ReportsController < ApplicationController
     end
     
 
-    send_data csv, :type => "text/plain", :filename => "outcomes.csv", :disposition => 'attachment'    
+    send_data csv, :type => "text/csv", :filename => "outcomes #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
   #because this is user-visible in the url, it does not match the
@@ -228,17 +229,18 @@ class ReportsController < ApplicationController
       end
     end 
     
-    send_data csv, :type => "text/csv", :filename => "cases.csv", :disposition => 'attachment'    
+    send_data csv, :type => "text/csv", :filename => "cases #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
   def events
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(["date between ? and ?", start_date, end_date])
+    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(:date => start_date..end_date)
 
     csv = ""
     CSV.generate(csv) do |csv|
+      csv << %w(Name DOB Ethnicity Gender Phone\ Number\ 1 Phone\ Number\ 2 Email Address City State Zip Notes Open\ Date Close\ Date Disposition Event\ Type Event\ Date Author Funding\ Source Hours)
       for event in events
         kase = event.kase
         customer = kase.customer
@@ -264,7 +266,7 @@ class ReportsController < ApplicationController
                 event.duration_in_hours]
       end
     end
-    send_data csv, :type => "text/plain", :filename => "events.csv", :disposition => 'attachment'    
+    send_data csv, :type => "text/csv", :filename => "events #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
   private
