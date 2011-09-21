@@ -14,7 +14,7 @@
 <body class="<%= bodytag_class %>">
   <div id="header">
     <div class="wrap selfclear">
-      <a id="logo" href="/">Wiseguide</a>
+      <%= link_to "WiseGuide", root_path, :id => 'logo' %>
       <div id="login-area">
         <% if current_user %>
         <a href="#"><%= current_user.email %></a> | <%= link_to "Log out", logout_path, {:method=>"post"} %></a>
@@ -27,7 +27,7 @@
       <ul id="primary-nav" class="selfclear">
         <li class="customers"><%= link_to "Customers", customers_path %></li>
         <li class="kases"><%= link_to "Cases", kases_path %></li>
-        <li class="reports"><%= link_to "Reports", :controller => "/reports" %></li>
+        <li class="reports"><%= link_to "Reports", reports_path %></li>
       </ul>
       <ul id="secondary-nav" class="selfclear">
         <li class="admin"><%= link_to "Admin", admin_path %></li>

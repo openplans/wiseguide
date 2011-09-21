@@ -65,6 +65,7 @@ Wiseguide::Application.routes.draw do
 
   match 'users', :controller=>:admin, :action=>:users
   match 'admin', :controller=>:admin, :action=>:index
+  match 'reports', :controller=>:reports, :action=>:index
 
   match 'reports(/:action)', :controller=>:reports
 
