@@ -23,16 +23,21 @@ class Ability
     else
       ability = :read
     end
-
-    can ability, Kase
     can ability, KaseRoute
-    can ability, Customer
     can ability, CustomerImpairment
+    can ability, CustomerSupportNetworkMember
+
+    if user.level >= 0
+      ability = [:create, :read, :update] 
+    else
+      ability = :read
+    end
+    can ability, Kase
+    can ability, Customer
     can ability, Event
     can ability, Outcome
     can ability, ResponseSet
     can ability, Survey
-    can ability, CustomerSupportNetworkMember
 
     #users can only read the cases of others
     can :read, Contact
@@ -42,6 +47,5 @@ class Ability
     if user.is_admin
       can :manage, :all
     end
-
   end
 end
