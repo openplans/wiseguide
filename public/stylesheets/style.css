@@ -442,6 +442,19 @@ form textarea {
     -webkit-box-shadow:inset 1px 2px 2px #ccc;
     box-shadow:inset 1px 2px 2px #ccc;
 }
+
+:-moz-placeholder {
+  font-style:italic;
+  color: #aaa
+}
+:-webkit-input-placeholder {
+  font-style:italic;
+  color: #aaa
+}
+placeholder {
+  color: #aaa
+}
+
 ol.section {
     list-style: none;
     margin: 0;
