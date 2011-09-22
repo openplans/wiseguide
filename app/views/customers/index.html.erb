@@ -16,35 +16,29 @@
 
 <table>
   <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
+    <th>Name</th>
     <th>DOB</th>
     <th>Primary Phone</th>
     <th>Secondary Phone</th>
     <th>Email Address</th>
     <th>Address</th>
-    <th></th>
-<% if can? :edit, Customer %>
+<% if can? :destroy, Customer %>
     <th></th>
 <% end %>
   </tr>
 
 <% for customer in @customers %>
-
   <tr>
-    <td><%= customer.first_name %></td>
-    <td><%= customer.last_name %></td>
+    <td><%= link_to customer.name_reversed, customer %></td>
     <td><%= customer.birth_date %></td>
     <td><%= customer.phone_number_1 %></td>
     <td><%= customer.phone_number_2 %></td>
     <td><%= customer.email %></td>
     <td><%= customer.address %></td>
-    <td><%= link_to "Show", customer %></td>
-    <% if can? :edit, @customer %>    
+    <% if can? :destroy, customer %>    
       <td><%= button_to "Delete", customer, :confirm=>"Are you sure you want to delete this user?", :method=>:delete %></td>
     <% end %>
   </tr>
-
 <% end %>
 </table>
 
