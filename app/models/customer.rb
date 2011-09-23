@@ -77,6 +77,9 @@ class Customer < ActiveRecord::Base
       args += fnargs
       Rails.logger.debug "QUERY: #{query}"
       Rails.logger.debug "QUERY: #{args}"
+    else
+      query = ''
+      args = []
     end
 
     conditions = [query] + args
