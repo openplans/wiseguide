@@ -1,7 +1,7 @@
 <div id="page-header">
   <h1><%= link_to @kase.customer.name, @kase.customer %></h1>
+  <%= link_to "Delete", kase_url(@kase), :confirm => "Are you sure you want to delete this case?", :class => "delete kase", :method => "delete" if can?(:delete, @kase)%>
 </div>
-
 
 <fieldset>
   <div class="first">

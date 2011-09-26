@@ -951,6 +951,16 @@ body.kases h2 a {
   line-height: 24px;
 }
 
+body.kases #page-header {
+	position: relative;
+}
+
+body.kases.show .delete.kase {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+}
+
 body.events.edit a.delete,
 body.contacts.edit a.delete {
   float  : right;
