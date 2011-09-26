@@ -53,23 +53,8 @@ class CustomersController < ApplicationController
     render :action => :index
   end
 
-  def add_impairment
-    @customer = Customer.find(params[:customer_impairment][:customer_id])
-    authorize! :edit, @customer
-    @customer_impairment = CustomerImpairment.create(params[:customer_impairment])
-    @impairment = @customer_impairment.impairment
-    render :layout=>nil
-  end
-
-  def delete_impairment
-    @customer_impairment = CustomerImpairment.where(:customer_id=>params[:customer_id], :impairment_id=>params[:impairment_id])[0]
-    @customer_impairment.destroy
-    render :json=>{:action=>:destroy, :customer_id=>@customer_impairment.customer_id, :impairment_id=>@customer_impairment.impairment_id}
-  end
-
   private
   def prep_edit
-    @impairments = Impairment.all
     @ethnicities = Ethnicity.all
     @genders = ALL_GENDERS
   end

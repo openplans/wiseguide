@@ -1,0 +1,19 @@
+<%= form_for @customer_impairment, :url => @customer_impairment.new_record? ? customer_impairments_path(:customer_id => @customer) : customer_impairment_path(@customer_impairment) do |f| %>
+<%= f.hidden_field :customer_id %>
+<fieldset>
+  <ol class="section fourth">
+    <li>
+      <%= f.label :impairment_id, "Consideration" %>
+      <%= f.collection_select :impairment_id, @impairments, :id, :name %>
+
+    </li>
+    <li>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </li>
+  </ol>
+  <div class="actions">
+    <%= f.submit "Save" %>
+  </div>
+</fieldset>
+<% end %>

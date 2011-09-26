@@ -1,45 +1,22 @@
 <h1>Special Considerations</h1>
 
 <table id="impairments">
-<% for impairment in @customer.impairments %>
-<%= render :partial=>"impairment_row", :locals=>{:impairment=>impairment, :customer=>@customer, :edit=>true} %>
+<% for customer_impairment in @customer.customer_impairments %>
+  <tr>
+    <td>
+      <%= customer_impairment.impairment.name %>
+    </td>
+    <td><%= customer_impairment.notes %></td>
+    <td>
+      <%= link_to( "", edit_customer_impairment_path( customer_impairment ), :class => "edit") if can? :edit, @customer %>
+    </td>
+    <td>
+      <%= link_to "", customer_impairment_path( customer_impairment ), {:method=>:delete, :confirm => "Are you sure you want to delete this customer impairment?", :class=>"delete"} %>
+    </td>
+  </tr>
 <% end %>
 </table>
 
-<%- if can? :edit, @customer -%>
-  <%= link_to "Add", add_impairment_customers_path(:customer_id=>@customer.id), "data-behavior" => "toggle-next" %>
-  <div style="display:none;">
-    <%= hidden_field_tag "customer_impairment[customer_id]", @customer.id %>
-    <%= collection_select "customer_impairment", :impairment_id, @impairments, :id, :name %>
-    <%= content_tag :button, "Add impairment", "data-remote" => add_impairment_customers_path %>
-  </div>
-<%- end -%>
-
-<script type='text/javascript'>
-
-  function init_row(index, row) {
-      $(row).bind('ajax:success', function(evt, data, status, xhr){
-          var $this = $(this);
-          $('#customer_impairment_' + data.customer_id + "_" + data.impairment_id).remove();
-      })
-  }
-  
-  $('.customer_impairment_row').each (init_row);
-
-  $("button[data-remote]").click( function( e ){
-    var button = $(this);
-  
-    $.post( 
-      button.attr("data-remote"),
-      button.parent().find("input, select").serialize(),
-      function(data, status, xhr){
-        var $this = $(this);
-
-        $('#impairments').append(xhr.responseText);
-        init_row(null, '#impairments tbody tr:last');
-        $("tr:odd").addClass("odd");
-      }
-    );
-    e.preventDefault();
-  });
-</script>
+<% if can? :edit, @customer %>
+<%= link_to "Add", new_customer_impairment_path( :customer_id => @customer.id ) %>
+<% end %>

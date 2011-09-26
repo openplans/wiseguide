@@ -16,12 +16,12 @@ Wiseguide::Application.routes.draw do
   resources :dispositions
 
   resources :customer_support_network_members
+  
+  resources :customer_impairments, :except => [:index, :show]
 
   resources :customers do
     collection do
       get  :search
-      post :add_impairment
-      post :delete_impairment
     end
     
     member do
