@@ -5,6 +5,8 @@ class Contact < ActiveRecord::Base
   belongs_to :created_by, :foreign_key => :created_by_id, :class_name=>'User'
   belongs_to :updated_by, :foreign_key => :updated_by_id, :class_name=>'User'
 
+  validates :description, :presence => true, :length => {:maximum => 30}
+
   def customer
     return kase.customer
   end
