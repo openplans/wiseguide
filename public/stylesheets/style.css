@@ -422,13 +422,17 @@ fieldset ol.section li div.field_with_errors {
 }
 div#error_explanation {
     color: #e5004d;
+    font-style: italic;
     background-color: #ffffc6;
     border: 1px solid #bbb;
     padding: 15px;
+    margin-bottom: 15px;
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 div#error_explanation h2 {
     font-size: 16px;
-    margin: 0;
 }
 
 /* forms */
@@ -961,8 +965,8 @@ body.kases.show .delete.kase {
 	right: 10px;
 }
 
-body.events.edit a.delete,
-body.contacts.edit a.delete {
+body.events a.delete,
+body.contacts a.delete {
   float  : right;
   margin : -43px 10px 0 0;
 }
