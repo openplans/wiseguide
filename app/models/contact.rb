@@ -7,9 +7,10 @@ class Contact < ActiveRecord::Base
 
   validates :description, :presence => true, :length => {:maximum => 30}
 
+  default_scope order(:date_time)
+
   def customer
     return kase.customer
   end
-
 
 end
