@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926212604) do
+ActiveRecord::Schema.define(:version => 20110928202637) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20110926212604) do
     t.integer  "lock_version",          :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
+    t.string   "phone_number_3"
+    t.string   "phone_number_4"
   end
 
   create_table "dependencies", :force => true do |t|
