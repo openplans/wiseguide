@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926212604) do
+ActiveRecord::Schema.define(:version => 20110928200930) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -44,9 +44,10 @@ ActiveRecord::Schema.define(:version => 20110926212604) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",  :default => 0
+    t.integer  "lock_version",    :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
+    t.boolean  "show_full_notes"
   end
 
   create_table "customer_impairments", :force => true do |t|

@@ -8,6 +8,13 @@
   <td><%= contact.description %></td>
   <td><%= link_to "Details", edit_contact_path(contact) %></td>
 </tr>
+<% if contact.show_full_notes? %>
+  <tr>
+    <td></td>
+    <td colspan="2"><%= contact.notes %></td>
+    <td></td>
+  </tr>
+<% end %>
 <% end %> 
 </table>
 <% if can? :edit, @kase %>
