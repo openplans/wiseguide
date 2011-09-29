@@ -1253,6 +1253,12 @@ body.surveyor div.survey_section li.string label {
   min-width : 150px;
 }
 
+body.surveyor div.survey_section li.text label {
+  display   : block;
+  float     : left;
+  min-width : 150px;
+}
+
 body.surveyor div.survey_section table {
   width: 50%;
 }
