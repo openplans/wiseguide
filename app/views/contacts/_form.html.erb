@@ -1,7 +1,7 @@
 <%= form_for @contact do |f| %>
 <fieldset>
   <%= f.hidden_field :kase_id %>
-  
+  <%= render "shared/error_messages", :target => @contact %> 
   <ol class="section fourth">
     <li>
       <label>By</label>

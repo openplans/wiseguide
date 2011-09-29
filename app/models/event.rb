@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :date
   validates_presence_of :duration_in_hours
 
+  default_scope order(:date)
+
   def customer
     return kase.customer
   end
