@@ -660,6 +660,7 @@ table {
 
 #timePkr {
   overflow: hidden;
+  margin-top: 35px;
 }
 
 #timePkr table {

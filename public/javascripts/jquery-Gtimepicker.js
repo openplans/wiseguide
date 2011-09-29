@@ -21,6 +21,7 @@
                     label: 'Done'
                 })
             }
+            
             // if ( $(this).val() == "" ) $(this).val('08:00 AM');
             $("#timePkr_hrs").slider({
                 value: 0,
@@ -58,8 +59,12 @@
             $(this).click(function () {
                 $('#timePkr_timeID').val($(this).attr('id'));
                 var a = $(this).offset();
-                $('#timePkr_tmpTime').html($(this).val());
                 var b = $(this).val();
+                if ( b == "" ) {
+                  b = '08:00 AM'; 
+                  $(this).val(b);
+                }
+                $('#timePkr_tmpTime').html( b );
                 $("#timePkr_mins").slider("value", parseInt(b.substr(3, 2), 10));
                 $("#timePkr_hrs").slider("value", parseInt(b.substr(0, 2), 10));
                 $('input[value=\"' + b.substr(6, 2) + '\"]').attr('checked', 'checked');
