@@ -1,4 +1,5 @@
 <h1>Support Network</h1>
+<%= link_to "Add", new_customer_support_network_member_path(:customer_id=>@customer.id), :class => :add %>
 <dl>
 <% for member in @customer.customer_support_network_members %>
 
@@ -16,4 +17,3 @@
 
 <% end %>
 </dl>
-<%= link_to "Add", new_customer_support_network_member_path(:customer_id=>@customer.id) %>

@@ -1,4 +1,7 @@
 <h1>Special Considerations</h1>
+<% if can? :edit, @customer %>
+  <%= link_to "Add", new_customer_impairment_path( :customer_id => @customer.id ), :class => :add %>
+<% end %>
 
 <table id="impairments">
 <% for customer_impairment in @customer.customer_impairments %>
@@ -17,6 +20,3 @@
 <% end %>
 </table>
 
-<% if can? :edit, @customer %>
-<%= link_to "Add", new_customer_impairment_path( :customer_id => @customer.id ) %>
-<% end %>

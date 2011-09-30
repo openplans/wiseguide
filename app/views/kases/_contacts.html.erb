@@ -1,4 +1,7 @@
 <h1>Contacts</h1>
+<% if can? :edit, @kase %>
+  <%= link_to "Add", new_contact_path(:kase_id=>@kase.id), :class => :add %>
+<% end %>
 
 <table>
 <% for contact in @kase.contacts %>
@@ -17,6 +20,3 @@
 <% end %>
 <% end %> 
 </table>
-<% if can? :edit, @kase %>
-<%= link_to "Add", new_contact_path(:kase_id=>@kase.id) %>
-<% end %>

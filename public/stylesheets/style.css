@@ -804,6 +804,7 @@ a.mark-complete {
 }
 a.add {
     background: url(images/plus-button.png) left center no-repeat scroll;
+    float: right;
 }
 a.change-password {
     background: url(images/lock.png) left center no-repeat scroll;
@@ -971,6 +972,14 @@ body.contacts a.delete {
   margin : -43px 10px 0 0;
 }
 
+ol.section li h1 {
+  margin: 0;
+}
+
+ol.section li a.add {
+  float: right;
+  margin : -26px 10px 0 0;
+}
 
 /*
  *

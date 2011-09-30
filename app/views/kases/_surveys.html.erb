@@ -1,4 +1,7 @@
 <h1><%= local_assigns[:title].nil? ? 'Assessments' : title%></h1>
+<% if can? :edit, @kase %>
+  <%= link_to "Add", new_survey_path(:kase_id=>@kase.id), :class => "add" %>
+<% end %>
 <table>
 <% for response_set in @kase.response_sets %>
 <tr>
@@ -20,6 +23,3 @@
 </tr>
 <% end %>
 </table>
-<% if can? :edit, @kase %>
-<%= link_to "Add", new_survey_path(:kase_id=>@kase.id), :class => "add_survey" %>
-<% end %>

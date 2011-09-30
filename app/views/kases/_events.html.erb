@@ -1,4 +1,7 @@
 <h1>Training Events</h1>
+<% if can? :edit, @kase %>
+  <%= link_to "Add", new_event_path(:kase_id=>@kase.id), :class => :add %>
+<% end %>
 
 <table>
 <% for event in @kase.events %>
@@ -12,6 +15,3 @@
 </tr>
 <% end %> 
 </table>
-<% if can? :edit, @kase %>
-<%= link_to "Add", new_event_path(:kase_id=>@kase.id) %>
-<% end %>
