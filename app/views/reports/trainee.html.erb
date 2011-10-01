@@ -1,39 +1,64 @@
+<h1>Trainee Report</h1>
 <table>
-<tr>
-<th>Name</th>
-<th>Actions Completed</th>
-<th>Date Completed</th>
-<th>Trainer</th>
-<th>Hours Trained</th>
-</th>
+  <tr>
+    <th>Name</th>
+    <th>Action</th>
+    <th>Date</th>
+    <th>Trainer</th>
+    <th>Hours</th>
+  </th>
 
-<% for customer in @customers %>
-<tr>
-<td rowspan="@events_by_customer[customer].size + 2" colspan="5"><%= customer.name %></td>
-</tr>
-<% for event in @events_by_customer[customer] %>
-<tr>
-<td><%= event.event_type.name %></td>
-<td><%= event.date %></td>
-<td><%= event.user.email %></td>
-<td><%= event.duration_in_hours %></td>
-</tr>
-<% end %>
-<tr>
-<td colspan="4">&nbsp;</td>
-<td class="total"><%= @hours_by_customer[customer] %></td>
-</tr>
+  <% for customer in @customers %>
+    <tr>
+      <td  colspan="5" class="definition"><%= customer.name %></td>
+    </tr>
+      <% for event in @events_by_customer[customer] %>
+        <tr>
+          <% if event == @events_by_customer[customer].first %>
+            <td rowspan="<%= @events_by_customer[customer].size + 1 %>"></td>
+          <% end %>
+          <td><%= event.event_type.name %></td>
+          <td><%= event.date %></td>
+          <td><%= event.user.email %></td>
+          <td class="number"><%= number_with_precision event.duration_in_hours, :precision => 2 %></td>
+        </tr>
+      <% end %>
+    <tr>
+      <td colspan="3">&nbsp;</td>
+      <td class="total"><%= number_with_precision @hours_by_customer[customer], :precision => 2 %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan = "4" class="definition">Grand Total</td>
+    <td class = "total"><%= number_with_precision @events.sum(&:duration_in_hours), :precision => 2 %></td> 
+  </tr>
+
 </table>
 
-<% end %>
-
-Dispositions:<br/>
-<% @dispositions.each do |disposition, count| %>
-<%= disposition.name %>: <%= count %><br/>
-<% end %>
-
-Events:<br/>
-<% @events_by_type.each do |event_type, count| %>
-<%= event_type.name %>: <%= count %><br/>
-<% end %>
-
+<h2>Dispositions:</h2>
+<table class="small">
+  <% @dispositions.each do |disposition, count| %>
+    <tr>
+      <td class="definition"><%= disposition.name %>:</td>
+      <td class="number"><%= count %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="definition">Total:</td>
+    <td class="total"><%= @dispositions.values.sum %></td>
+  </tr>
+</table>
+<br/>
+<h2>Events:</h2>
+<table class="small">
+  <% @events_by_type.each do |event_type, count| %>
+    <tr>
+      <td class="definition"><%= event_type.name %>:</td>
+      <td class="number"><%= count %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="definition">Total:</td>
+    <td class="total"><%= @events_by_type.values.sum %></td>
+  </tr>
+</table>

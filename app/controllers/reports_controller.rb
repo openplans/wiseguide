@@ -137,11 +137,12 @@ class ReportsController < ApplicationController
       events_by_type[event.event_type] += 1
 
     end
-    @customers = events_by_customer.keys.sort{|x| x.name}
+    @customers = events_by_customer.keys.sort_by{|x| x.name_reversed}
     @events_by_customer = events_by_customer
     @hours_by_customer = hours_by_customer
     @dispositions = dispositions
     @events_by_type = events_by_type
+    @events = events.all
   end
 
   def route

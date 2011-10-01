@@ -56,13 +56,26 @@ thead {
 tr {
 }
 th {
-  padding: 0.7em;
+  padding: 0.2em 0.7em;
+}
+td.total {
+  font-weight: bold;
+  text-align: right;
+  border-top: 2pt solid black;
+  padding-bottom: 1em;
+}
+
+td.definition {
+  font-weight: bold;
+  text-decoration: underline;
 }
 tr.sub-header th {
 }
 td {
-  padding: 0.7em;
+  padding: 0.2em 0.7em;
   border-top: 1pt solid #ddd;
+}
+td.number {
   text-align: right;
 }
 tr.report-item td {
