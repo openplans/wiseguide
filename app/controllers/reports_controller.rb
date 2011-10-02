@@ -109,10 +109,10 @@ class ReportsController < ApplicationController
 
   def trainee
 
-    start_date = Date.parse(params[:start_date])
-    end_date = Date.parse(params[:end_date])
+    @start_date = Date.parse(params[:start_date])
+    @end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).where(["date between ? and ?", start_date, end_date]).order('date')
+    events = Event.accessible_by(current_ability).where(["date between ? and ?", @start_date, @end_date]).order('date')
     events_by_customer = {}
     hours_by_customer = {}
     dispositions = {}
@@ -135,8 +135,8 @@ class ReportsController < ApplicationController
         events_by_type[event.event_type] = 0
       end
       events_by_type[event.event_type] += 1
-
     end
+
     @customers = events_by_customer.keys.sort_by{|x| x.name_reversed}
     @events_by_customer = events_by_customer
     @hours_by_customer = hours_by_customer
