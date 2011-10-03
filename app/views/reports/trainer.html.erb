@@ -17,8 +17,8 @@
 
     <% for event in @events_by_trainer[trainer] %>
       <tr>
-        <td><%= event.kase.customer.name %></td>
-        <td><%= event.event_type.name %></td>
+        <td><%= link_to event.kase.customer.name, event.kase %></td>
+        <td><%= link_to event.event_type.name, [:edit, event] %></td>
         <td><%= event.date.to_date %></td>
         <td class="number"><%= number_with_precision event.duration_in_hours, :precision => 2 %></td>
       </tr>

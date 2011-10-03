@@ -11,14 +11,14 @@
 
   <% for customer in @customers %>
     <tr>
-      <td  colspan="5" class="definition"><%= customer.name %></td>
+      <td  colspan="5" class="definition"><%= link_to customer.name, @events_by_customer[customer].first.kase %></td>
     </tr>
       <% for event in @events_by_customer[customer] %>
         <tr>
           <% if event == @events_by_customer[customer].first %>
             <td rowspan="<%= @events_by_customer[customer].size + 1 %>"></td>
           <% end %>
-          <td><%= event.event_type.name %></td>
+          <td><%= link_to event.event_type.name, [:edit, event] %></td>
           <td><%= event.date %></td>
           <td><%= event.user.email %></td>
           <td class="number"><%= number_with_precision event.duration_in_hours, :precision => 2 %></td>

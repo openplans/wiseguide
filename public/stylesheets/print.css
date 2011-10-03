@@ -7,8 +7,8 @@
 /* Base Print Style Reset */
 * { background: transparent !important; color: #000 !important; text-shadow: none !important; 
     -moz-box-shadow: none !important; -webkit-box-shadow: none !important; box-shadow: none !important;}
-a, a:visited { text-decoration: underline; color: blue !important; }
-a:after { content: " (" attr(href) ")"; } 
+a, a:visited { text-decoration: none; color: black }
+/* a:after { content: " (" attr(href) ")"; } */
 abbr:after { content: " (" attr(title) ")"; }
 .ir a:after { content: ""; }  /* Don't show links for images */
 pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
@@ -61,7 +61,7 @@ th {
 td.total {
   font-weight: bold;
   text-align: right;
-  border-top: 2pt solid black;
+  border-top: 1pt solid black;
   padding-bottom: 1em;
 }
 
