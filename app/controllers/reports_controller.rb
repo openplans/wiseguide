@@ -99,8 +99,8 @@ class ReportsController < ApplicationController
       customers_by_trainer[user].add event.kase.customer
       customers_by_trainer['{total}'].add event.kase.customer
     end
-    @trainers = events_by_trainer.keys.sort_by{|x| x.email}
 
+    @trainers = events_by_trainer.keys.sort_by{|x| x.email}
     @events_by_trainer = events_by_trainer
     @hours_by_trainer = hours_by_trainer
     @customers_by_trainer = customers_by_trainer
@@ -119,18 +119,22 @@ class ReportsController < ApplicationController
     events_by_type = {}
     for event in events
       customer = event.kase.customer
+
       if ! events_by_customer.member? customer
         events_by_customer[customer] = []
       end
       events_by_customer[customer].push(event)
+
       if ! hours_by_customer.member? customer
         hours_by_customer[customer] = 0
       end
       hours_by_customer[customer] += event.duration_in_hours
+
       if !dispositions.member? event.kase.disposition
-        dispositions[event.kase.disposition] = 0
+        dispositions[event.kase.disposition] = Set.new
       end
-      dispositions[event.kase.disposition] += 1
+      dispositions[event.kase.disposition].add event.kase
+
       if !events_by_type.member? event.event_type
         events_by_type[event.event_type] = 0
       end

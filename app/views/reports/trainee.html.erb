@@ -38,15 +38,15 @@
 
 <h2>Dispositions:</h2>
 <table class="small">
-  <% @dispositions.each do |disposition, count| %>
+  <% @dispositions.each do |disposition, set | %>
     <tr>
       <td class="definition"><%= disposition.name %>:</td>
-      <td class="number"><%= count %></td>
+      <td class="number"><%= set.size %></td>
     </tr>
   <% end %>
   <tr>
     <td class="definition">Total:</td>
-    <td class="total"><%= @dispositions.values.sum %></td>
+    <td class="total"><%= @dispositions.values.sum{|s| s.size} %></td>
   </tr>
 </table>
 <br/>
