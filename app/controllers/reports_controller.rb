@@ -113,6 +113,7 @@ class ReportsController < ApplicationController
     @end_date = Date.parse(params[:end_date])
 
     events = Event.accessible_by(current_ability).where(["date between ? and ?", @start_date, @end_date]).order('date')
+    kases = Kase.open_in_range(@start_date,@end_date)
     events_by_customer = {}
     hours_by_customer = {}
     dispositions = {}
@@ -130,16 +131,13 @@ class ReportsController < ApplicationController
       end
       hours_by_customer[customer] += event.duration_in_hours
 
-      if !dispositions.member? event.kase.disposition
-        dispositions[event.kase.disposition] = Set.new
-      end
-      dispositions[event.kase.disposition].add event.kase
-
       if !events_by_type.member? event.event_type
         events_by_type[event.event_type] = 0
       end
       events_by_type[event.event_type] += 1
     end
+  
+    dispositions = kases.group_by(&:disposition)
 
     @customers = events_by_customer.keys.sort_by{|x| x.name_reversed}
     @events_by_customer = events_by_customer
