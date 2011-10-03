@@ -75,10 +75,10 @@ class ReportsController < ApplicationController
     #interviews, scouts, trainings, shadows), with dates, durations.
     #Grouped by trainer with grand and by-trainer totals.
 
-    start_date = Date.parse(params[:start_date])
-    end_date = Date.parse(params[:end_date])
+    @start_date = Date.parse(params[:start_date])
+    @end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).where(["date between ? and ?", start_date, end_date]).order('date')
+    events = Event.accessible_by(current_ability).where(["date between ? and ?", @start_date, @end_date]).order('date')
     events_by_trainer = {}
     hours_by_trainer = {'{total}' => 0}
     customers_by_trainer = {'{total}' => Set.new}
@@ -99,7 +99,7 @@ class ReportsController < ApplicationController
       customers_by_trainer[user].add event.kase.customer
       customers_by_trainer['{total}'].add event.kase.customer
     end
-    @trainers = events_by_trainer.keys.sort{|x| x.email}
+    @trainers = events_by_trainer.keys.sort_by{|x| x.email}
 
     @events_by_trainer = events_by_trainer
     @hours_by_trainer = hours_by_trainer
