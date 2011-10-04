@@ -19,9 +19,13 @@ class ReportsController < ApplicationController
   end
 
   def age_and_ethnicity
-    month_kases = get_kases_for_month
-    params[:year] = Date.parse(params[:start_date]).year
-    year_kases = get_kases_for_year
+    @start_date = Date.parse(params[:start_date])
+    @end_date = @start_date + 1.month - 1.day
+    fy_start_date = Date.new(@start_date.year - (@start_date.month < 7 ? 1 : 0), 7, 1)
+
+    month_customers = Customer.with_new_successful_exit_in_range(@start_date,@end_date).includes(:ethnicity).uniq
+    year_customers = Customer.with_successful_exit_in_range(fy_start_date,@end_date).includes(:ethnicity).uniq
+
     @this_month_unknown_age = 0
     @this_month_sixty_plus = 0
     @this_month_less_than_sixty = 0
@@ -33,9 +37,7 @@ class ReportsController < ApplicationController
     @counts_by_ethnicity = {}
 
     #first, handle the customers from this month
-    for kase in month_kases
-      customer = kase.customer
-
+    for customer in month_customers
       age = customer.age_in_years
       if age.nil?
         @this_month_unknown_age += 1
@@ -52,7 +54,7 @@ class ReportsController < ApplicationController
     end
 
     #now all customers for the year
-    for kase in year_kases
+    for customer in year_customers
       age = customer.age_in_years
       if age.nil?
         @this_year_unknown_age += 1
@@ -162,7 +164,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).where(:close_date => start_date..end_date)
+    kases = Kase.accessible_by(current_ability).where(:close_date => start_date..end_date).includes({:outcomes=>:trip_reason},{:customer=>:ethnicity},:disposition,:assigned_to,:referral_type)
     
     csv = ""
     CSV.generate(csv) do |csv|
@@ -175,7 +177,7 @@ class ReportsController < ApplicationController
                   customer.ethnicity.name,
                   customer.gender,
                   kase.open_date,
-                  kase.assigned_to.email,
+                  kase.assigned_to.try(:email),
                   kase.referral_source,
                   kase.referral_type.name,
                   kase.close_date,
@@ -204,7 +206,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).includes(:customer).where(:open_date => start_date..end_date)
+    kases = Kase.accessible_by(current_ability).includes({:customer => :ethnicity},:assigned_to,:disposition,:referral_type).where(:open_date => start_date..end_date)
 
     csv = ""
     CSV.generate(csv) do |csv|
@@ -226,7 +228,7 @@ class ReportsController < ApplicationController
                 customer.state,
                 customer.zip,
                 customer.notes,
-                kase.assigned_to.email,
+                kase.assigned_to.try(:email),
                 kase.close_date,
                 kase.disposition.name]
       end
@@ -239,7 +241,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).includes(:kase=>:customer, :user=>nil).where(:date => start_date..end_date)
+    events = Event.accessible_by(current_ability).includes({:kase=>[:disposition,{:customer=>:ethnicity}]},:user,:funding_source,:event_type).where(:date => start_date..end_date)
 
     csv = ""
     CSV.generate(csv) do |csv|
@@ -282,9 +284,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = start_date.next_month
 
-    successful = Disposition.find_by_name("Successful")
-
-    kases_successfully_closed_this_month = Kase.where(["disposition_id=? and close_date between ? and ?", successful.id, start_date, end_date])
+    kases_successfully_closed_this_month = Kase.successful.closed_in_range(start_date,end_date).includes(:customer => :ethnicity)
 
     kases_successfully_closed_this_month = filter_by_funding_source(kases_successfully_closed_this_month)
 

@@ -20,6 +20,13 @@ class Customer < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 50
   
+  scope :with_successful_exit_in_range, lambda{|start_date,end_date| joins(:kases).where(:kases => {:disposition_id=>Disposition.successful.id,:close_date =>start_date..end_date})}
+
+  def self.with_new_successful_exit_in_range(start_date,end_date)
+    fy_start_date = Date.new(start_date.year - (start_date.month < 7 ? 1 : 0), 7, 1)
+    self.with_successful_exit_in_range(start_date,end_date).where("customers.id NOT IN (SELECT customer_id FROM kases WHERE disposition_id = ? AND close_date BETWEEN ? AND ?)",Disposition.successful.id,fy_start_date,start_date - 1.day)
+  end
+
   def self.search(term)
     if term.match /^[a-z]+$/i
       #a single word, either a first or a last name

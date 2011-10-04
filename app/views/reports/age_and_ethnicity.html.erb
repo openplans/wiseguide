@@ -1,5 +1,6 @@
 <div id="page-header">
-  <h1>Reports: Age &amp; Ethnicity</h1>
+  <h1>Age &amp; Ethnicity</h1>
+  <%= content_tag :h2, describe_date_range(@start_date,@end_date) %>
 </div>
 
 <div class="section-header">
@@ -14,27 +15,27 @@
   </tr>
 
   <tr>
-    <td>Unduplicated number of persons 60 years and older</td>
-    <td><%= @this_month_sixty_plus %></td>
-    <td><%= @this_year_sixty_plus %></td>
+    <td class="definition">Unduplicated number of persons 60 years and older</td>
+    <td class="number"><%= @this_month_sixty_plus %></td>
+    <td class="number"><%= @this_year_sixty_plus %></td>
   </tr>
 
   <tr>
-    <td>Unduplicated number of persons 59 years and younger</td>
-    <td><%= @this_month_less_than_sixty %></td>
-    <td><%= @this_year_less_than_sixty %></td>
+    <td class="definition">Unduplicated number of persons 59 years and younger</td>
+    <td class="number"><%= @this_month_less_than_sixty %></td>
+    <td class="number"><%= @this_year_less_than_sixty %></td>
   </tr>
 
   <tr>
-    <td>Unduplicated number of persons age unknown</td>
-    <td><%= @this_month_unknown_age %></td>
-    <td><%= @this_year_unknown_age %></td>
+    <td class="definition">Unduplicated number of persons age unknown</td>
+    <td class="number"><%= @this_month_unknown_age %></td>
+    <td class="number"><%= @this_year_unknown_age %></td>
   </tr>
 
   <tr>
-    <td>Total Unduplicated Individuals</td>
-    <td><%= @this_month_unknown_age + @this_month_sixty_plus + @this_month_less_than_sixty %></td>
-    <td><%= @this_year_unknown_age + @this_year_sixty_plus + @this_year_less_than_sixty  %></td>
+    <td class="definition">Total Unduplicated Individuals</td>
+    <td class="number"><%= @this_month_unknown_age + @this_month_sixty_plus + @this_month_less_than_sixty %></td>
+    <td class="number"><%= @this_year_unknown_age + @this_year_sixty_plus + @this_year_less_than_sixty  %></td>
   </tr>
 
 </table>
@@ -51,12 +52,12 @@
     <th>Fiscal YTD</th>
   </tr>
 
-  <% for ethnicity in @counts_by_ethnicity.keys.sort %>
+  <% for ethnicity in @counts_by_ethnicity.keys.sort_by{|e| e.name} %>
   <% row = @counts_by_ethnicity[ethnicity] %>
   <tr>
-    <td><%= ethnicity.name %></td>
-    <td><%= row['month'] %></td>
-    <td><%= row['year'] %></td>
+    <td class="definition"><%= ethnicity.name %></td>
+    <td class="number"><%= row['month'] %></td>
+    <td class="number"><%= row['year'] %></td>
   </tr>
   <% end %>
 
