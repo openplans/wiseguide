@@ -45,4 +45,12 @@ module ReportsHelper
     date += 1.year if date.month > 6 
     "#{date.year-1}-#{date.strftime('%y')}"
   end
+
+  def start_last_month
+    (Date.today - Date.today.day.days + 1.day - 1.month).to_s
+  end
+
+  def end_last_month
+    (Date.today - Date.today.day.days).to_s
+  end
 end
