@@ -967,6 +967,7 @@ body.customers a.new-customer {
 body.kases div.first,
 body.kases div.second {
  float : left;
+ min-width: 250px;
 }
 
 body.kases div.first {
