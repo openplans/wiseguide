@@ -420,6 +420,10 @@ fieldset ol.section li div.field_with_errors {
     color: #e5004d;
     float: none;
 }
+div.field_with_errors input, div.field_with_errors select {
+   background-color: #ffffc6;
+   border: 2px solid #e5004d;
+}
 div#error_explanation {
     color: #e5004d;
     font-style: italic;
@@ -711,6 +715,7 @@ table th {
   text-align: left;
   background: #2E6399;
   color: #DDD;
+  padding: 3px 10px;
 }
 
 table tr.sub-header th {

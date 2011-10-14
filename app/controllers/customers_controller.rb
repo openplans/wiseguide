@@ -57,5 +57,6 @@ class CustomersController < ApplicationController
   def prep_edit
     @ethnicities = Ethnicity.all
     @genders = ALL_GENDERS
+    @counties = (County.all.collect {|c| c.name} << @customer.county).compact.uniq.sort
   end
 end

@@ -20,6 +20,7 @@ class KasesController < ApplicationController
   def new
     in_progress = Disposition.find_by_name('In Progress')
     @kase = Kase.new(:customer_id=>params[:customer_id], :disposition_id=>in_progress.id)
+    @kase.county = Kase::VALID_COUNTIES.fetch(Customer.find(params[:customer_id]).county,nil)
     prep_edit
   end
 

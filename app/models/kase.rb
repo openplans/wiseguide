@@ -16,10 +16,13 @@ class Kase < ActiveRecord::Base
   has_many :routes, :through=>:kase_routes
   has_many :outcomes
 
+  VALID_COUNTIES = {'Multnomah' => 'M', 'Clackamas' => 'C', 'Washington' => 'W'}
+
   validates_presence_of :customer_id
   validates_presence_of :referral_type
   validates_presence_of :funding_source
   validates_presence_of :disposition
+  validates_inclusion_of :county, :in => VALID_COUNTIES.values
 
   scope :assigned_to, lambda {|user| where(:user_id => user.id) }
   scope :not_assigned_to, lambda {|user| where('user_id <> ?',user.id)}

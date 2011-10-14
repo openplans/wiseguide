@@ -35,7 +35,12 @@
   </li>
 
   <li>
-    <%= f.label :funding_source_id, "Default funding source" %>
+    <%= f.label :county, "County of Service" %>
+    <%= f.select :county, Kase::VALID_COUNTIES, {:prompt => "<Select County>"} %>
+  </li>
+
+  <li>
+    <%= f.label :funding_source_id, "Default Funding Source" %>
     <%= f.collection_select :funding_source_id, @funding_sources, :id, :name %>
   </li>
 

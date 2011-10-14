@@ -31,6 +31,11 @@
     </li>
 
     <li>
+    <%= f.label :ethnicity %>
+    <%= f.collection_select :ethnicity_id, @ethnicities, :id, :name %>
+    </li>
+
+    <li>
     <%= f.label :phone_number_1, "Preferred phone" %>
     <%= f.text_field :phone_number_1 %>
     </li>
@@ -76,6 +81,6 @@
     </li>
 
     <li>
-    <%= f.label :ethnicity %>
-    <%= f.collection_select :ethnicity_id, @ethnicities, :id, :name %>
+    <%= f.label :county %>
+    <%= f.select :county, @counties, :prompt => '<Select County>' %>
     </li>

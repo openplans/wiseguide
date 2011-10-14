@@ -17,6 +17,7 @@ class Ability
     can :read, Route
     can :read, TripReason
     can :read, User
+    can :read, County
 
     if user.level >= 50
       ability = :manage

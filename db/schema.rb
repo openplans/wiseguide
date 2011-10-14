@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110928202637) do
+ActiveRecord::Schema.define(:version => 20111014221807) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(:version => 20110928202637) do
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.boolean  "show_full_notes"
+  end
+
+  create_table "counties", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "customer_impairments", :force => true do |t|
@@ -92,11 +98,12 @@ ActiveRecord::Schema.define(:version => 20110928202637) do
     t.datetime "portrait_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",          :default => 0
+    t.integer  "lock_version",                        :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
     t.string   "phone_number_3"
     t.string   "phone_number_4"
+    t.string   "county",                :limit => 25
   end
 
   create_table "dependencies", :force => true do |t|
@@ -177,16 +184,6 @@ ActiveRecord::Schema.define(:version => 20110928202637) do
     t.integer  "updated_by_id"
   end
 
-  create_table "geometry_columns", :id => false, :force => true do |t|
-    t.string  "f_table_catalog",   :limit => 256, :null => false
-    t.string  "f_table_schema",    :limit => 256, :null => false
-    t.string  "f_table_name",      :limit => 256, :null => false
-    t.string  "f_geometry_column", :limit => 256, :null => false
-    t.integer "coord_dimension",                  :null => false
-    t.integer "srid",                             :null => false
-    t.string  "type",              :limit => 30,  :null => false
-  end
-
   create_table "impairments", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -214,9 +211,10 @@ ActiveRecord::Schema.define(:version => 20110928202637) do
     t.integer  "disposition_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",      :default => 0
+    t.integer  "lock_version",                   :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
+    t.string   "county",            :limit => 1
   end
 
   create_table "outcomes", :force => true do |t|
@@ -324,14 +322,6 @@ ActiveRecord::Schema.define(:version => 20110928202637) do
     t.integer  "lock_version",  :default => 0
     t.integer  "created_by_id"
     t.integer  "updated_by_id"
-  end
-
-  create_table "spatial_ref_sys", :id => false, :force => true do |t|
-    t.integer "srid",                      :null => false
-    t.string  "auth_name", :limit => 256
-    t.integer "auth_srid"
-    t.string  "srtext",    :limit => 2048
-    t.string  "proj4text", :limit => 2048
   end
 
   create_table "survey_sections", :force => true do |t|
