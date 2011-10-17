@@ -500,6 +500,9 @@ fieldset.new-trip {
     border-top-right-radius: 0;
     border-top-left-radius: 0;
 }
+fieldset ol {
+  min-width: 250px;
+}
 fieldset ol.first,
 fieldset ol.second,
 fieldset ol.third {
@@ -518,19 +521,20 @@ fieldset ol.summary-form-part-one {
     float: left;
     width: 35%;
 }
-    body fieldset ol.summary-form-part-one li label { width: 90%;
-    }
+body fieldset ol.summary-form-part-one li label {
+    width: 90%;
+}
 
 fieldset ol.summary-form-part-two {
     float: left;
     width: 30%;
 }
-    fieldset ol.summary-form-part-two textarea {
-        width: 85%;
-        height: 4.5em;
-        overflow: auto;
-        margin-bottom: 10px;
-    }
+  fieldset ol.summary-form-part-two textarea {
+      width: 85%;
+      height: 4.5em;
+      overflow: auto;
+      margin-bottom: 10px;
+  }
 fieldset ol.summary-form-part-three {
     float: right;
     width: 32%;
@@ -546,10 +550,10 @@ fieldset ol.section li label {
     margin-right: 2%;
 }
 fieldset ol.section li input {
-    max-width: 60%;
+    max-width: 200px;
 }
 fieldset ol.section li textarea {
-    max-width: 60%;
+    max-width: 250px;
     height: 3.5em;
     resize: none;
 }
