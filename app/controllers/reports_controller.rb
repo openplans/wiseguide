@@ -23,53 +23,60 @@ class ReportsController < ApplicationController
     @end_date = @start_date + 1.month - 1.day
     fy_start_date = Date.new(@start_date.year - (@start_date.month < 7 ? 1 : 0), 7, 1)
 
-    month_customers = Customer.with_new_successful_exit_in_range(@start_date,@end_date).includes(:ethnicity).uniq
-    year_customers = Customer.with_successful_exit_in_range(fy_start_date,@end_date).includes(:ethnicity).uniq
-
-    @this_month_unknown_age = 0
-    @this_month_sixty_plus = 0
-    @this_month_less_than_sixty = 0
-
-    @this_year_unknown_age = 0
-    @this_year_sixty_plus = 0
-    @this_year_less_than_sixty = 0
-
+    @this_month_unknown_age = {}
+    @this_month_sixty_plus = {}
+    @this_month_less_than_sixty = {}
+    @this_year_unknown_age = {}
+    @this_year_sixty_plus = {}
+    @this_year_less_than_sixty = {}
     @counts_by_ethnicity = {}
 
-    #first, handle the customers from this month
-    for customer in month_customers
-      age = customer.age_in_years
-      if age.nil?
-        @this_month_unknown_age += 1
-      elsif age > 60
-        @this_month_sixty_plus += 1
-      else
-        @this_month_less_than_sixty += 1
+    Kase::VALID_COUNTIES.each do |county, county_code|
+      month_customers = Customer.with_new_successful_exit_in_range_for_county(@start_date,@end_date,county_code).includes(:ethnicity).uniq
+      year_customers = Customer.with_successful_exit_in_range_for_county(fy_start_date,@end_date,county_code).includes(:ethnicity).uniq
+
+      @this_month_unknown_age[county] = 0
+      @this_month_sixty_plus[county] = 0
+      @this_month_less_than_sixty[county] = 0
+      @this_year_unknown_age[county] = 0
+      @this_year_sixty_plus[county] = 0
+      @this_year_less_than_sixty[county] = 0
+      @counts_by_ethnicity[county] = {}
+
+      #first, handle the customers from this month
+      for customer in month_customers
+        age = customer.age_in_years
+        if age.nil?
+          @this_month_unknown_age[county] += 1
+        elsif age > 60
+          @this_month_sixty_plus[county] += 1
+        else
+          @this_month_less_than_sixty[county] += 1
+        end
+
+        if ! @counts_by_ethnicity[county].member? customer.ethnicity
+          @counts_by_ethnicity[county][customer.ethnicity] = {'month' => 0, 'year' => 0}
+        end
+        @counts_by_ethnicity[county][customer.ethnicity]['month'] += 1
       end
 
-      if ! @counts_by_ethnicity.member? customer.ethnicity
-        @counts_by_ethnicity[customer.ethnicity] = {'month' => 0, 'year' => 0}
+      #now all customers for the year
+      for customer in year_customers
+        age = customer.age_in_years
+        if age.nil?
+          @this_year_unknown_age[county] += 1
+        elsif age > 60
+          @this_year_sixty_plus[county] += 1
+        else
+          @this_year_less_than_sixty[county] += 1
+        end
+
+        if ! @counts_by_ethnicity[county].member? customer.ethnicity
+          @counts_by_ethnicity[county][customer.ethnicity] = {'month' => 0, 'year' => 0}
+        end
+        @counts_by_ethnicity[county][customer.ethnicity]['year'] += 1
       end
-      @counts_by_ethnicity[customer.ethnicity]['month'] += 1
     end
-
-    #now all customers for the year
-    for customer in year_customers
-      age = customer.age_in_years
-      if age.nil?
-        @this_year_unknown_age += 1
-      elsif age > 60
-        @this_year_sixty_plus += 1
-      else
-        @this_year_less_than_sixty += 1
-      end
-
-      if ! @counts_by_ethnicity.member? customer.ethnicity
-        @counts_by_ethnicity[customer.ethnicity] = {'month' => 0, 'year' => 0}
-      end
-      @counts_by_ethnicity[customer.ethnicity]['year'] += 1
-    end
-
   end
 
   def trainer

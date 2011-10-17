@@ -3,62 +3,75 @@
   <%= content_tag :h2, describe_date_range(@start_date,@end_date) %>
 </div>
 
-<div class="section-header">
-  <h2>Age</h2>
-</div>
+<% Kase::VALID_COUNTIES.each do |county,county_code| %>
+  <div class="section-header">
+    <h2><%= county %> County</h2>
+  </div>
 
-<table>
-  <tr>
-    <th>Age</th>
-    <th>Current Month</th>
-    <th>Fiscal YTD</th>
-  </tr>
+  <div class="indent">
+    <table>
+      <thead>
+        <tr>
+          <th>Age</th>
+          <th>Current Month</th>
+          <th>Fiscal YTD</th>
+        </tr>
+      </thead>
 
-  <tr>
-    <td class="definition">Unduplicated number of persons 60 years and older</td>
-    <td class="number"><%= @this_month_sixty_plus %></td>
-    <td class="number"><%= @this_year_sixty_plus %></td>
-  </tr>
+      <tr>
+        <td class="report-item">Unduplicated number of persons 60 years and older</td>
+        <td class="number"><%= @this_month_sixty_plus[county] %></td>
+        <td class="number"><%= @this_year_sixty_plus[county] %></td>
+      </tr>
 
-  <tr>
-    <td class="definition">Unduplicated number of persons 59 years and younger</td>
-    <td class="number"><%= @this_month_less_than_sixty %></td>
-    <td class="number"><%= @this_year_less_than_sixty %></td>
-  </tr>
+      <tr>
+        <td class="report-item">Unduplicated number of persons 59 years and younger</td>
+        <td class="number"><%= @this_month_less_than_sixty[county] %></td>
+        <td class="number"><%= @this_year_less_than_sixty[county] %></td>
+      </tr>
 
-  <tr>
-    <td class="definition">Unduplicated number of persons age unknown</td>
-    <td class="number"><%= @this_month_unknown_age %></td>
-    <td class="number"><%= @this_year_unknown_age %></td>
-  </tr>
+      <tr>
+        <td class="report-item">Unduplicated number of persons age unknown</td>
+        <td class="number"><%= @this_month_unknown_age[county] %></td>
+        <td class="number"><%= @this_year_unknown_age[county] %></td>
+      </tr>
 
-  <tr>
-    <td class="definition">Total Unduplicated Individuals</td>
-    <td class="number"><%= @this_month_unknown_age + @this_month_sixty_plus + @this_month_less_than_sixty %></td>
-    <td class="number"><%= @this_year_unknown_age + @this_year_sixty_plus + @this_year_less_than_sixty  %></td>
-  </tr>
+      <tfoot>
+        <tr>
+          <td >Total Unduplicated Individuals</td>
+          <td class="number"><%= @this_month_unknown_age[county] + @this_month_sixty_plus[county] + @this_month_less_than_sixty[county] %></td>
+          <td class="number"><%= @this_year_unknown_age[county] + @this_year_sixty_plus[county] + @this_year_less_than_sixty[county]  %></td>
+        </tr>
+      </tfoot>
+    </table>
 
-</table>
+    <table>
 
-<div class="section-header">
-  <h2>Ethnic Heritage</h2>
-</div>
+      <thead>
+        <tr>
+          <th>Ethnic Heritage</th>
+          <th>Current Month</th>
+          <th>Fiscal YTD</th>
+        </tr>
+      </thead>
 
-<table>
+      <% for ethnicity in @counts_by_ethnicity[county].keys.sort_by{|e| e.name} %>
+        <% row = @counts_by_ethnicity[county][ethnicity] %>
+        <tr>
+          <td class="report-item"><%= ethnicity.name %></td>
+          <td class="number"><%= row['month'] %></td>
+          <td class="number"><%= row['year'] %></td>
+        </tr>
+      <% end %>
 
-  <tr>
-    <th>Ethnic Heritage</th>
-    <th>Current Month</th>
-    <th>Fiscal YTD</th>
-  </tr>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td class="number"><%= @counts_by_ethnicity[county].values.reduce(0){|sum,this| sum + this['month']} %></td>
+          <td class="number"><%= @counts_by_ethnicity[county].values.reduce(0){|sum,this| sum + this['year']} %></td>
+        </tr>
+      </tfoot>
 
-  <% for ethnicity in @counts_by_ethnicity.keys.sort_by{|e| e.name} %>
-  <% row = @counts_by_ethnicity[ethnicity] %>
-  <tr>
-    <td class="definition"><%= ethnicity.name %></td>
-    <td class="number"><%= row['month'] %></td>
-    <td class="number"><%= row['year'] %></td>
-  </tr>
-  <% end %>
-
-</table>
+    </table>
+  </div>
+<% end %>

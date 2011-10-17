@@ -16,7 +16,7 @@ class Kase < ActiveRecord::Base
   has_many :routes, :through=>:kase_routes
   has_many :outcomes
 
-  VALID_COUNTIES = {'Multnomah' => 'M', 'Clackamas' => 'C', 'Washington' => 'W'}
+  VALID_COUNTIES = {'Clackamas' => 'C', 'Multnomah' => 'M', 'Washington' => 'W'}
 
   validates_presence_of :customer_id
   validates_presence_of :referral_type

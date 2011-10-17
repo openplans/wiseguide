@@ -1135,6 +1135,10 @@ p input[type="checkbox"] {
     border-top: 1px solid #999;
 }
 
+.indent {
+    padding-left: 25px;
+}
+
 
 /* Predefined Reports */
 .report-header {

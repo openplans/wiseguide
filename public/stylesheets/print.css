@@ -45,49 +45,65 @@ a.back { display: none; clear: both; }
 #main {
   border-top: 1pt solid #000;
 }
+h1 {
+  margin-bottom: 0;
+}
+h1+h2 {
+  margin-top: 0;
+}
+h2 {
+  margin-bottom: 3px;
+}
 
+.indent {
+  padding-left: 25px;
+}
 /* tables */
 table {
     border-collapse: collapse;
+    margin-bottom: 5px;
+}
+table .definition {
+}
+table .number {
+  text-align: right;
 }
 thead {
   border-bottom: 2pt solid #000;
 }
+tfoot {
+  border-top: 2pt solid #000;
+  font-weight: bold;
+}
 tr {
+}
+tr.report-item td {
+  border-top: 1pt solid #000;
+}
+tr.sum-totals td {
+  border-top: 2pt solid #000;
+  padding-top: 1.5em;
+}
+tr.sub-header th {
 }
 th {
   padding: 0.2em 0.7em;
+  font-weight: bold;
+}
+
+td {
+  padding: 0.2em 0.7em;
+  border-top: 1pt solid #ddd;
+}
+td.report-item {
+  font-weight: bold;
+  text-align: left;
 }
 td.total {
   font-weight: bold;
   text-align: right;
   border-top: 1pt solid black;
   padding-bottom: 1em;
-}
-
-td.definition {
-  font-weight: bold;
-  text-decoration: underline;
-}
-tr.sub-header th {
-}
-td {
-  padding: 0.2em 0.7em;
-  border-top: 1pt solid #ddd;
-}
-td.number {
-  text-align: right;
-}
-tr.report-item td {
-  border-top: 1pt solid #000;
-}
-td.report-item {
-  font-weight: bold;
-  text-align: left;
-}
-tr.sum-totals td {
-  border-top: 2pt solid #000;
-  padding-top: 1.5em;
 }
 
 body.surveyor h3 {
