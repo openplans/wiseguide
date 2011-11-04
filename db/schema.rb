@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111014221807) do
+ActiveRecord::Schema.define(:version => 20111104223700) do
 
   create_table "answers", :force => true do |t|
     t.integer  "question_id"
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20111014221807) do
     t.string   "email"
     t.string   "address"
     t.string   "city"
-    t.string   "state"
+    t.string   "state",                               :default => "OR"
     t.string   "zip"
     t.integer  "ethnicity_id"
     t.text     "notes"
