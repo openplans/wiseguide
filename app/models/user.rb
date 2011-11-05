@@ -19,7 +19,9 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  default_scope order("users.level DESC, email")
+  default_scope order(:email)
+  scope :active, where("users.level >= 0")
+  scope :active_or_selected, lambda{|user_id| where("users.level >= 0 OR users.id = ?",user_id)}
 
   def role_name
     case level
