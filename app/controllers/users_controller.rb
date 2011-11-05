@@ -33,7 +33,6 @@ class UsersController < Devise::SessionsController
     end
   end
 
-
   def update
     @user = User.find(params[:id])
     authorize! :edit, @user
@@ -89,8 +88,10 @@ class UsersController < Devise::SessionsController
   def delete
     @user = User.find(params[:id])
     authorize! :manage, @user
-    @user.destroy
-    redirect_to :users
+    @user.level = -1
+    @user.encrypted_password = "x"
+    @user.save!
+    redirect_to :users, :notice => "User #{@user.email} successfully marked deleted."
   end
 
 end

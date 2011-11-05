@@ -19,9 +19,11 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
+  default_scope order("users.level DESC, email")
+
   def role_name
     case level
-    when level < 0
+    when -1 
       return "Deleted"
     when 0
       return "Viewer"

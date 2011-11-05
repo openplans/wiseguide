@@ -25,11 +25,13 @@
       <% if can? :edit, user %>
       <td>
         <%= form_for(user, :url=>update_user_path(:id=>user.id), :html => { :method => :post }) do |f| %>
-          <%= f.select :level, [["Admin", 100], ["Editor", 50], ["Viewer", 0]] %>
+          <%= f.select(:level, user_roles(user.level)) %>
           <%= f.submit "Change role" %>
         <% end %>
       </td>
-      <td><%= button_to "Delete", user_path(:id=>user.id), :confirm => 'Are you sure?', :class=>'delete', :method=>:delete %></td>
+      <td>
+        <%= button_to("Delete", user_path(:id=>user.id), :confirm => 'Are you sure?', :class=>'delete', :method=>:delete) unless user.level == -1 %>
+      </td>
       <% end %>
     </tr>
     <% end %>
