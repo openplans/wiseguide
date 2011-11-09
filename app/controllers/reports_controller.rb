@@ -171,7 +171,7 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).where(:close_date => start_date..end_date).includes({:outcomes=>:trip_reason},{:customer=>:ethnicity},:disposition,:assigned_to,:referral_type)
+    kases = Kase.closed_in_range(start_date,end_date).includes({:outcomes=>:trip_reason},{:customer=>:ethnicity},:disposition,:assigned_to,:referral_type)
     
     csv = ""
     CSV.generate(csv) do |csv|
@@ -289,7 +289,7 @@ class ReportsController < ApplicationController
     #first case of the year
     
     start_date = Date.parse(params[:start_date])
-    end_date = start_date.next_month
+    end_date = start_date + 1.month - 1.day
 
     kases_successfully_closed_this_month = Kase.successful.closed_in_range(start_date,end_date).includes(:customer => :ethnicity)
 
