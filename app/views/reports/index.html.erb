@@ -3,9 +3,9 @@
 </div>
 
 <div class="predefined-report" data-name="monthly">
-  <form action="<%= url_for(:action => 'basic_monthly_report') %>" class="run-report">
+  <form action="<%= url_for(:action => 'basic_report') %>" class="run-report">
     <fieldset>
-      <h2 class="report-header">Monthly report</h2>
+      <h2 class="report-header">Productivity Report</h2>
       <p></p>
       <ol>
         <li>
@@ -13,28 +13,12 @@
           <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %>
         </li>
         <li>
-          <label>First day of month:</label> 
+          <label>Start date:</label>
           <input type="text" name="start_date" value="<%= start_last_month %>" class="datepicker" placeholder="yyyy-mm-dd" required="required">
         </li>
-      </ol>
-      <input type="submit" name="report" value="Report">
-    </fieldset>
-  </form>
-</div>
-
-<div class="predefined-report" data-name="yearly">
-  <form action="<%= url_for(:action => 'basic_annual_report') %>" class="run-report">
-    <fieldset>
-      <h2 class="report-header">Yearly report</h2>
-      <p></p>
-      <ol>
         <li>
-          <label>Funding source:</label> 
-          <%= select_tag "funding_source_id", options_for_select(@funding_sources.map { |fs| [fs.name, fs.id] }) %>
-        </li>
-        <li>
-          <label>Fiscal Year:</label> 
-          <input type="text" name="year" required="required">
+          <label>End date:</label>
+          <input type="text" name="end_date" value="<%= end_last_month %>" class="datepicker" placeholder="yyyy-mm-dd" required="required">
         </li>
       </ol>
       <input type="submit" name="report" value="Report">

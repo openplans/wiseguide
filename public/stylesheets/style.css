@@ -723,11 +723,14 @@ table th {
 }
 
 table tr.sub-header th {
-    border-top: 1px dotted #3674b3;
-    vertical-align: bottom;
+  border-top: 1px dotted #3674b3;
+  vertical-align: bottom;
 }
 table tr.report-item td {
-    border-top: 1px solid #2e6399;
+  border-top: 1px solid #2e6399;
+}
+table tr.begin-group td {
+  border-top: 3px solid #2e6399;
 }
 
 div.report-wrapper td { text-align: right; }

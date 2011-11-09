@@ -80,6 +80,9 @@ tr {
 tr.report-item td {
   border-top: 1pt solid #000;
 }
+table tr.begin-group td {
+  border-top: 3px solid #000;
+}
 tr.sum-totals td {
   border-top: 2pt solid #000;
   padding-top: 1.5em;

@@ -2,20 +2,45 @@ require 'csv'
 class ReportsController < ApplicationController
 
   def index
-    @funding_sources = [FundingSource.new(:id=>0, :name=>"all")] + FundingSource.accessible_by(current_ability) 
-    @routes = Route.accessible_by(current_ability)
+    @funding_sources = [FundingSource.new(:name=>"<All>")] + FundingSource.all 
+    @routes = Route.all
   end
 
-  def basic_monthly_report
-    kases = get_kases_for_month
-    compute_basic_results(kases)
-    render "basic_report"
-  end
+  def basic_report
+    @start_date = Date.parse(params[:start_date])
+    @end_date = Date.parse(params[:end_date])
+    @exited_count = 0
+    @work_related_vmr = 0
+    @work_related_tpw = 0
+    @non_work_related_vmr = 0
+    @non_work_related_tpw = 0
 
-  def basic_annual_report
-    kases = get_kases_for_year
-    compute_basic_results(kases)
-    render "basic_report"
+    kases = Kase.successful.closed_in_range(@start_date..@end_date).for_funding_source_id(params[:funding_source_id]).includes(:outcomes => :trip_reason)
+
+    for kase in kases
+      @exited_count += 1
+
+      for outcome in kase.outcomes
+        vmr = outcome.exit_vehicle_miles_reduced
+        tpw = outcome.exit_trip_count
+        if outcome.three_month_vehicle_miles_reduced
+          vmr = outcome.three_month_vehicle_miles_reduced
+          tpw = outcome.three_month_trip_count
+        end
+        if outcome.six_month_vehicle_miles_reduced
+          vmr = outcome.six_month_vehicle_miles_reduced
+          tpw = outcome.six_month_trip_count
+        end
+
+        if outcome.trip_reason.work_related
+          @work_related_vmr += vmr
+          @work_related_tpw += tpw
+        else
+          @non_work_related_vmr += vmr
+          @non_work_related_tpw += tpw
+        end
+      end
+    end
   end
 
   def age_and_ethnicity
@@ -122,7 +147,7 @@ class ReportsController < ApplicationController
     @end_date = Date.parse(params[:end_date])
 
     events = Event.accessible_by(current_ability).in_range(@start_date, @end_date).includes(:event_type,:user,{:kase => [:customer,:disposition]})
-    kases = Kase.open_in_range(@start_date,@end_date).includes(:disposition)
+    kases = Kase.open_in_range(@start_date..@end_date).includes(:disposition)
     events_by_customer = {}
     hours_by_customer = {}
     dispositions = {}
@@ -171,38 +196,21 @@ class ReportsController < ApplicationController
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.closed_in_range(start_date,end_date).includes({:outcomes=>:trip_reason},{:customer=>:ethnicity},:disposition,:assigned_to,:referral_type)
+    kases = Kase.successful.closed_in_range(start_date..end_date).includes({:outcomes=>:trip_reason},{:customer=>:ethnicity},:disposition,:assigned_to,:referral_type)
     
     csv = ""
     CSV.generate(csv) do |csv|
-      csv << %w(Name DOB Ethnicity Gender Open\ Date Assigned\ To Referral\ Source Referral\ Type Close\ Date Disposition Trip\ Reason Exit\ Trip\ Count Exit\ VMR 3\ Month\ Unreachable 3\ Month\ Trip\ Count 3\ Month\ VMR 6\ Month\ Unreachable 6\ Month\ Trip\ Count 6\ Month\ VMR)
+      csv << %w(Name DOB Ethnicity Gender Open\ Date Assigned\ To Referral\ Source Referral\ Type Close\ Date Trip\ Reason Exit\ Trip\ Count Exit\ VMR 3\ Month\ Unreachable 3\ Month\ Trip\ Count 3\ Month\ VMR 6\ Month\ Unreachable 6\ Month\ Trip\ Count 6\ Month\ VMR)
       for kase in kases
         customer = kase.customer
-        for outcome in kase.outcomes
-          csv << [customer.name,
-                  customer.birth_date.to_s,
-                  customer.ethnicity.name,
-                  customer.gender,
-                  kase.open_date,
-                  kase.assigned_to.try(:email),
-                  kase.referral_source,
-                  kase.referral_type.name,
-                  kase.close_date,
-                  kase.disposition.name,
-                  outcome.trip_reason.name,
-                  outcome.exit_trip_count,
-                  outcome.exit_vehicle_miles_reduced,
-                  outcome.three_month_unreachable,
-                  outcome.three_month_trip_count,
-                  outcome.three_month_vehicle_miles_reduced,
-                  outcome.six_month_unreachable,
-                  outcome.six_month_trip_count,
-                  outcome.six_month_vehicle_miles_reduced]
+        if kase.outcomes.present?
+          kase.outcomes.each{|outcome| csv << outcomes_row(customer, kase, outcome)}
+        else
+          csv << outcomes_row(customer, kase, nil)
         end
       end 
     end
     
-
     send_data csv, :type => "text/csv", :filename => "outcomes #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
@@ -283,120 +291,25 @@ class ReportsController < ApplicationController
 
   private
 
-  def get_kases_for_month
-    #so, we want to be able to get a list of unduplicated customers
-    #whose case was closed this month, and where this case was the
-    #first case of the year
-    
-    start_date = Date.parse(params[:start_date])
-    end_date = start_date + 1.month - 1.day
-
-    kases_successfully_closed_this_month = Kase.successful.closed_in_range(start_date,end_date).includes(:customer => :ethnicity)
-
-    kases_successfully_closed_this_month = filter_by_funding_source(kases_successfully_closed_this_month)
-
-    #compute the fiscal year start date
-
-    fy = start_date.year
-    if start_date.month <= 6
-      fy -= 1
-    end
-    fy_start_date = Date.new(fy, 7, 1)
-
-    possibly_prior_kases_this_year = Kase.accessible_by(current_ability).where(["close_date < ? and close_date > ?", start_date, fy_start_date])
-
-    possibly_prior_kases_this_year = filter_by_funding_source(possibly_prior_kases_this_year)
-
-    #now, organize the prior cases by customer id
-    priors_by_customer_id = {}
-    for kase in possibly_prior_kases_this_year
-      if ! priors_by_customer_id.member?(kase.customer_id)
-        priors_by_customer_id[kase.customer_id] = []
-      end
-      priors_by_customer_id[kase.customer_id] << kase
-    end
-
-    kases = []
-    for kase in kases_successfully_closed_this_month
-      #figure out if there was a prior this year
-      priors = priors_by_customer_id[kase.customer_id] || []
-      bad = false
-      for prior in priors
-        next if prior == kase
-        next if prior.open_date > kase.open_date
-        bad = true
-        break
-      end
-      next if bad
-      kases << kase
-    end
-    kases
+  def outcomes_row(customer,kase,outcome)
+    [customer.name,
+    customer.birth_date.to_s,
+    customer.ethnicity.name,
+    customer.gender,
+    kase.open_date,
+    kase.assigned_to.try(:email),
+    kase.referral_source,
+    kase.referral_type.name,
+    kase.close_date,
+    outcome.try(:trip_reason).try(:name),
+    outcome.try(:exit_trip_count),
+    outcome.try(:exit_vehicle_miles_reduced),
+    outcome.try(:three_month_unreachable),
+    outcome.try(:three_month_trip_count),
+    outcome.try(:three_month_vehicle_miles_reduced),
+    outcome.try(:six_month_unreachable),
+    outcome.try(:six_month_trip_count),
+    outcome.try(:six_month_vehicle_miles_reduced)]
   end
 
-  def get_kases_for_year
-    successful = Disposition.find_by_name("Successful")
-
-    year = params[:year].to_i || Date.today.year
-
-    fy_start_date = Date.new(year, 7, 1)
-    fy_end_date = Date.new(year + 1, 7, 1)
-
-    if params[:funding_source_id].to_s != ''
-
-      sql = "select k1.* from customers join kases k1 on (customers.id = k1.customer_id and k1.disposition_id = ? and k1.close_date between ? and ? and k1.funding_source_id=?)
-    left outer join kases k2 on (customers.id = k2.customer_id and
-      k1.close_date < k2.close_date and k2.disposition_id = ? and k2.close_date between ? and ? and k2.funding_source_id=?)
-    where k2.id is null"
-      kases = Kase.find_by_sql([sql, successful.id, fy_start_date, fy_end_date, params[:funding_source_id], successful.id, fy_start_date, fy_end_date, params[:funding_source_id]])
-    else
-      sql = "select k1.* from customers join kases k1 on (customers.id = k1.customer_id and k1.disposition_id = ? and k1.close_date between ? and ?)
-    left outer join kases k2 on (customers.id = k2.customer_id and
-      k1.close_date < k2.close_date and k2.disposition_id = ? and k2.close_date between ? and ?)
-    where k2.id is null"
-      kases = Kase.find_by_sql([sql, successful.id, fy_start_date, fy_end_date, successful.id, fy_start_date, fy_end_date])
-    end
-    kases = kases.find_all {|k| can? :read, k}
-    kases
-  end
-
-  def filter_by_funding_source(query)
-    if params[:funding_source_id].to_s != ''
-      return query.where(:funding_source_id => params[:funding_source_id])
-    else
-      return query
-    end
-  end
-
-  def compute_basic_results(kases)
-
-    @exited_count = 0
-    @work_related_vmr = 0
-    @work_related_tpw = 0
-    @non_work_related_vmr = 0
-    @non_work_related_tpw = 0
-    for kase in kases
-      @exited_count += 1
-
-      for outcome in kase.outcomes
-        vmr = outcome.exit_vehicle_miles_reduced
-        tpw = outcome.exit_trip_count
-        if outcome.three_month_vehicle_miles_reduced
-          vmr = outcome.three_month_vehicle_miles_reduced
-          tpw = outcome.three_month_trip_count
-        end
-        if outcome.six_month_vehicle_miles_reduced
-          vmr = outcome.six_month_vehicle_miles_reduced
-          tpw = outcome.six_month_trip_count
-        end
-
-        if outcome.trip_reason.work_related
-          @work_related_vmr += vmr
-          @work_related_tpw += tpw
-        else
-          @non_work_related_vmr += vmr
-          @non_work_related_tpw += tpw
-        end
-      end
-    end
-  end
 end

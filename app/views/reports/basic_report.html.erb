@@ -1,11 +1,52 @@
-Succesfully exited this period: <%= @exited_count %><br/>
-<br/>
-Work-related vehicle miles reduced per week: <%=  @work_related_vmr %><br/>
-Work-related trips per week: <%=  @work_related_tpw%><br/>
-Non-work-related vehicle miles reduced per week: <%=  @non_work_related_vmr %><br/>
-Non-work-related trips per week: <%=  @non_work_related_tpw%><br/>
-<br/>
-Work-related vehicle miles reduced per year: <%=  @work_related_vmr * 52%><br/>
-Work-related trips per year: <%=  @work_related_tpw * 52%><br/>
-Non-work-related vehicle miles reduced per year: <%=  @non_work_related_vmr * 52 %><br/>
-Non-work-related trips per year: <%=  @non_work_related_tpw * 52%><br/>
+<div id="page-header">
+  <h1>RideWise Productivity Report</h1>
+  <%= content_tag :h2, describe_date_range(@start_date,@end_date) %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+
+  <tr>
+    <td class="report-item">Successfully exited this period</td>
+    <td class="number"><%= @exited_count %></td>
+  </tr>
+
+  <tr class="begin-group">
+    <td class="report-item">Work-related vehicle miles reduced per week</td> 
+    <td class="number"><%=  @work_related_vmr %></td>
+  </tr>
+  <tr>
+    <td class="report-item">Work-related trips per week</td> 
+    <td class="number"><%=  @work_related_tpw%></td>
+  </tr>
+  <tr>
+    <td class="report-item">Non-work-related vehicle miles reduced per week</td> 
+    <td class="number"><%=  @non_work_related_vmr %></td>
+  </tr>
+  <tr>
+    <td class="report-item">Non-work-related trips per week</td> 
+    <td class="number"><%=  @non_work_related_tpw%></td>
+  </tr>
+
+  <tr class="begin-group">
+    <td class="report-item">Work-related vehicle miles reduced per year</td> 
+    <td class="number"><%=  @work_related_vmr * 52%></td>
+  </tr>
+  <tr>
+    <td class="report-item">Work-related trips per year</td> 
+    <td class="number"><%=  @work_related_tpw * 52%></td>
+  </tr>
+  <tr>
+    <td class="report-item">Non-work-related vehicle miles reduced per year</td> 
+    <td class="number"><%=  @non_work_related_vmr * 52 %></td>
+  </tr>
+  <tr>
+    <td class="report-item">Non-work-related trips per year</td> 
+    <td class="number"><%=  @non_work_related_tpw * 52%></td>
+  </tr>
+</table>
