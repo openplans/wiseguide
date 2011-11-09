@@ -39,12 +39,6 @@ $(function(){
       extraSpace      : 20
   }).trigger('change');
   
-  // Report toggling
-  $("#report_selector").change(function(e){
-    $("body.reports.index").find(".predefined-report").hide();
-    $("div[data-name=" + $(this).val() + "]").show();
-  }).trigger("change");
-    
   // Disable table header styles that are not on first line of table in surveys
   $("body.surveyor tr").not(":first-child").find("th").css("background", "none").css("color", "#444")
 });

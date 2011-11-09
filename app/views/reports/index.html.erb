@@ -2,13 +2,6 @@
   <h1>Reports</h1>
 </div>
 
-<div>
-  <fieldset>
-    <label>Select report: </label>
-    <%= select_tag "report_selector", reports_options %>
-  </fieldset>
-</div>  
-
 <div class="predefined-report" data-name="monthly">
   <form action="<%= url_for(:action => 'basic_monthly_report') %>" class="run-report">
     <fieldset>
