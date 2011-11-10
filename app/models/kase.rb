@@ -28,6 +28,7 @@ class Kase < ActiveRecord::Base
   scope :not_assigned_to, lambda {|user| where('user_id <> ?',user.id)}
   scope :unassigned, where(:user_id => nil)
   scope :open, where(:close_date => nil)
+  scope :opened_in_range, lambda{|date_range| where(:open_date => date_range)}
   scope :open_in_range, lambda{|date_range| where("NOT (COALESCE(kases.close_date,?) < ? OR kases.open_date > ?)", date_range.begin, date_range.begin, date_range.end)}
   scope :closed, where('close_date IS NOT NULL')
   scope :closed_in_range, lambda{|date_range| where(:close_date => date_range)}

@@ -214,42 +214,22 @@ class ReportsController < ApplicationController
     send_data csv, :type => "text/csv", :filename => "outcomes #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
-  #because this is user-visible in the url, it does not match the
-  #system-wide "kase" naming convention
-  def cases
-    #csv, one record per case with events in the period
+  def opened_cases
     start_date = Date.parse(params[:start_date])
     end_date = Date.parse(params[:end_date])
 
-    kases = Kase.accessible_by(current_ability).includes({:customer => :ethnicity},:assigned_to,:disposition,:referral_type).where(:open_date => start_date..end_date)
-
-    csv = ""
-    CSV.generate(csv) do |csv|
-      csv << %w(Name Open\ Date Referral\ Source Referral\ Type DOB Ethnicity Gender Phone\ Number\ 1 Phone\ Number\ 2 Email Address City State Zip Notes Assigned\ To Close\ Date Disposition)
-      for kase in kases
-        customer = kase.customer
-        csv << [customer.name,
-                kase.open_date,
-                kase.referral_source,
-                kase.referral_type.name,
-                customer.birth_date.to_s,
-                customer.ethnicity.name,
-                customer.gender,
-                customer.phone_number_1,
-                customer.phone_number_2,
-                customer.email,
-                customer.address,
-                customer.city,
-                customer.state,
-                customer.zip,
-                customer.notes,
-                kase.assigned_to.try(:email),
-                kase.close_date,
-                kase.disposition.name]
-      end
-    end 
+    kases = Kase.opened_in_range(start_date..end_date)
     
-    send_data csv, :type => "text/csv", :filename => "cases #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
+    send_data kases_csv(kases), :type => "text/csv", :filename => "Opened Cases #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
+  end
+
+  def closed_cases
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+
+    kases = Kase.closed_in_range(start_date..end_date)
+    
+    send_data kases_csv(kases), :type => "text/csv", :filename => "Closed Cases #{start_date.to_s} to #{end_date.to_s}.csv", :disposition => 'attachment'    
   end
 
   def events
@@ -310,6 +290,38 @@ class ReportsController < ApplicationController
     outcome.try(:six_month_unreachable),
     outcome.try(:six_month_trip_count),
     outcome.try(:six_month_vehicle_miles_reduced)]
+  end
+
+  def kases_csv(kases)
+    #csv, one record per case with events in the period
+    kases = kases.accessible_by(current_ability).includes({:customer => :ethnicity},:assigned_to,:disposition,:referral_type)
+
+    csv = ""
+    CSV.generate(csv) do |csv|
+      csv << %w(Name Open\ Date Referral\ Source Referral\ Type DOB Ethnicity Gender Phone\ Number\ 1 Phone\ Number\ 2 Email Address City State Zip Notes Assigned\ To Close\ Date Disposition)
+      for kase in kases
+        customer = kase.customer
+        csv << [customer.name,
+                kase.open_date,
+                kase.referral_source,
+                kase.referral_type.name,
+                customer.birth_date.to_s,
+                customer.ethnicity.name,
+                customer.gender,
+                customer.phone_number_1,
+                customer.phone_number_2,
+                customer.email,
+                customer.address,
+                customer.city,
+                customer.state,
+                customer.zip,
+                customer.notes,
+                kase.assigned_to.try(:email),
+                kase.close_date,
+                kase.disposition.name]
+      end
+    end 
+    
   end
 
 end
