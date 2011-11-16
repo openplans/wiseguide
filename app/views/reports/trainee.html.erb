@@ -38,10 +38,10 @@
 
 <h2>Dispositions:</h2>
 <table class="small">
-  <% @dispositions.each do |disposition, set | %>
+  <% @dispositions.keys.sort_by{|d| d.name}.each do |disposition| %>
     <tr>
       <td class="definition"><%= disposition.name %>:</td>
-      <td class="number"><%= set.size %></td>
+      <td class="number"><%= @dispositions[disposition].size %></td>
     </tr>
   <% end %>
   <tr>
@@ -52,10 +52,10 @@
 <br/>
 <h2>Events:</h2>
 <table class="small">
-  <% @events_by_type.each do |event_type, count| %>
+  <% @events_by_type.keys.sort_by{|e| e.name}.each do |event_type| %>
     <tr>
       <td class="definition"><%= event_type.name %>:</td>
-      <td class="number"><%= count %></td>
+      <td class="number"><%= @events_by_type[event_type] %></td>
     </tr>
   <% end %>
   <tr>

@@ -112,7 +112,7 @@ class ReportsController < ApplicationController
     @start_date = Date.parse(params[:start_date])
     @end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).in_range(@start_date, @end_date).includes(:event_type,:user,{:kase => [:customer,:disposition]})
+    events = Event.accessible_by(current_ability).in_range(@start_date..@end_date).includes(:event_type,:user,{:kase => [:customer,:disposition]})
     events_by_trainer = {}
     hours_by_trainer = {'{total}' => 0}
     customers_by_trainer = {'{total}' => Set.new}
@@ -146,8 +146,8 @@ class ReportsController < ApplicationController
     @start_date = Date.parse(params[:start_date])
     @end_date = Date.parse(params[:end_date])
 
-    events = Event.accessible_by(current_ability).in_range(@start_date, @end_date).includes(:event_type,:user,{:kase => [:customer,:disposition]})
-    kases = Kase.open_in_range(@start_date..@end_date).includes(:disposition)
+    events = Event.accessible_by(current_ability).in_range(@start_date..@end_date).includes(:event_type,:user,{:kase => [:customer,:disposition]})
+    kases = Kase.closed_in_range(@start_date..@end_date).includes(:disposition)
     events_by_customer = {}
     hours_by_customer = {}
     dispositions = {}
