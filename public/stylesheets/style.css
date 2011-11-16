@@ -998,7 +998,7 @@ body.kases #page-header {
 	position: relative;
 }
 
-body.kases.show .delete.kase {
+body.kases .delete.kase {
 	position: absolute;
 	top: 8px;
 	right: 10px;
