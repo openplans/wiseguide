@@ -27,12 +27,12 @@
 
     <li>
     <%= f.label :gender %>
-    <%= f.select :gender, @genders, {:selected=>@customer.gender} %>
+    <%= f.select :gender, @genders, :prompt => '<Select Gender>' %>
     </li>
 
     <li>
-    <%= f.label :ethnicity %>
-    <%= f.collection_select :ethnicity_id, @ethnicities, :id, :name %>
+    <%= f.label :ethnicity_id %>
+    <%= f.collection_select :ethnicity_id, @ethnicities, :id, :name, :prompt => '<Select Ethnicity>' %>
     </li>
 
     <li>

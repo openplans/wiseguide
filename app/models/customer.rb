@@ -16,6 +16,17 @@ class Customer < ActiveRecord::Base
   validates_attachment_content_type :portrait, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'image/pjpeg']
 
   validates_presence_of :ethnicity_id
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates             :birth_date, :date => { :before => Proc.new { Date.today } }
+  validates_presence_of :gender
+  validates_presence_of :phone_number_1
+  validates_format_of   :email, :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/, :allow_blank => true
+  validates_presence_of :address
+  validates_presence_of :city
+  validates_length_of   :state, :is => 2
+  validates_format_of   :zip, :with => %r{\d{5}(-\d{4})?},:message => "should be 12345 or 12345-6789" 
+  validates_presence_of :county
 
   cattr_reader :per_page
   @@per_page = 50

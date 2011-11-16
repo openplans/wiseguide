@@ -33,6 +33,8 @@ gem 'exception_notification',
     :git => "git://github.com/rails/exception_notification.git",
     :require => "exception_notifier"
 
+gem 'date_validator'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
