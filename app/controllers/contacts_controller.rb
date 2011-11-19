@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
   end
 
   def new
-    @contact = Contact.new(:kase_id=>params[:kase_id], :date_time=>DateTime.now)
+    @contact = Contact.new(:kase_id=>params[:kase_id], :date_time=>DateTime.now, :user => current_user)
     prep_edit
   end
 
@@ -17,6 +17,7 @@ class ContactsController < ApplicationController
     @kase = Kase.find(params[:contact][:kase_id])
     authorize! :edit, @kase
     @contact = Contact.new(params[:contact])
+    @contact.user = current_user
 
     if @contact.save
       redirect_to(@kase, :notice => 'Contact was successfully created.') 

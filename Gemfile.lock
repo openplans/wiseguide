@@ -56,9 +56,10 @@ GEM
     date_validator (0.6.2)
       activemodel (>= 3.0.0, < 3.2.0)
     devise (1.4.5)
+>>>>>>> 661eeb839d9fb14309f01835563ddf756016ebcb
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
-      warden (~> 1.0.3)
+      warden (~> 1.1)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     fastercsv (1.5.4)
@@ -130,7 +131,7 @@ GEM
     userstamp (2.0.1)
     uuid (2.3.4)
       macaddr (~> 1.0)
-    warden (1.0.5)
+    warden (1.1.0)
       rack (>= 1.0)
     will_paginate (3.0.pre2)
 
